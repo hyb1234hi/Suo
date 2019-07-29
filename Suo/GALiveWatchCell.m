@@ -9,6 +9,7 @@
 #import "GALiveWatchCell.h"
 
 @interface GALiveWatchCell ()
+//top
 @property(nonatomic,strong) UIToolbar *toolbar;
 @property(nonatomic,strong) UIView *anchorView;         //!<主播信息容器
 @property(nonatomic,strong) UIImageView *anchorAvatar;  //!<主播头像
@@ -18,6 +19,8 @@
 @property(nonatomic,strong) UIButton *followBtn;        //!<关注主播按钮
 @property(nonatomic,strong) UIBarButtonItem *userItem1;//!<用户1
 @property(nonatomic,strong) UIBarButtonItem *userItem2;//!<用户2
+
+
 @end
 
 @implementation GALiveWatchCell

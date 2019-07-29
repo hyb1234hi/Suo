@@ -85,10 +85,13 @@
         [_collectionView setDelegate:self];
         [_collectionView setDataSource:self];
         [_collectionView setBackgroundColor:ColorWhite];
+        //[_collectionView setPagingEnabled:YES];
+        
         if (@available(iOS 11.0, *)) {
             [_collectionView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
         } else {
                 // Fallback on earlier versions
+        
         }
         
     }
