@@ -1,0 +1,23 @@
+platform:ios,'10'
+
+target 'Suo' do
+
+
+pod 'Masonry'
+pod 'SDWebImage'
+pod 'MJExtension'
+pod 'WMPageController'
+pod 'BEMCheckBox'
+pod 'SDCycleScrollView'
+
+pod 'SuperPlayer'
+pod 'XRWaterfallLayout'
+
+pod 'DCPathButton'  #按钮
+pod 'VHBoomMenuButton/ObjC'
+
+#debug
+pod 'LookinServer', :configurations => ['Debug']
+pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+
+end

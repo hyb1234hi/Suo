@@ -1,0 +1,93 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - BEMCheckBox (1.4.1)
+  - DCPathButton (2.1.4)
+  - LookinServer (0.9.3)
+  - Masonry (1.1.0)
+  - MJExtension (3.1.0)
+  - MMLayout (0.2.0)
+  - Reveal-iOS-SDK (1.6.2)
+  - SDCycleScrollView (1.80):
+    - SDWebImage (>= 5.0.0)
+  - SDWebImage (5.0.6):
+    - SDWebImage/Core (= 5.0.6)
+  - SDWebImage/Core (5.0.6)
+  - SuperPlayer (3.1.1):
+    - AFNetworking
+    - Masonry
+    - MMLayout
+    - SDWebImage
+    - SuperPlayer/Player (= 3.1.1)
+  - SuperPlayer/Player (3.1.1):
+    - AFNetworking
+    - Masonry
+    - MMLayout
+    - SDWebImage
+  - VHBoomMenuButton/ObjC (2.0.0)
+  - WMPageController (2.5.2)
+  - XRWaterfallLayout (0.1.2)
+
+DEPENDENCIES:
+  - BEMCheckBox
+  - DCPathButton
+  - LookinServer
+  - Masonry
+  - MJExtension
+  - Reveal-iOS-SDK
+  - SDCycleScrollView
+  - SDWebImage
+  - SuperPlayer
+  - VHBoomMenuButton/ObjC
+  - WMPageController
+  - XRWaterfallLayout
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - BEMCheckBox
+    - DCPathButton
+    - LookinServer
+    - Masonry
+    - MJExtension
+    - MMLayout
+    - Reveal-iOS-SDK
+    - SDCycleScrollView
+    - SDWebImage
+    - SuperPlayer
+    - VHBoomMenuButton
+    - WMPageController
+    - XRWaterfallLayout
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
+  DCPathButton: 99c8211ef3eafc3b438c917a4c7b4502fa77eee7
+  LookinServer: 44f1b5f32743dc61068a156ff86b5b47d0a82943
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 6b69b3bef2864fd550ce1a184eda219e321209d2
+  MMLayout: 3fb59d58eeb8656c64e61d550fb0088e10666c11
+  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
+  SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
+  SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SuperPlayer: de9540ac79b1db43875d82e514620989c9bc2bde
+  VHBoomMenuButton: 77a7ae6742220b57b54eec28183fc123a3dd98ed
+  WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
+  XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
+
+PODFILE CHECKSUM: 4c9d8d108c937c6e8f3ccd68c0b26e33c1bd0493
+
+COCOAPODS: 1.7.5

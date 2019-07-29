@@ -1,0 +1,653 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
+		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
+		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
+		3B47C00D22EA9102000974C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00C22EA9102000974C7 /* Assets.xcassets */; };
+		3B47C01022EA9102000974C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00E22EA9102000974C7 /* LaunchScreen.storyboard */; };
+		3B47C01322EA9102000974C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C01222EA9102000974C7 /* main.m */; };
+		3B47C02422EA97BC000974C7 /* GAVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C01C22EA97BC000974C7 /* GAVideoPlayViewController.m */; };
+		3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */; };
+		3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C02122EA97BC000974C7 /* GACityWideViewController.m */; };
+		3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C02222EA97BC000974C7 /* GAVideoViewController.m */; };
+		3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C02F22EA9FE0000974C7 /* GABaseCollectionViewCell.m */; };
+		3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C03222EAA03E000974C7 /* GAVideoCell.m */; };
+		3B47C03E22EAA792000974C7 /* UIView+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */; };
+		3B47C04122EAACD4000974C7 /* GAVideoPlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C04022EAACD4000974C7 /* GAVideoPlayCell.m */; };
+		3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C04922EAAD80000974C7 /* GAVideoPlayControllerView.m */; };
+		3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C04C22EAD539000974C7 /* GACommentPopView.m */; };
+		3B47C05022EADE0C000974C7 /* GABaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C04F22EADE0C000974C7 /* GABaseTableViewCell.m */; };
+		3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C05222EADE4C000974C7 /* GACommentCell.m */; };
+		3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */; };
+		3B47C05922EAF30E000974C7 /* GACityWideCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C05822EAF30E000974C7 /* GACityWideCollectionCell.m */; };
+		3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C71D22EC067500ED8999 /* GABaseModel.m */; };
+		3B99C72122EC071000ED8999 /* GAVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72022EC071000ED8999 /* GAVideo.m */; };
+		3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72322EC098800ED8999 /* GAVideoClassify.m */; };
+		3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72622EC0A8200ED8999 /* GAUser.m */; };
+		3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72922EC2A7400ED8999 /* GALiveViewController.m */; };
+		3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72C22EC2E6300ED8999 /* GALiveCell.m */; };
+		3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */; };
+		3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */; };
+		3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73522EC468C00ED8999 /* GALiveWatchCell.m */; };
+		3B99C73922ED665B00ED8999 /* GASharePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73722ED665A00ED8999 /* GASharePopView.m */; };
+		3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */; };
+		3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73D22ED8D1000ED8999 /* GACommentTextView.m */; };
+		9D29F30A8A0559825739EA25 /* libPods-Suo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3B47C00622EA90F8000974C7 /* GAMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAMainViewController.h; sourceTree = "<group>"; };
+		3B47C00722EA90F8000974C7 /* GAMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAMainViewController.m; sourceTree = "<group>"; };
+		3B47C00A22EA90F8000974C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3B47C00C22EA9102000974C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3B47C00F22EA9102000974C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3B47C01122EA9102000974C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B47C01222EA9102000974C7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3B47C01C22EA97BC000974C7 /* GAVideoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAVideoPlayViewController.m; sourceTree = "<group>"; };
+		3B47C01D22EA97BC000974C7 /* GAVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAVideoViewController.h; sourceTree = "<group>"; };
+		3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GALiveMainViewController.m; sourceTree = "<group>"; };
+		3B47C01F22EA97BC000974C7 /* GAVideoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAVideoPlayViewController.h; sourceTree = "<group>"; };
+		3B47C02022EA97BC000974C7 /* GALiveMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GALiveMainViewController.h; sourceTree = "<group>"; };
+		3B47C02122EA97BC000974C7 /* GACityWideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACityWideViewController.m; sourceTree = "<group>"; };
+		3B47C02222EA97BC000974C7 /* GAVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAVideoViewController.m; sourceTree = "<group>"; };
+		3B47C02322EA97BC000974C7 /* GACityWideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACityWideViewController.h; sourceTree = "<group>"; };
+		3B47C02822EA9836000974C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/PrefixHeader.pch; sourceTree = "<group>"; };
+		3B47C02E22EA9FE0000974C7 /* GABaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GABaseCollectionViewCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseCollectionViewCell.h; sourceTree = "<group>"; };
+		3B47C02F22EA9FE0000974C7 /* GABaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GABaseCollectionViewCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseCollectionViewCell.m; sourceTree = "<group>"; };
+		3B47C03122EAA03E000974C7 /* GAVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoCell.h; sourceTree = "<group>"; };
+		3B47C03222EAA03E000974C7 /* GAVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoCell.m; sourceTree = "<group>"; };
+		3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+GAExtension.h"; sourceTree = "<group>"; };
+		3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+GAExtension.m"; sourceTree = "<group>"; };
+		3B47C03F22EAACD4000974C7 /* GAVideoPlayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoPlayCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayCell.h; sourceTree = "<group>"; };
+		3B47C04022EAACD4000974C7 /* GAVideoPlayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoPlayCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayCell.m; sourceTree = "<group>"; };
+		3B47C04822EAAD80000974C7 /* GAVideoPlayControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoPlayControllerView.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayControllerView.h; sourceTree = "<group>"; };
+		3B47C04922EAAD80000974C7 /* GAVideoPlayControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoPlayControllerView.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayControllerView.m; sourceTree = "<group>"; };
+		3B47C04B22EAD539000974C7 /* GACommentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACommentPopView.h; sourceTree = "<group>"; };
+		3B47C04C22EAD539000974C7 /* GACommentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACommentPopView.m; sourceTree = "<group>"; };
+		3B47C04E22EADE0C000974C7 /* GABaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseTableViewCell.h; sourceTree = "<group>"; };
+		3B47C04F22EADE0C000974C7 /* GABaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABaseTableViewCell.m; sourceTree = "<group>"; };
+		3B47C05122EADE4C000974C7 /* GACommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACommentCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACommentCell.h; sourceTree = "<group>"; };
+		3B47C05222EADE4C000974C7 /* GACommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACommentCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACommentCell.m; sourceTree = "<group>"; };
+		3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACityWideSubViewController.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideSubViewController.h; sourceTree = "<group>"; };
+		3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACityWideSubViewController.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideSubViewController.m; sourceTree = "<group>"; };
+		3B47C05722EAF30E000974C7 /* GACityWideCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACityWideCollectionCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideCollectionCell.h; sourceTree = "<group>"; };
+		3B47C05822EAF30E000974C7 /* GACityWideCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACityWideCollectionCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideCollectionCell.m; sourceTree = "<group>"; };
+		3B99C71C22EC067500ED8999 /* GABaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GABaseModel.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseModel.h; sourceTree = "<group>"; };
+		3B99C71D22EC067500ED8999 /* GABaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GABaseModel.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseModel.m; sourceTree = "<group>"; };
+		3B99C71F22EC071000ED8999 /* GAVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideo.h; sourceTree = "<group>"; };
+		3B99C72022EC071000ED8999 /* GAVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideo.m; sourceTree = "<group>"; };
+		3B99C72222EC098800ED8999 /* GAVideoClassify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoClassify.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoClassify.h; sourceTree = "<group>"; };
+		3B99C72322EC098800ED8999 /* GAVideoClassify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoClassify.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoClassify.m; sourceTree = "<group>"; };
+		3B99C72522EC0A8200ED8999 /* GAUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAUser.h; sourceTree = "<group>"; };
+		3B99C72622EC0A8200ED8999 /* GAUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAUser.m; sourceTree = "<group>"; };
+		3B99C72822EC2A7400ED8999 /* GALiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveViewController.h; sourceTree = "<group>"; };
+		3B99C72922EC2A7400ED8999 /* GALiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveViewController.m; sourceTree = "<group>"; };
+		3B99C72B22EC2E6300ED8999 /* GALiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveCell.h; sourceTree = "<group>"; };
+		3B99C72C22EC2E6300ED8999 /* GALiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCell.m; sourceTree = "<group>"; };
+		3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GALiveTableCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveTableCell.h; sourceTree = "<group>"; };
+		3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GALiveTableCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveTableCell.m; sourceTree = "<group>"; };
+		3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GALiveWatchViewController.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveWatchViewController.h; sourceTree = "<group>"; };
+		3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GALiveWatchViewController.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveWatchViewController.m; sourceTree = "<group>"; };
+		3B99C73422EC468C00ED8999 /* GALiveWatchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchCell.h; sourceTree = "<group>"; };
+		3B99C73522EC468C00ED8999 /* GALiveWatchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchCell.m; sourceTree = "<group>"; };
+		3B99C73722ED665A00ED8999 /* GASharePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GASharePopView.m; sourceTree = "<group>"; };
+		3B99C73822ED665B00ED8999 /* GASharePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GASharePopView.h; sourceTree = "<group>"; };
+		3B99C73A22ED6CCC00ED8999 /* GALiveHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveHeaderView.h; sourceTree = "<group>"; };
+		3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveHeaderView.m; sourceTree = "<group>"; };
+		3B99C73D22ED8D1000ED8999 /* GACommentTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACommentTextView.m; sourceTree = "<group>"; };
+		3B99C73E22ED8D1000ED8999 /* GACommentTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACommentTextView.h; sourceTree = "<group>"; };
+		71DE5F39565E6B8B128BE66E /* Pods-Suo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Suo.debug.xcconfig"; path = "Target Support Files/Pods-Suo/Pods-Suo.debug.xcconfig"; sourceTree = "<group>"; };
+		97ED12025A225651A90D3F9D /* Pods-Suo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Suo.release.xcconfig"; path = "Target Support Files/Pods-Suo/Pods-Suo.release.xcconfig"; sourceTree = "<group>"; };
+		F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Suo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B47BFFD22EA90F8000974C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D29F30A8A0559825739EA25 /* libPods-Suo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08C0A4D7FD112849DB1706AA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71DE5F39565E6B8B128BE66E /* Pods-Suo.debug.xcconfig */,
+				97ED12025A225651A90D3F9D /* Pods-Suo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		36E9E6CB06E9719B7D7590F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B47BFF722EA90F7000974C7 = {
+			isa = PBXGroup;
+			children = (
+				3B47C00222EA90F8000974C7 /* Suo */,
+				3B47C00122EA90F8000974C7 /* Products */,
+				08C0A4D7FD112849DB1706AA /* Pods */,
+				36E9E6CB06E9719B7D7590F6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3B47C00122EA90F8000974C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C00022EA90F8000974C7 /* Suo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B47C00222EA90F8000974C7 /* Suo */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C03622EAA64F000974C7 /* EX */,
+				3B47C02D22EA9FB7000974C7 /* Basic */,
+				3B47C01B22EA917D000974C7 /* Support */,
+				3B47C01922EA915E000974C7 /* 直播 */,
+				3B47C00622EA90F8000974C7 /* GAMainViewController.h */,
+				3B47C00722EA90F8000974C7 /* GAMainViewController.m */,
+			);
+			path = Suo;
+			sourceTree = "<group>";
+		};
+		3B47C01922EA915E000974C7 /* 直播 */ = {
+			isa = PBXGroup;
+			children = (
+				3B99C71B22EC064700ED8999 /* Model */,
+				3B47C05A22EAF9BA000974C7 /* Player */,
+				3B47C02C22EA9F99000974C7 /* View */,
+				3B47C02322EA97BC000974C7 /* GACityWideViewController.h */,
+				3B47C02122EA97BC000974C7 /* GACityWideViewController.m */,
+				3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */,
+				3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */,
+				3B47C02022EA97BC000974C7 /* GALiveMainViewController.h */,
+				3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */,
+				3B47C01F22EA97BC000974C7 /* GAVideoPlayViewController.h */,
+				3B47C01C22EA97BC000974C7 /* GAVideoPlayViewController.m */,
+				3B47C01D22EA97BC000974C7 /* GAVideoViewController.h */,
+				3B47C02222EA97BC000974C7 /* GAVideoViewController.m */,
+				3B99C72822EC2A7400ED8999 /* GALiveViewController.h */,
+				3B99C72922EC2A7400ED8999 /* GALiveViewController.m */,
+				3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */,
+				3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */,
+			);
+			name = "直播";
+			sourceTree = "<group>";
+		};
+		3B47C01B22EA917D000974C7 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C00322EA90F8000974C7 /* AppDelegate.h */,
+				3B47C00422EA90F8000974C7 /* AppDelegate.m */,
+				3B47C00922EA90F8000974C7 /* Main.storyboard */,
+				3B47C00C22EA9102000974C7 /* Assets.xcassets */,
+				3B47C00E22EA9102000974C7 /* LaunchScreen.storyboard */,
+				3B47C01122EA9102000974C7 /* Info.plist */,
+				3B47C01222EA9102000974C7 /* main.m */,
+				3B47C02822EA9836000974C7 /* PrefixHeader.pch */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		3B47C02C22EA9F99000974C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C03122EAA03E000974C7 /* GAVideoCell.h */,
+				3B47C03222EAA03E000974C7 /* GAVideoCell.m */,
+				3B47C03F22EAACD4000974C7 /* GAVideoPlayCell.h */,
+				3B47C04022EAACD4000974C7 /* GAVideoPlayCell.m */,
+				3B47C04822EAAD80000974C7 /* GAVideoPlayControllerView.h */,
+				3B47C04922EAAD80000974C7 /* GAVideoPlayControllerView.m */,
+				3B99C73E22ED8D1000ED8999 /* GACommentTextView.h */,
+				3B99C73D22ED8D1000ED8999 /* GACommentTextView.m */,
+				3B47C04B22EAD539000974C7 /* GACommentPopView.h */,
+				3B47C04C22EAD539000974C7 /* GACommentPopView.m */,
+				3B47C05122EADE4C000974C7 /* GACommentCell.h */,
+				3B47C05222EADE4C000974C7 /* GACommentCell.m */,
+				3B99C73822ED665B00ED8999 /* GASharePopView.h */,
+				3B99C73722ED665A00ED8999 /* GASharePopView.m */,
+				3B47C05722EAF30E000974C7 /* GACityWideCollectionCell.h */,
+				3B47C05822EAF30E000974C7 /* GACityWideCollectionCell.m */,
+				3B99C72B22EC2E6300ED8999 /* GALiveCell.h */,
+				3B99C72C22EC2E6300ED8999 /* GALiveCell.m */,
+				3B99C73422EC468C00ED8999 /* GALiveWatchCell.h */,
+				3B99C73522EC468C00ED8999 /* GALiveWatchCell.m */,
+				3B99C73A22ED6CCC00ED8999 /* GALiveHeaderView.h */,
+				3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */,
+				3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */,
+				3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3B47C02D22EA9FB7000974C7 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C02E22EA9FE0000974C7 /* GABaseCollectionViewCell.h */,
+				3B47C02F22EA9FE0000974C7 /* GABaseCollectionViewCell.m */,
+				3B47C04E22EADE0C000974C7 /* GABaseTableViewCell.h */,
+				3B47C04F22EADE0C000974C7 /* GABaseTableViewCell.m */,
+				3B99C71C22EC067500ED8999 /* GABaseModel.h */,
+				3B99C71D22EC067500ED8999 /* GABaseModel.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		3B47C03622EAA64F000974C7 /* EX */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */,
+				3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */,
+			);
+			name = EX;
+			sourceTree = "<group>";
+		};
+		3B47C05A22EAF9BA000974C7 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		3B99C71B22EC064700ED8999 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B99C71F22EC071000ED8999 /* GAVideo.h */,
+				3B99C72022EC071000ED8999 /* GAVideo.m */,
+				3B99C72222EC098800ED8999 /* GAVideoClassify.h */,
+				3B99C72322EC098800ED8999 /* GAVideoClassify.m */,
+				3B99C72522EC0A8200ED8999 /* GAUser.h */,
+				3B99C72622EC0A8200ED8999 /* GAUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3B47BFFF22EA90F8000974C7 /* Suo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B47C01622EA9102000974C7 /* Build configuration list for PBXNativeTarget "Suo" */;
+			buildPhases = (
+				7DE86FBFDFFD2CA26238ADE4 /* [CP] Check Pods Manifest.lock */,
+				3B47BFFC22EA90F8000974C7 /* Sources */,
+				3B47BFFD22EA90F8000974C7 /* Frameworks */,
+				3B47BFFE22EA90F8000974C7 /* Resources */,
+				6327758DF6DFB03F39DD7235 /* [CP] Embed Pods Frameworks */,
+				AC61FA045F29AEA694576890 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Suo;
+			productName = Suo;
+			productReference = 3B47C00022EA90F8000974C7 /* Suo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3B47BFF822EA90F7000974C7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GA;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "怪兽 🐙";
+				TargetAttributes = {
+					3B47BFFF22EA90F8000974C7 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = 3B47BFFB22EA90F7000974C7 /* Build configuration list for PBXProject "Suo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3B47BFF722EA90F7000974C7;
+			productRefGroup = 3B47C00122EA90F8000974C7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3B47BFFF22EA90F8000974C7 /* Suo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3B47BFFE22EA90F8000974C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B47C01022EA9102000974C7 /* LaunchScreen.storyboard in Resources */,
+				3B47C00D22EA9102000974C7 /* Assets.xcassets in Resources */,
+				3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6327758DF6DFB03F39DD7235 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7DE86FBFDFFD2CA26238ADE4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Suo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC61FA045F29AEA694576890 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3B47BFFC22EA90F8000974C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B47C05022EADE0C000974C7 /* GABaseTableViewCell.m in Sources */,
+				3B47C03E22EAA792000974C7 /* UIView+GAExtension.m in Sources */,
+				3B47C02422EA97BC000974C7 /* GAVideoPlayViewController.m in Sources */,
+				3B47C04122EAACD4000974C7 /* GAVideoPlayCell.m in Sources */,
+				3B99C72122EC071000ED8999 /* GAVideo.m in Sources */,
+				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
+				3B99C73922ED665B00ED8999 /* GASharePopView.m in Sources */,
+				3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */,
+				3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */,
+				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
+				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
+				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
+				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
+				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
+				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
+				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
+				3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */,
+				3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */,
+				3B47C01322EA9102000974C7 /* main.m in Sources */,
+				3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */,
+				3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */,
+				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
+				3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */,
+				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
+				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
+				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
+				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
+				3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */,
+				3B47C05922EAF30E000974C7 /* GACityWideCollectionCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3B47C00922EA90F8000974C7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B47C00A22EA90F8000974C7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3B47C00E22EA9102000974C7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B47C00F22EA9102000974C7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3B47C01422EA9102000974C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3B47C01522EA9102000974C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3B47C01722EA9102000974C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71DE5F39565E6B8B128BE66E /* Pods-Suo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V9W837Y6AV;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
+				INFOPLIST_FILE = Suo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3B47C01822EA9102000974C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97ED12025A225651A90D3F9D /* Pods-Suo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V9W837Y6AV;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
+				INFOPLIST_FILE = Suo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3B47BFFB22EA90F7000974C7 /* Build configuration list for PBXProject "Suo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B47C01422EA9102000974C7 /* Debug */,
+				3B47C01522EA9102000974C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3B47C01622EA9102000974C7 /* Build configuration list for PBXNativeTarget "Suo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B47C01722EA9102000974C7 /* Debug */,
+				3B47C01822EA9102000974C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3B47BFF822EA90F7000974C7 /* Project object */;
+}
