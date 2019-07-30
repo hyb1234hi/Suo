@@ -51,6 +51,11 @@ static CGFloat avatarH = 32.0;
    
     [_avatarView setImage:[UIImage imageNamed:@"微信"]];
    // [_avatarView setupMaskWithCorner:avatarH/2.0 rectCorner:UIRectCornerAllCorners];
+    
+        //action
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAvatar:)];
+    [_avatarView setUserInteractionEnabled:YES];
+    [_avatarView addGestureRecognizer:tap];
 }
 
 - (void)layoutSubviews{
@@ -72,5 +77,11 @@ static CGFloat avatarH = 32.0;
         make.left.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.avatarView.mas_top).inset(6);
     }];
+}
+
+- (void)clickAvatar:(UITapGestureRecognizer*)tap{
+    if ([self.delegate respondsToSelector:@selector(cellDidClickAvatar:)]) {
+        [self.delegate cellDidClickAvatar:self];
+    }
 }
 @end

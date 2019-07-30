@@ -8,11 +8,11 @@
 
 #import "GAVideoViewController.h"
 #import "GAVideoPlayViewController.h"
-
+#import "GAAuthorViewController.h"
 #import "GAVideoCell.h"
 
 
-@interface GAVideoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface GAVideoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GAVideoCellDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
 @end
 
@@ -38,6 +38,12 @@
     }];
 }
 
+#pragma mark - GAVideoCellDelegate
+- (void)cellDidClickAvatar:(GAVideoCell *)cell{
+    GAAuthorViewController *vc = [[GAAuthorViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     GAVideoPlayViewController *vc = [[GAVideoPlayViewController alloc] initWith:@"" index:indexPath.row];
@@ -51,6 +57,7 @@
     
     GAVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GAVideoCell.identifier forIndexPath:indexPath];
     [cell setBackgroundColor:UIColor.redColor];
+    [cell setDelegate:self];
     
     return cell;
 }
