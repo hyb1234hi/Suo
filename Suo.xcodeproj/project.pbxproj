@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */; };
+		027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */; };
+		027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -46,6 +48,10 @@
 /* Begin PBXFileReference section */
 		027DB66422EEED36001B0593 /* GALiveWatchControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchControllerView.h; sourceTree = "<group>"; };
 		027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchControllerView.m; sourceTree = "<group>"; };
+		027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLEmojiLabel+BarrageView.h"; sourceTree = "<group>"; };
+		027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLEmojiLabel+BarrageView.m"; sourceTree = "<group>"; };
+		027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorViewController.h; sourceTree = "<group>"; };
+		027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorViewController.m; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -194,6 +200,8 @@
 				3B99C72922EC2A7400ED8999 /* GALiveViewController.m */,
 				3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */,
 				3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */,
+				027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */,
+				027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */,
 			);
 			name = "直播";
 			sourceTree = "<group>";
@@ -262,6 +270,8 @@
 		3B47C03622EAA64F000974C7 /* EX */ = {
 			isa = PBXGroup;
 			children = (
+				027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */,
+				027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */,
 				3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */,
 				3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */,
 			);
@@ -434,6 +444,7 @@
 				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
 				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
+				027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
 				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
@@ -446,6 +457,7 @@
 				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
 				3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */,
 				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
+				027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */,
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,

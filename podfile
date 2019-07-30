@@ -19,6 +19,7 @@ pod 'VHBoomMenuButton/ObjC'
 #弹幕
 pod 'OCBarrage'
 pod 'BarrageRenderer'
+pod 'MLEmojiLabel'
 
 #debug
 pod 'LookinServer', :configurations => ['Debug']

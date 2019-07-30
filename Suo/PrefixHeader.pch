@@ -88,7 +88,7 @@ alpha:1.0]
 #define MainBoldFont    [UIFont boldSystemFontOfSize:17.0]
 
 //iPhoneX
-#define isIPhoneX       (CGRectGetHeight([UIScreen mainScreen].bounds) >= 812)
+#define isIPhoneX       ((CGRectGetHeight([UIScreen mainScreen].bounds) >= 812)&&([[UIDevice currentDevice].model isEqualToString:@"iPhone"]))
 
 #define ScreenBounds    ([[UIScreen  mainScreen] bounds])
 #define ScreenWidth     (CGRectGetWidth([UIScreen mainScreen].bounds))

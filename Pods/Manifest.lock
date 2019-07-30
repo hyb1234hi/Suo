@@ -20,6 +20,8 @@ PODS:
   - LookinServer (0.9.3)
   - Masonry (1.1.0)
   - MJExtension (3.1.0)
+  - MLEmojiLabel (1.0.2):
+    - TTTAttributedLabel (~> 1.13.4)
   - MMLayout (0.2.0)
   - OCBarrage (1.0.5)
   - Reveal-iOS-SDK (1.6.2)
@@ -39,6 +41,7 @@ PODS:
     - Masonry
     - MMLayout
     - SDWebImage
+  - TTTAttributedLabel (1.13.4)
   - VHBoomMenuButton/ObjC (2.0.0)
   - WMPageController (2.5.2)
   - XRWaterfallLayout (0.1.2)
@@ -50,6 +53,7 @@ DEPENDENCIES:
   - LookinServer
   - Masonry
   - MJExtension
+  - MLEmojiLabel
   - OCBarrage
   - Reveal-iOS-SDK
   - SDCycleScrollView
@@ -68,12 +72,14 @@ SPEC REPOS:
     - LookinServer
     - Masonry
     - MJExtension
+    - MLEmojiLabel
     - MMLayout
     - OCBarrage
     - Reveal-iOS-SDK
     - SDCycleScrollView
     - SDWebImage
     - SuperPlayer
+    - TTTAttributedLabel
     - VHBoomMenuButton
     - WMPageController
     - XRWaterfallLayout
@@ -86,16 +92,18 @@ SPEC CHECKSUMS:
   LookinServer: 44f1b5f32743dc61068a156ff86b5b47d0a82943
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 6b69b3bef2864fd550ce1a184eda219e321209d2
+  MLEmojiLabel: 36d73c19f9975cbf9def24e5bc135263b0337fd8
   MMLayout: 3fb59d58eeb8656c64e61d550fb0088e10666c11
   OCBarrage: 5ee1a922afacb2c04739621ccda71872185e2e59
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SuperPlayer: de9540ac79b1db43875d82e514620989c9bc2bde
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   VHBoomMenuButton: 77a7ae6742220b57b54eec28183fc123a3dd98ed
   WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
 
-PODFILE CHECKSUM: e3b12173e5f64123247140ba87ddb3ee6d7ce8d0
+PODFILE CHECKSUM: a36d2e36d90e044bc5ee1003eaeec76817c8f357
 
 COCOAPODS: 1.7.5

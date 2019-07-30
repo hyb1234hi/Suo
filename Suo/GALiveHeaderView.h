@@ -14,12 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GALiveHeaderViewDelegate <NSObject>
 
-//- (void)menuView:(WMMenuView*)menuView selected:()
+- (void)menuView:(WMMenuView*)menuView selectedIndex:(NSUInteger)index;
 
 @end
 
 @interface GALiveHeaderView : UICollectionReusableView
-
+@property(nonatomic,weak)id<GALiveHeaderViewDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

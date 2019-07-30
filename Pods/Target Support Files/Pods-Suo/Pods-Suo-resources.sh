@@ -100,12 +100,20 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/bloom.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/fold.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/selected.caf"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
   install_resource "${PODS_ROOT}/SuperPlayer/SuperPlayer/Resource/SuperPlayer.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/bloom.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/fold.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/selected.caf"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
+  install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
   install_resource "${PODS_ROOT}/SuperPlayer/SuperPlayer/Resource/SuperPlayer.bundle"
 fi
 

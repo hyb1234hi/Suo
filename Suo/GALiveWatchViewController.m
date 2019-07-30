@@ -8,9 +8,11 @@
 
 #import "GALiveWatchViewController.h"
 #import "GALiveWatchCell.h"
+#import "GAAuthorViewController.h"
+
 #import <TXLiteAVSDK_Player/TXLivePlayer.h>
 
-@interface GALiveWatchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface GALiveWatchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GALiveWatchCellDelegate>
 
 @property(nonatomic,strong) UIToolbar *toolbar;
 @property(nonatomic,strong) UIView *userView;
@@ -60,9 +62,18 @@
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    //[self.navigationController setNavigationBarHidden:YES];
 }
 
+#pragma mark - GALiveWatchCellDelegate
+- (void)clickUserWithCell:(GALiveWatchCell *)cell{
+    GAAuthorViewController *vc = GAAuthorViewController.new;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 10;
 }
@@ -70,6 +81,7 @@
     GALiveWatchCell *cell = (GALiveWatchCell*)[collectionView dequeueReusableCellWithReuseIdentifier:GALiveWatchCell.identifier forIndexPath:indexPath];
     
     [cell setBackgroundColor:UIColor.grayColor];
+    [cell setDelegate:self];
     
     return cell;
 }
@@ -77,7 +89,8 @@
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
         [layout setItemSize:ScreenBounds.size];
-        [layout setMinimumInteritemSpacing:10];
+        [layout setMinimumInteritemSpacing:0];
+        [layout setMinimumLineSpacing:0];
         
         
         _collectionView  = [[UICollectionView alloc] initWithFrame:ScreenBounds collectionViewLayout:layout];
@@ -97,6 +110,8 @@
     }
     return _collectionView;
 }
+
+
 
 - (UIToolbar *)toolbar{
     if (!_toolbar) {
