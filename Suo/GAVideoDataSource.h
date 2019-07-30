@@ -11,12 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^FetchVideoBlock)(NSArray<GAVideo*>*videos,NSString*message,NSError *error);
+typedef void(^FetchVideoBlock)(NSArray<GAVideo*>* _Nullable videos,NSString* _Nullable message,NSError * _Nullable error);
 
 @interface GAVideoDataSource : NSObject
 @property(nonatomic,strong)NSMutableArray<GAVideo*> *videoList;
 
-
+- (void)reloadData;
+- (void)loadNextPathWithCompletion:(FetchVideoBlock)completion;
 
 @end
 

@@ -8,9 +8,11 @@
 
 #import "GAVideoPlayViewController.h"
 #import "GAVideoPlayCell.h"
+#import "GAAuthorViewController.h"
+
 #import <TXLiteAVSDK_Player/TXVodPlayer.h>
 
-@interface GAVideoPlayViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,TXVodPlayListener>
+@interface GAVideoPlayViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,TXVodPlayListener,GAVideoPlayCellDelegate>
 
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)TXVodPlayer *player;
@@ -55,7 +57,7 @@
                  @"http://videoqiniu.laosiji.com/ybopElHe9eMNUgJSNqS8T35laqA=/lmsi_n0BERbvf_clpkM686hURB3F"];
     
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"1..." style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonAction)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"More" style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonAction)];
     [self.navigationItem setRightBarButtonItem:rightItem];
     
     [self.view setBackgroundColor:ColorGray];
@@ -86,6 +88,10 @@
 
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setTintColor:UIColor.whiteColor];
+    
+    
+    [self.player resume];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -98,8 +104,6 @@
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
-    
-    NSLog(@"--%@",self.navigationController);
 }
 
 
@@ -167,6 +171,7 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     GAVideoPlayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GAVideoPlayCell.identifier forIndexPath:indexPath];
+    [cell setDelegate:self];
     return cell;
 }
 
@@ -269,5 +274,11 @@
     
 }
 
+
+#pragma mark - GAVideoPlayCellDelegate
+- (void)cellDidClickUser:(GAVideoPlayCell *)cell{
+    GAAuthorViewController *vc = GAAuthorViewController.new;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
