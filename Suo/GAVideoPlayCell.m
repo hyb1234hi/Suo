@@ -10,7 +10,7 @@
 #import "GAVideoPlayControllerView.h"
 
 
-@interface GAVideoPlayCell ()
+@interface GAVideoPlayCell ()<GAVideoPlayControllerDelegate>
 
 @property(nonatomic,strong) GAVideoPlayControllerView *controllerView;
 @end
@@ -21,6 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         _controllerView = GAVideoPlayControllerView.new;
+        _controllerView.delegate  = self;
         
         [self.contentView addSubview:_controllerView];
     }
@@ -34,6 +35,12 @@
         make.left.bottom.right.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight, 0));
         make.height.mas_equalTo(280);
     }];
+}
+
+- (void)viewDidClickUser{
+    if ([self.delegate respondsToSelector:@selector(cellDidClickUser:)]) {
+        [self.delegate cellDidClickUser:self];
+    }
 }
 
 @end

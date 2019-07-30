@@ -10,8 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GAVideoPlayCell : GABaseCollectionViewCell
+@class GAVideoPlayCell;
 
+@protocol GAVideoPlayCellDelegate <NSObject>
+
+- (void)cellDidClickUser:(GAVideoPlayCell*)cell;
+
+@end
+
+@interface GAVideoPlayCell : GABaseCollectionViewCell
+@property(nonatomic,weak)id<GAVideoPlayCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

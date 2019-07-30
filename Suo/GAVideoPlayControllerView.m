@@ -41,83 +41,75 @@ static CGFloat avatarW = 60;
 }
 
 - (void)setupUI{
-    _writeCommentBtn = UIButton.new;
-    _commentBtn = UIButton.new;
-    _likeBtn = UIButton.new;
-    _shareBtn = UIButton.new;
-    _rightStackView = [[UIStackView alloc] initWithArrangedSubviews:@[_commentBtn,_likeBtn,_shareBtn]];
     
-    _musicLab = UILabel.new;
-    _commentLab = UILabel.new;
-    _tagButton = UIButton.new;
+    
+    UILabel*(^createLabel)(NSString *text) = ^(NSString*text){
+        UILabel *label = UILabel.new;
+        [label setText:text];
+        [label setTextColor:ColorWhite];
+        [label setFont:[MainFont fontWithSize:14]];
+        [self addSubview:label];
+        return label;
+    };
+    
+    UIButton*(^createButton)(SEL ,NSString*) = ^(SEL sel, NSString *title){
+        UIButton *button = UIButton.new;
+        [button addTarget:self action:sel forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:title forState:UIControlStateNormal];
+        
+        return button;
+    };
+    
+    //右边栈视图
+    _commentBtn     = createButton(@selector(commentAction:),@"6590");
+    _likeBtn        = createButton(@selector(likeAction:),@"700");
+    _shareBtn       = createButton(@selector(shareAction:),@"900");
+    _rightStackView = [[UIStackView alloc] initWithArrangedSubviews:@[_commentBtn,_likeBtn,_shareBtn]];
+    [_rightStackView setDistribution:UIStackViewDistributionFillEqually];
+    
+
+    _writeCommentBtn = createButton(@selector(writeCommentAction:),@"说点什么");
+    [_writeCommentBtn setBackgroundColor:RGBA(255, 255, 255, 0.45)];
+    [_writeCommentBtn.titleLabel setFont:[MainFont fontWithSize:15]];
+    
+    _followBtn      = createButton(@selector(followAction:),@"关注");
+    [_followBtn setTitle:@"已关注" forState:UIControlStateSelected];
+    [_followBtn.titleLabel setFont:[MainFont fontWithSize:14]];
+    [_followBtn setBackgroundColor:RGBA(255, 23, 45, 1)];
+    
+    _tagButton = createButton(@selector(tagAction:),@"# 音乐");
+    [_tagButton setBackgroundColor:RGBA(255, 255, 255, 0.45)];
+    [_tagButton.titleLabel setFont:[MainFont fontWithSize:15]];
+
+    
     _avatarView = UIImageView.new;
-    _userNameLab = UILabel.new;
-    _followBtn = UIButton.new;
+    [_avatarView setImage:[UIImage imageNamed:@"微信"]];
+    [_avatarView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickUser)];
+    [_avatarView addGestureRecognizer:tap];
+    
+   
+    _musicLab = createLabel(@"🎵 宠爱");
+
+    _commentLab = createLabel(@"66666666");
+    [_commentLab setFont:[MainFont fontWithSize:15]];
+    
+    _userNameLab = createLabel(@"滑板鞋");
+    [_userNameLab setFont:[MainBoldFont fontWithSize:22]];
+    [_userNameLab setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tapName = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickUser)];
+    [_userNameLab addGestureRecognizer:tapName];
     
     
     //add
     [self addSubview:_writeCommentBtn];
     [self addSubview:_rightStackView];
-    [self addSubview:_musicLab];
-    [self addSubview:_commentLab];
+
     [self addSubview:_tagButton];
     [self addSubview:_avatarView];
-    [self addSubview:_userNameLab];
     [self addSubview:_followBtn];
     
     
-    [_rightStackView setDistribution:UIStackViewDistributionFillEqually];
-
-    [_writeCommentBtn setBackgroundColor:RGBA(255, 255, 255, 0.45)];
-    [_writeCommentBtn.titleLabel setFont:[MainFont fontWithSize:15]];
-    //[_writeCommentBtn setupMaskWithCorner:10 rectCorner:UIRectCornerAllCorners];
-    
-    UIFont *font = [MainFont fontWithSize:14];
-    [_commentBtn.titleLabel setFont:font];
-    [_likeBtn.titleLabel setFont:font];
-    [_shareBtn.titleLabel setFont:font];
-    
-   // [_avatarView setupMaskWithCorner:avatarH/2.0 rectCorner:UIRectCornerAllCorners];
-    
-    [_musicLab setTextColor:ColorWhite];
-    [_musicLab setFont:[MainFont fontWithSize:14]];
-    [_commentLab setFont:[MainFont fontWithSize:14]];
-    [_commentLab setTextColor:ColorWhite];
-    
-    [_userNameLab setTextColor:ColorWhite];
-    [_userNameLab setFont:[MainBoldFont fontWithSize:22]];
-    
-    [_followBtn setTitle:@"关注" forState:UIControlStateNormal];
-    [_followBtn setTitle:@"已关注" forState:UIControlStateSelected];
-    [_followBtn.titleLabel setFont:[MainFont fontWithSize:14]];
-    [_followBtn setBackgroundColor:RGBA(255, 23, 45, 1)];
-    
-    
-    [_commentLab setFont:[MainFont fontWithSize:15]];
-    
-    [_tagButton setBackgroundColor:RGBA(255, 255, 255, 0.45)];
-    [_tagButton.titleLabel setFont:[MainFont fontWithSize:15]];
-    
-    [_writeCommentBtn setTitle:@"说点什么" forState:UIControlStateNormal];
-    [_commentBtn setTitle:@"2563" forState:UIControlStateNormal];
-    [_likeBtn setTitle:@"1W" forState:UIControlStateNormal];
-    [_shareBtn setTitle:@"7K" forState:UIControlStateNormal];
-    
-    [_musicLab setText:@"晴天"];
-    [_commentLab setText:@"66666"];
-    [_tagButton setTitle:@" # music" forState:UIControlStateNormal];
-    [_userNameLab setText:@"滑板鞋"];
-    [_avatarView setImage:[UIImage imageNamed:@"微信"]];
-    
-    
-    UIControlEvents events = UIControlEventTouchUpInside;
-    [_followBtn addTarget:self action:@selector(followAction:) forControlEvents:events];
-    [_writeCommentBtn addTarget:self action:@selector(writeCommentAction:) forControlEvents:events];
-    [_commentBtn addTarget:self action:@selector(commentAction:) forControlEvents:events];
-    [_likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:events];
-    [_shareBtn addTarget:self action:@selector(shareAction:) forControlEvents:events];
-    
-
 }
 
 - (void)layoutSubviews{
@@ -173,6 +165,11 @@ static CGFloat avatarW = 60;
 
 }
 
+- (void)clickUser{
+    if ([self.delegate respondsToSelector:@selector(viewDidClickUser)]) {
+        [self.delegate viewDidClickUser];
+    }
+}
 
 - (void)followAction:(UIButton*)send{
     [send setSelected:!send.selected];
@@ -192,6 +189,10 @@ static CGFloat avatarW = 60;
 }
 - (void)shareAction:(UIButton*)send{
     [GASharePopView.new show];
+}
+
+- (void)tagAction:(UIButton*)send{
+    
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{

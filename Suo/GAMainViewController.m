@@ -57,13 +57,28 @@
     
     
     
+    [self pushToLive];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 35)];
+    [button setTitle:@"直播中心" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(pushToLive) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
+    [self.view addSubview:button];
+    [button mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.view);
+    }];
+}
+
+
+- (void)pushToLive{
     UIViewController *vc = GALiveMainViewController.new;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
+    
+    
     
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
@@ -81,8 +96,7 @@
    // NSLog(@"did start url = %@",webView.URL.absoluteString);
     NSString *url = webView.URL.absoluteString;
     if ([url isEqualToString:@"http://www.suo.com/mobile/html/pointspro_list.html"]) {
-        UIViewController *vc = GALiveMainViewController.new;
-        [self.navigationController pushViewController:vc animated:YES];
+        [self pushToLive];
     }
 }
 

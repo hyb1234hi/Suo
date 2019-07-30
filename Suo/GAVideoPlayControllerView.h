@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol GAVideoPlayControllerDelegate <NSObject>
+
+- (void)viewDidClickUser;
+
+@end
+
 @interface GAVideoPlayControllerView : UIView
+
+@property(nonatomic,weak)id<GAVideoPlayControllerDelegate> delegate;
 
 @end
 
