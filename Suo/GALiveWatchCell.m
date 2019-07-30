@@ -7,8 +7,10 @@
 //
 
 #import "GALiveWatchCell.h"
+#import "GALiveWatchControllerView.h" //弹幕
 
 @interface GALiveWatchCell ()
+//top
 @property(nonatomic,strong) UIToolbar *toolbar;
 @property(nonatomic,strong) UIView *anchorView;         //!<主播信息容器
 @property(nonatomic,strong) UIImageView *anchorAvatar;  //!<主播头像
@@ -18,6 +20,9 @@
 @property(nonatomic,strong) UIButton *followBtn;        //!<关注主播按钮
 @property(nonatomic,strong) UIBarButtonItem *userItem1;//!<用户1
 @property(nonatomic,strong) UIBarButtonItem *userItem2;//!<用户2
+
+@property(nonatomic,strong)GALiveWatchControllerView *barrageView; //!<弹幕
+
 @end
 
 @implementation GALiveWatchCell
@@ -35,14 +40,14 @@
     UIImage *image = [UIImage imageNamed:@"icon_profile_share_qq"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(33, 0, ScreenWidth-33, 44)];
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth-33, 44)];
     
     
     //用户信息
     ({
         _anchorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
         _anchorAvatar = UIImageView.new;
+        [_anchorAvatar setUserInteractionEnabled:YES];
         
         _anchorName = UILabel.new;
         [_anchorName setFont:[MainFont fontWithSize:16]];
@@ -60,6 +65,9 @@
         [_anchorHot setText:@"600万人气"];
         [_anchorAvatar setImage:image];
         
+        UITapGestureRecognizer *tapAvatar = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userItemSendAction:)];
+        [_anchorView addGestureRecognizer:tapAvatar];
+        
     });
     
     _followBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 30)];
@@ -71,6 +79,9 @@
     
     UIBarButtonItem *userItem = [[UIBarButtonItem alloc] initWithCustomView:_anchorView];
     [userItem setWidth:180];
+    [userItem setTarget:self];
+    [userItem setAction:@selector(userItemSendAction:)];
+    
     
     UIBarButtonItem *followItem = [[UIBarButtonItem alloc] initWithCustomView:_followBtn];
     
@@ -84,15 +95,30 @@
     [_toolbar setBackgroundImage:UIImage.new forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [_toolbar setShadowImage:UIImage.new forToolbarPosition:UIBarPositionAny];
     
+    
+    ({
+        _barrageView = GALiveWatchControllerView.new;
+        [self.contentView addSubview:_barrageView];
+        
+    });
+    
     [self.contentView addSubview:_toolbar];
 }
 
+- (void)userItemSendAction:(UIBarButtonItem*)item{
+   // NSLog(@"-------------click user action");
+    if ([self.delegate respondsToSelector:@selector(clickUserWithCell:)]) {
+        [self.delegate clickUserWithCell:self];
+    }
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    UIViewController *root = [UIApplication sharedApplication].delegate.window.rootViewController;
+    CGFloat top = root.view.safeAreaInsets.top;
     [self.toolbar mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(SafeAreaTopHeight-44, 33, 0, 0));
+        make.left.top.right.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(top, 33, 0, 0));
         make.height.mas_equalTo(44);
     }];
     
@@ -108,6 +134,12 @@
     [self.anchorHot mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.anchorAvatar.mas_right).inset(4);
         make.top.mas_equalTo(self.anchorAvatar.mas_centerY).inset(2);
+    }];
+    
+    [self.barrageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight, 0));
+        make.width.mas_equalTo(ScreenWidth/2.5);
+        make.height.mas_equalTo(300);
     }];
 }
 

@@ -13,7 +13,7 @@
 #import "GALiveTableCell.h"
 #import "GALiveHeaderView.h"
 
-@interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GALiveHeaderViewDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) UITableView *tableView;
 @end
@@ -52,6 +52,7 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         GALiveHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
         [header setFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*0.58)];
+        [header setDelegate:self];
         return header;
     }else{
         return nil;
@@ -82,6 +83,12 @@
         [_collectionView setBackgroundColor:ColorWhite];
     }
     return _collectionView;
+}
+
+#pragma mark - GALiveHeaderViewDelegate
+- (void)menuView:(WMMenuView *)menuView selectedIndex:(NSUInteger)index{
+    //刷新数据源
+   // NSLog(@"index -- %d",index);
 }
 
 @end

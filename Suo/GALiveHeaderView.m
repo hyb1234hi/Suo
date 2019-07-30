@@ -112,6 +112,12 @@
     return initialMenuItem;
 }
 
+- (void)menuView:(WMMenuView *)menu didSelesctedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex{
+    if ([self.delegate respondsToSelector:@selector(menuView:selectedIndex:)]) {
+        [self.delegate menuView:menu selectedIndex:index];
+    }
+}
+
 - (NSTimer *)timer{
     if (!_timer) {
         __weak typeof(self) wself = self;

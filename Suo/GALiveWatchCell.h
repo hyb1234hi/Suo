@@ -10,8 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GALiveWatchCell : GABaseCollectionViewCell
+@class GALiveWatchCell;
 
+@protocol GALiveWatchCellDelegate <NSObject>
+
+- (void)clickUserWithCell:(GALiveWatchCell*)cell;
+
+@end
+
+@interface GALiveWatchCell : GABaseCollectionViewCell
+@property(nonatomic,weak)id<GALiveWatchCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

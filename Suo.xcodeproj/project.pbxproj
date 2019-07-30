@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */; };
+		027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */; };
+		027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -43,6 +46,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		027DB66422EEED36001B0593 /* GALiveWatchControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchControllerView.h; sourceTree = "<group>"; };
+		027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchControllerView.m; sourceTree = "<group>"; };
+		027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLEmojiLabel+BarrageView.h"; sourceTree = "<group>"; };
+		027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLEmojiLabel+BarrageView.m"; sourceTree = "<group>"; };
+		027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorViewController.h; sourceTree = "<group>"; };
+		027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorViewController.m; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -61,43 +70,43 @@
 		3B47C02122EA97BC000974C7 /* GACityWideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACityWideViewController.m; sourceTree = "<group>"; };
 		3B47C02222EA97BC000974C7 /* GAVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAVideoViewController.m; sourceTree = "<group>"; };
 		3B47C02322EA97BC000974C7 /* GACityWideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACityWideViewController.h; sourceTree = "<group>"; };
-		3B47C02822EA9836000974C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/PrefixHeader.pch; sourceTree = "<group>"; };
-		3B47C02E22EA9FE0000974C7 /* GABaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GABaseCollectionViewCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseCollectionViewCell.h; sourceTree = "<group>"; };
-		3B47C02F22EA9FE0000974C7 /* GABaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GABaseCollectionViewCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseCollectionViewCell.m; sourceTree = "<group>"; };
+		3B47C02822EA9836000974C7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3B47C02E22EA9FE0000974C7 /* GABaseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseCollectionViewCell.h; sourceTree = "<group>"; };
+		3B47C02F22EA9FE0000974C7 /* GABaseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABaseCollectionViewCell.m; sourceTree = "<group>"; };
 		3B47C03122EAA03E000974C7 /* GAVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoCell.h; sourceTree = "<group>"; };
 		3B47C03222EAA03E000974C7 /* GAVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoCell.m; sourceTree = "<group>"; };
 		3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+GAExtension.h"; sourceTree = "<group>"; };
 		3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+GAExtension.m"; sourceTree = "<group>"; };
-		3B47C03F22EAACD4000974C7 /* GAVideoPlayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoPlayCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayCell.h; sourceTree = "<group>"; };
-		3B47C04022EAACD4000974C7 /* GAVideoPlayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoPlayCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayCell.m; sourceTree = "<group>"; };
-		3B47C04822EAAD80000974C7 /* GAVideoPlayControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoPlayControllerView.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayControllerView.h; sourceTree = "<group>"; };
-		3B47C04922EAAD80000974C7 /* GAVideoPlayControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoPlayControllerView.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoPlayControllerView.m; sourceTree = "<group>"; };
+		3B47C03F22EAACD4000974C7 /* GAVideoPlayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoPlayCell.h; sourceTree = "<group>"; };
+		3B47C04022EAACD4000974C7 /* GAVideoPlayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoPlayCell.m; sourceTree = "<group>"; };
+		3B47C04822EAAD80000974C7 /* GAVideoPlayControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoPlayControllerView.h; sourceTree = "<group>"; };
+		3B47C04922EAAD80000974C7 /* GAVideoPlayControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoPlayControllerView.m; sourceTree = "<group>"; };
 		3B47C04B22EAD539000974C7 /* GACommentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACommentPopView.h; sourceTree = "<group>"; };
 		3B47C04C22EAD539000974C7 /* GACommentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GACommentPopView.m; sourceTree = "<group>"; };
 		3B47C04E22EADE0C000974C7 /* GABaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseTableViewCell.h; sourceTree = "<group>"; };
 		3B47C04F22EADE0C000974C7 /* GABaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABaseTableViewCell.m; sourceTree = "<group>"; };
-		3B47C05122EADE4C000974C7 /* GACommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACommentCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACommentCell.h; sourceTree = "<group>"; };
-		3B47C05222EADE4C000974C7 /* GACommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACommentCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACommentCell.m; sourceTree = "<group>"; };
-		3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACityWideSubViewController.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideSubViewController.h; sourceTree = "<group>"; };
-		3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACityWideSubViewController.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideSubViewController.m; sourceTree = "<group>"; };
-		3B47C05722EAF30E000974C7 /* GACityWideCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GACityWideCollectionCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideCollectionCell.h; sourceTree = "<group>"; };
-		3B47C05822EAF30E000974C7 /* GACityWideCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GACityWideCollectionCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GACityWideCollectionCell.m; sourceTree = "<group>"; };
-		3B99C71C22EC067500ED8999 /* GABaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GABaseModel.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseModel.h; sourceTree = "<group>"; };
-		3B99C71D22EC067500ED8999 /* GABaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GABaseModel.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GABaseModel.m; sourceTree = "<group>"; };
+		3B47C05122EADE4C000974C7 /* GACommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACommentCell.h; sourceTree = "<group>"; };
+		3B47C05222EADE4C000974C7 /* GACommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACommentCell.m; sourceTree = "<group>"; };
+		3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACityWideSubViewController.h; sourceTree = "<group>"; };
+		3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACityWideSubViewController.m; sourceTree = "<group>"; };
+		3B47C05722EAF30E000974C7 /* GACityWideCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACityWideCollectionCell.h; sourceTree = "<group>"; };
+		3B47C05822EAF30E000974C7 /* GACityWideCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACityWideCollectionCell.m; sourceTree = "<group>"; };
+		3B99C71C22EC067500ED8999 /* GABaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseModel.h; sourceTree = "<group>"; };
+		3B99C71D22EC067500ED8999 /* GABaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABaseModel.m; sourceTree = "<group>"; };
 		3B99C71F22EC071000ED8999 /* GAVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideo.h; sourceTree = "<group>"; };
 		3B99C72022EC071000ED8999 /* GAVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideo.m; sourceTree = "<group>"; };
-		3B99C72222EC098800ED8999 /* GAVideoClassify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GAVideoClassify.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoClassify.h; sourceTree = "<group>"; };
-		3B99C72322EC098800ED8999 /* GAVideoClassify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GAVideoClassify.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GAVideoClassify.m; sourceTree = "<group>"; };
+		3B99C72222EC098800ED8999 /* GAVideoClassify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoClassify.h; sourceTree = "<group>"; };
+		3B99C72322EC098800ED8999 /* GAVideoClassify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoClassify.m; sourceTree = "<group>"; };
 		3B99C72522EC0A8200ED8999 /* GAUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAUser.h; sourceTree = "<group>"; };
 		3B99C72622EC0A8200ED8999 /* GAUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAUser.m; sourceTree = "<group>"; };
 		3B99C72822EC2A7400ED8999 /* GALiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveViewController.h; sourceTree = "<group>"; };
 		3B99C72922EC2A7400ED8999 /* GALiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveViewController.m; sourceTree = "<group>"; };
 		3B99C72B22EC2E6300ED8999 /* GALiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveCell.h; sourceTree = "<group>"; };
 		3B99C72C22EC2E6300ED8999 /* GALiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCell.m; sourceTree = "<group>"; };
-		3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GALiveTableCell.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveTableCell.h; sourceTree = "<group>"; };
-		3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GALiveTableCell.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveTableCell.m; sourceTree = "<group>"; };
-		3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GALiveWatchViewController.h; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveWatchViewController.h; sourceTree = "<group>"; };
-		3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GALiveWatchViewController.m; path = ../../../../../../System/Volumes/Data/Users/pan/Desktop/Project/Suo/Suo/GALiveWatchViewController.m; sourceTree = "<group>"; };
+		3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveTableCell.h; sourceTree = "<group>"; };
+		3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveTableCell.m; sourceTree = "<group>"; };
+		3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchViewController.h; sourceTree = "<group>"; };
+		3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchViewController.m; sourceTree = "<group>"; };
 		3B99C73422EC468C00ED8999 /* GALiveWatchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchCell.h; sourceTree = "<group>"; };
 		3B99C73522EC468C00ED8999 /* GALiveWatchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchCell.m; sourceTree = "<group>"; };
 		3B99C73722ED665A00ED8999 /* GASharePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GASharePopView.m; sourceTree = "<group>"; };
@@ -191,6 +200,8 @@
 				3B99C72922EC2A7400ED8999 /* GALiveViewController.m */,
 				3B99C73122EC3F5F00ED8999 /* GALiveWatchViewController.h */,
 				3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */,
+				027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */,
+				027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */,
 			);
 			name = "直播";
 			sourceTree = "<group>";
@@ -233,6 +244,8 @@
 				3B99C72C22EC2E6300ED8999 /* GALiveCell.m */,
 				3B99C73422EC468C00ED8999 /* GALiveWatchCell.h */,
 				3B99C73522EC468C00ED8999 /* GALiveWatchCell.m */,
+				027DB66422EEED36001B0593 /* GALiveWatchControllerView.h */,
+				027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */,
 				3B99C73A22ED6CCC00ED8999 /* GALiveHeaderView.h */,
 				3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */,
 				3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */,
@@ -257,6 +270,8 @@
 		3B47C03622EAA64F000974C7 /* EX */ = {
 			isa = PBXGroup;
 			children = (
+				027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */,
+				027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */,
 				3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */,
 				3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */,
 			);
@@ -429,17 +444,20 @@
 				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
 				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
+				027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
 				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
 				3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */,
 				3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */,
+				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
 				3B47C01322EA9102000974C7 /* main.m in Sources */,
 				3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */,
 				3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */,
 				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
 				3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */,
 				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
+				027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */,
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
@@ -521,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -574,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -593,7 +611,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
 				INFOPLIST_FILE = Suo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,7 +633,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
 				INFOPLIST_FILE = Suo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

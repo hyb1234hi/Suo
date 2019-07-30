@@ -16,6 +16,11 @@ pod 'XRWaterfallLayout'
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
 
+#弹幕
+pod 'OCBarrage'
+pod 'BarrageRenderer'
+pod 'MLEmojiLabel'
+
 #debug
 pod 'LookinServer', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
