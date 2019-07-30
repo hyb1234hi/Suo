@@ -98,7 +98,7 @@
 
     descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
     descriptor.params[@"bizMsgId"] = [NSString stringWithFormat:@"%ld",(long)_index];
-    descriptor.params[@"text"] = [NSString stringWithFormat:@"过场文字弹幕:%ld",(long)_index++];
+    descriptor.params[@"text"] = [NSString stringWithFormat:@"过场🥰文字弹幕:%ld",(long)_index++];
     descriptor.params[@"textColor"] = [UIColor blueColor];
     descriptor.params[@"speed"] = @(100);
     //descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);

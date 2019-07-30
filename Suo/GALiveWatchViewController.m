@@ -38,6 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setTitle:@""];
     [self.view addSubview:self.collectionView];
     
    // [self.navigationItem setTitleView:self.toolbar];

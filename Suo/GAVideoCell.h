@@ -10,8 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GAVideoCell : GABaseCollectionViewCell
 
+@class GAVideoCell;
+
+@protocol GAVideoCellDelegate <NSObject>
+
+- (void)cellDidClickAvatar:(GAVideoCell*)cell;
+
+@end
+
+@interface GAVideoCell : GABaseCollectionViewCell
+@property(nonatomic,weak)id<GAVideoCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

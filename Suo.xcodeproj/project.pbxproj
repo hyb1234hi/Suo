@@ -10,6 +10,11 @@
 		027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */; };
 		027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */; };
 		027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */; };
+		027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66E22EFEAB3001B0593 /* GAAuthorHeaderView.m */; };
+		027DB67222F016CB001B0593 /* GAAuthorVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67122F016CB001B0593 /* GAAuthorVideoCell.m */; };
+		027DB67522F01D70001B0593 /* GAFansAndFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67422F01D70001B0593 /* GAFansAndFollowViewController.m */; };
+		027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67722F026A6001B0593 /* GAFansFollowCell.m */; };
+		027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -52,6 +57,16 @@
 		027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLEmojiLabel+BarrageView.m"; sourceTree = "<group>"; };
 		027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorViewController.h; sourceTree = "<group>"; };
 		027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorViewController.m; sourceTree = "<group>"; };
+		027DB66D22EFEAB3001B0593 /* GAAuthorHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorHeaderView.h; sourceTree = "<group>"; };
+		027DB66E22EFEAB3001B0593 /* GAAuthorHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorHeaderView.m; sourceTree = "<group>"; };
+		027DB67022F016CB001B0593 /* GAAuthorVideoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorVideoCell.h; sourceTree = "<group>"; };
+		027DB67122F016CB001B0593 /* GAAuthorVideoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorVideoCell.m; sourceTree = "<group>"; };
+		027DB67322F01D70001B0593 /* GAFansAndFollowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAFansAndFollowViewController.h; sourceTree = "<group>"; };
+		027DB67422F01D70001B0593 /* GAFansAndFollowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAFansAndFollowViewController.m; sourceTree = "<group>"; };
+		027DB67622F026A6001B0593 /* GAFansFollowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAFansFollowCell.h; sourceTree = "<group>"; };
+		027DB67722F026A6001B0593 /* GAFansFollowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAFansFollowCell.m; sourceTree = "<group>"; };
+		027DB67E22F02FBB001B0593 /* GAVideoDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoDataSource.h; sourceTree = "<group>"; };
+		027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoDataSource.m; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -132,6 +147,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		027DB67922F02EBC001B0593 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		027DB67A22F02F58001B0593 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				027DB67E22F02FBB001B0593 /* GAVideoDataSource.h */,
+				027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */,
+			);
+			name = DataSource;
+			sourceTree = "<group>";
+		};
 		08C0A4D7FD112849DB1706AA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +214,8 @@
 		3B47C01922EA915E000974C7 /* 直播 */ = {
 			isa = PBXGroup;
 			children = (
+				027DB67A22F02F58001B0593 /* DataSource */,
+				027DB67922F02EBC001B0593 /* Network */,
 				3B99C71B22EC064700ED8999 /* Model */,
 				3B47C05A22EAF9BA000974C7 /* Player */,
 				3B47C02C22EA9F99000974C7 /* View */,
@@ -202,6 +235,8 @@
 				3B99C73222EC3F5F00ED8999 /* GALiveWatchViewController.m */,
 				027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */,
 				027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */,
+				027DB67322F01D70001B0593 /* GAFansAndFollowViewController.h */,
+				027DB67422F01D70001B0593 /* GAFansAndFollowViewController.m */,
 			);
 			name = "直播";
 			sourceTree = "<group>";
@@ -250,6 +285,12 @@
 				3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */,
 				3B99C72E22EC2FD300ED8999 /* GALiveTableCell.h */,
 				3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */,
+				027DB66D22EFEAB3001B0593 /* GAAuthorHeaderView.h */,
+				027DB66E22EFEAB3001B0593 /* GAAuthorHeaderView.m */,
+				027DB67022F016CB001B0593 /* GAAuthorVideoCell.h */,
+				027DB67122F016CB001B0593 /* GAAuthorVideoCell.m */,
+				027DB67622F026A6001B0593 /* GAFansFollowCell.h */,
+				027DB67722F026A6001B0593 /* GAFansFollowCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -439,7 +480,9 @@
 				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
 				3B99C73922ED665B00ED8999 /* GASharePopView.m in Sources */,
 				3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */,
+				027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */,
 				3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */,
+				027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */,
 				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
 				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
@@ -447,9 +490,12 @@
 				027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
+				027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */,
 				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
 				3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */,
 				3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */,
+				027DB67522F01D70001B0593 /* GAFansAndFollowViewController.m in Sources */,
+				027DB67222F016CB001B0593 /* GAAuthorVideoCell.m in Sources */,
 				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
 				3B47C01322EA9102000974C7 /* main.m in Sources */,
 				3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */,
