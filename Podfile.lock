@@ -18,6 +18,7 @@ PODS:
   - BEMCheckBox (1.4.1)
   - DCPathButton (2.1.4)
   - LookinServer (0.9.3)
+  - LXMButtonImagePosition (1.2.0)
   - Masonry (1.1.0)
   - MJExtension (3.1.0)
   - MLEmojiLabel (1.0.2):
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - BEMCheckBox
   - DCPathButton
   - LookinServer
+  - LXMButtonImagePosition
   - Masonry
   - MJExtension
   - MLEmojiLabel
@@ -70,6 +72,7 @@ SPEC REPOS:
     - BEMCheckBox
     - DCPathButton
     - LookinServer
+    - LXMButtonImagePosition
     - Masonry
     - MJExtension
     - MLEmojiLabel
@@ -90,6 +93,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   DCPathButton: 99c8211ef3eafc3b438c917a4c7b4502fa77eee7
   LookinServer: 44f1b5f32743dc61068a156ff86b5b47d0a82943
+  LXMButtonImagePosition: 663e176be2c7e4ff99bcda808c364ebc3774af0f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 6b69b3bef2864fd550ce1a184eda219e321209d2
   MLEmojiLabel: 36d73c19f9975cbf9def24e5bc135263b0337fd8
@@ -104,6 +108,6 @@ SPEC CHECKSUMS:
   WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
 
-PODFILE CHECKSUM: a36d2e36d90e044bc5ee1003eaeec76817c8f357
+PODFILE CHECKSUM: 3656ea904ff8a18753009a4165c88a00ccc0ff01
 
 COCOAPODS: 1.7.5

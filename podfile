@@ -15,6 +15,7 @@ pod 'XRWaterfallLayout'
 
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
+pod 'LXMButtonImagePosition'
 
 #弹幕
 pod 'OCBarrage'

@@ -15,6 +15,8 @@
 		027DB67522F01D70001B0593 /* GAFansAndFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67422F01D70001B0593 /* GAFansAndFollowViewController.m */; };
 		027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67722F026A6001B0593 /* GAFansFollowCell.m */; };
 		027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */; };
+		027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68322F044E2001B0593 /* GAShootingViewController.m */; };
+		027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68622F049BD001B0593 /* GAShootControllerView.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -67,6 +69,10 @@
 		027DB67722F026A6001B0593 /* GAFansFollowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAFansFollowCell.m; sourceTree = "<group>"; };
 		027DB67E22F02FBB001B0593 /* GAVideoDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAVideoDataSource.h; sourceTree = "<group>"; };
 		027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAVideoDataSource.m; sourceTree = "<group>"; };
+		027DB68222F044E2001B0593 /* GAShootingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAShootingViewController.h; sourceTree = "<group>"; };
+		027DB68322F044E2001B0593 /* GAShootingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAShootingViewController.m; sourceTree = "<group>"; };
+		027DB68522F049BD001B0593 /* GAShootControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAShootControllerView.h; sourceTree = "<group>"; };
+		027DB68622F049BD001B0593 /* GAShootControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAShootControllerView.m; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -163,6 +169,17 @@
 			name = DataSource;
 			sourceTree = "<group>";
 		};
+		027DB68122F04499001B0593 /* 拍摄 */ = {
+			isa = PBXGroup;
+			children = (
+				027DB68222F044E2001B0593 /* GAShootingViewController.h */,
+				027DB68322F044E2001B0593 /* GAShootingViewController.m */,
+				027DB68522F049BD001B0593 /* GAShootControllerView.h */,
+				027DB68622F049BD001B0593 /* GAShootControllerView.m */,
+			);
+			name = "拍摄";
+			sourceTree = "<group>";
+		};
 		08C0A4D7FD112849DB1706AA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +218,7 @@
 		3B47C00222EA90F8000974C7 /* Suo */ = {
 			isa = PBXGroup;
 			children = (
+				027DB68122F04499001B0593 /* 拍摄 */,
 				3B47C03622EAA64F000974C7 /* EX */,
 				3B47C02D22EA9FB7000974C7 /* Basic */,
 				3B47C01B22EA917D000974C7 /* Support */,
@@ -496,7 +514,9 @@
 				3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */,
 				027DB67522F01D70001B0593 /* GAFansAndFollowViewController.m in Sources */,
 				027DB67222F016CB001B0593 /* GAAuthorVideoCell.m in Sources */,
+				027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */,
 				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
+				027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */,
 				3B47C01322EA9102000974C7 /* main.m in Sources */,
 				3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */,
 				3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */,
