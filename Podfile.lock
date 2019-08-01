@@ -17,6 +17,22 @@ PODS:
   - BarrageRenderer (2.1.0)
   - BEMCheckBox (1.4.1)
   - DCPathButton (2.1.4)
+  - GPUImage (0.1.7)
+  - libksygpulive/base (3.0.4)
+  - libksygpulive/KSYGPUResource (3.0.4)
+  - libksygpulive/libksygpulive (3.0.4):
+    - GPUImage
+    - libksygpulive/streamerbase
+  - libksygpulive/mediacodec (3.0.4)
+  - libksygpulive/mediacore_enc_base (3.0.4)
+  - libksygpulive/mediacore_enc_lite (3.0.4)
+  - libksygpulive/streamerbase (3.0.4):
+    - libksygpulive/base
+    - libksygpulive/mediacodec
+    - libksygpulive/mediacore_enc_base
+    - libksygpulive/mediacore_enc_lite
+    - libksygpulive/yuv
+  - libksygpulive/yuv (3.0.4)
   - LookinServer (0.9.3)
   - LXMButtonImagePosition (1.2.0)
   - Masonry (1.1.0)
@@ -25,6 +41,7 @@ PODS:
     - TTTAttributedLabel (~> 1.13.4)
   - MMLayout (0.2.0)
   - OCBarrage (1.0.5)
+  - PRTween (0.1.0)
   - Reveal-iOS-SDK (1.6.2)
   - SDCycleScrollView (1.80):
     - SDWebImage (>= 5.0.0)
@@ -51,12 +68,15 @@ DEPENDENCIES:
   - BarrageRenderer
   - BEMCheckBox
   - DCPathButton
+  - libksygpulive/KSYGPUResource
+  - libksygpulive/libksygpulive
   - LookinServer
   - LXMButtonImagePosition
   - Masonry
   - MJExtension
   - MLEmojiLabel
   - OCBarrage
+  - PRTween
   - Reveal-iOS-SDK
   - SDCycleScrollView
   - SDWebImage
@@ -71,6 +91,8 @@ SPEC REPOS:
     - BarrageRenderer
     - BEMCheckBox
     - DCPathButton
+    - GPUImage
+    - libksygpulive
     - LookinServer
     - LXMButtonImagePosition
     - Masonry
@@ -78,6 +100,7 @@ SPEC REPOS:
     - MLEmojiLabel
     - MMLayout
     - OCBarrage
+    - PRTween
     - Reveal-iOS-SDK
     - SDCycleScrollView
     - SDWebImage
@@ -92,6 +115,8 @@ SPEC CHECKSUMS:
   BarrageRenderer: 00e5f8081d81f29c1fc12712ddf2f875bd9c6f77
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   DCPathButton: 99c8211ef3eafc3b438c917a4c7b4502fa77eee7
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  libksygpulive: aca3eb30e7a38ee6565feb52feb82ccc0103ce43
   LookinServer: 44f1b5f32743dc61068a156ff86b5b47d0a82943
   LXMButtonImagePosition: 663e176be2c7e4ff99bcda808c364ebc3774af0f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -99,6 +124,7 @@ SPEC CHECKSUMS:
   MLEmojiLabel: 36d73c19f9975cbf9def24e5bc135263b0337fd8
   MMLayout: 3fb59d58eeb8656c64e61d550fb0088e10666c11
   OCBarrage: 5ee1a922afacb2c04739621ccda71872185e2e59
+  PRTween: 6c58c7e32ebcf31e33e6a6e6bc727ebef3b668ef
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
@@ -108,6 +134,6 @@ SPEC CHECKSUMS:
   WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
 
-PODFILE CHECKSUM: 3656ea904ff8a18753009a4165c88a00ccc0ff01
+PODFILE CHECKSUM: 0927f7cd080b8af7654490ef804dde61aebbabba
 
 COCOAPODS: 1.7.5

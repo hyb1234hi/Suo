@@ -17,6 +17,10 @@
 		027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */; };
 		027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68322F044E2001B0593 /* GAShootingViewController.m */; };
 		027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68622F049BD001B0593 /* GAShootControllerView.m */; };
+		027DB68A22F04D51001B0593 /* GACaptureConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68922F04D51001B0593 /* GACaptureConfiguration.m */; };
+		027DB68D22F11D1A001B0593 /* GAShootingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB68C22F11D1A001B0593 /* GAShootingView.m */; };
+		027DB69522F16FCF001B0593 /* GARecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB69422F16FCF001B0593 /* GARecordButton.m */; };
+		027DB69822F183BE001B0593 /* UIColor+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB69722F183BE001B0593 /* UIColor+GAExtension.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -73,6 +77,15 @@
 		027DB68322F044E2001B0593 /* GAShootingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAShootingViewController.m; sourceTree = "<group>"; };
 		027DB68522F049BD001B0593 /* GAShootControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAShootControllerView.h; sourceTree = "<group>"; };
 		027DB68622F049BD001B0593 /* GAShootControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAShootControllerView.m; sourceTree = "<group>"; };
+		027DB68822F04D51001B0593 /* GACaptureConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACaptureConfiguration.h; sourceTree = "<group>"; };
+		027DB68922F04D51001B0593 /* GACaptureConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACaptureConfiguration.m; sourceTree = "<group>"; };
+		027DB68B22F11D1A001B0593 /* GAShootingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAShootingView.h; sourceTree = "<group>"; };
+		027DB68C22F11D1A001B0593 /* GAShootingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAShootingView.m; sourceTree = "<group>"; };
+		027DB68E22F16D79001B0593 /* Suo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Suo-Bridging-Header.h"; sourceTree = "<group>"; };
+		027DB69322F16FCF001B0593 /* GARecordButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GARecordButton.h; sourceTree = "<group>"; };
+		027DB69422F16FCF001B0593 /* GARecordButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GARecordButton.m; sourceTree = "<group>"; };
+		027DB69622F183BE001B0593 /* UIColor+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+GAExtension.h"; sourceTree = "<group>"; };
+		027DB69722F183BE001B0593 /* UIColor+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GAExtension.m"; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -174,8 +187,17 @@
 			children = (
 				027DB68222F044E2001B0593 /* GAShootingViewController.h */,
 				027DB68322F044E2001B0593 /* GAShootingViewController.m */,
+				027DB68B22F11D1A001B0593 /* GAShootingView.h */,
+				027DB68C22F11D1A001B0593 /* GAShootingView.m */,
+				027DB68822F04D51001B0593 /* GACaptureConfiguration.h */,
+				027DB68922F04D51001B0593 /* GACaptureConfiguration.m */,
 				027DB68522F049BD001B0593 /* GAShootControllerView.h */,
 				027DB68622F049BD001B0593 /* GAShootControllerView.m */,
+				027DB69322F16FCF001B0593 /* GARecordButton.h */,
+				027DB69422F16FCF001B0593 /* GARecordButton.m */,
+				027DB68E22F16D79001B0593 /* Suo-Bridging-Header.h */,
+				027DB69622F183BE001B0593 /* UIColor+GAExtension.h */,
+				027DB69722F183BE001B0593 /* UIColor+GAExtension.m */,
 			);
 			name = "拍摄";
 			sourceTree = "<group>";
@@ -392,6 +414,7 @@
 				TargetAttributes = {
 					3B47BFFF22EA90F8000974C7 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -503,9 +526,11 @@
 				027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */,
 				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
 				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
+				027DB69522F16FCF001B0593 /* GARecordButton.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
 				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
 				027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */,
+				027DB69822F183BE001B0593 /* UIColor+GAExtension.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
 				027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */,
@@ -523,12 +548,14 @@
 				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
 				3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */,
 				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
+				027DB68D22F11D1A001B0593 /* GAShootingView.m in Sources */,
 				027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */,
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
 				3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */,
 				3B47C05922EAF30E000974C7 /* GACityWideCollectionCell.m in Sources */,
+				027DB68A22F04D51001B0593 /* GACaptureConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +698,7 @@
 			baseConfigurationReference = 71DE5F39565E6B8B128BE66E /* Pods-Suo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
@@ -684,6 +712,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Suo/Suo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -693,6 +724,7 @@
 			baseConfigurationReference = 97ED12025A225651A90D3F9D /* Pods-Suo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
@@ -706,6 +738,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Suo/Suo-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

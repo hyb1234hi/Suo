@@ -2,7 +2,7 @@ platform:ios,'10'
 
 target 'Suo' do
 
-
+  
 pod 'Masonry'
 pod 'SDWebImage'
 pod 'MJExtension'
@@ -16,14 +16,21 @@ pod 'XRWaterfallLayout'
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
 pod 'LXMButtonImagePosition'
+pod 'PRTween'
 
 #弹幕
 pod 'OCBarrage'
 pod 'BarrageRenderer'
 pod 'MLEmojiLabel'
 
+#直播
+pod 'libksygpulive/KSYGPUResource'
+pod 'libksygpulive/libksygpulive'
+
 #debug
 pod 'LookinServer', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
 end
+
+
