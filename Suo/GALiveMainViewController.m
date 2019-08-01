@@ -11,6 +11,7 @@
 #import "GALiveViewController.h"
 #import "GAVideoViewController.h"
 #import "GACityWideViewController.h"
+#import "GAShootingViewController.h"
 
 
 #import <WMPageController.h>
@@ -58,9 +59,15 @@
     _addButton = UIButton.new;
     [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab"] forState:UIControlStateNormal];
     [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"] forState:UIControlStateHighlighted];
-    
+    [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addButton];
 }
+
+- (void)addButtonAction:(UIButton*)send{
+    GAShootingViewController *vc = GAShootingViewController.new;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 - (BOOL)prefersStatusBarHidden{
     return YES;
     

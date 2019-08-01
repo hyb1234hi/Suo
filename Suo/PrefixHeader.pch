@@ -105,6 +105,7 @@ alpha:1.0]
 #define WXSecret        @""
 
 #import <Masonry.h>
+#import <UIButton+LXMImagePosition.h>
 #import "UIView+GAExtension.h"
 
 #endif /* PrefixHeader_pch */
