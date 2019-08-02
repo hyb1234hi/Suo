@@ -43,7 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _urlList = @[@"http://1253131631.vod2.myqcloud.com/26f327f9vodgzp1253131631/f4c0c9e59031868222924048327/f0.mp4",
+    _urlList = @[@"http://gajz.live.play.zsepoch.com/live/test_atangge.flv?txSecret=604bd314c34586e6c366f3beaf922bd7&txTime=5D3ED1B0",
+                 @"http://1253131631.vod2.myqcloud.com/26f327f9vodgzp1253131631/f4c0c9e59031868222924048327/f0.mp4",
                  @"http://videoqiniu.laosiji.com/ZySuZqFj6MCC2a7uZsPTVzUzdBI=/Fi21D9NWMQqOrhqMbXlxdkRzitXa",
                  @"http://videoqiniu.laosiji.com/e6CRXo2_u_xJP6gOzJU6h6s8new=/Fg2fmesGFjdSeixACoikpFCOLUAK",
                  @"http://videoqiniu.laosiji.com/yohZP1E1q5Q-2_3UC7R-75sI2rE=/FgN7rui4MHgwiOrVgeUN8USFKIa2",

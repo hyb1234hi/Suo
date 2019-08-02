@@ -9,16 +9,13 @@
 #import "GAShootControllerView.h"
 #import "GARecordButton.h"
 
+#import "GAOpenLiveControlView.h"
+#import "GARecordControlView.h"
+
 #import <UIButton+LXMImagePosition.h>
 
 
 @interface GAShootControllerView ()
-//右上角按钮
-@property(nonatomic,strong)UIButton *conversionLensBtn; //!<反转镜头按钮
-@property(nonatomic,strong)UIButton *beautyBtn;         //!<美颜按钮
-@property(nonatomic,strong)UIButton *countdownBtn;      //!<倒计时按钮
-@property(nonatomic,strong)UIButton *fsixedPointStopBtn;//!<定点停止按钮
-@property(nonatomic,strong)UIButton *speedChangeBtn;       //!<变速按钮
 
 //底部视频分类按钮
 @property(nonatomic,strong)UIButton *uploadBtn;     //!<上传按钮
@@ -27,15 +24,8 @@
 @property(nonatomic,strong)UIButton *kSong;         //!<k歌
 
 
-@property(nonatomic,strong)GARecordButton *recordBtn;     //!<录制按钮
-@property(nonatomic,strong)UIButton *propsBtn;      //!<道具
-@property(nonatomic,strong)UIButton *musicBtn;      //!<音乐按钮
-
-
-
-@property(nonatomic,strong)NSTimer *timer;
-@property(nonatomic,assign)CGFloat pregress;
-
+@property(nonatomic,strong)GAOpenLiveControlView *openLiveView;
+@property(nonatomic,strong)GARecordControlView *recordView;
 
 @end
 
@@ -49,7 +39,6 @@
 }
 
 - (void)setupUI{
-    
 
     UIButton*(^createButton)(NSString*,NSString*,LXMImagePosition) = ^(NSString*title,NSString*image,LXMImagePosition pos){
         UIButton *button = UIButton.new;
@@ -61,31 +50,7 @@
         return button;
     };
 
-    
-        //right top button
-    ({
-        LXMImagePosition top = LXMImagePositionTop;
-        _conversionLensBtn = createButton(@"反转镜头",@"iconHomeAllshareXitong",top);
-        _beautyBtn = createButton(@"美颜",@"iconHomeAllshareXitong",top);
-        _countdownBtn = createButton(@"倒计时",@"iconHomeAllshareXitong",top);
-        _fsixedPointStopBtn = createButton(@"定点停",@"iconHomeAllshareXitong",top);
-        _speedChangeBtn = createButton(@"变速",@"iconHomeAllshareXitong",top);
-        
-        NSArray<UIView*> *views = @[_conversionLensBtn,_beautyBtn,_countdownBtn,_fsixedPointStopBtn,_speedChangeBtn];
-        
-        for (UIView *view in views) {
-            [self addSubview:view];
-        }
-        
-            //layout
-        [views mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:4 leadSpacing:20 tailSpacing:300];
-        [views mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 70));
-            make.right.mas_equalTo(-16);
-        }];
-    });
-    
-    
+
     //bottom button
     ({
         LXMImagePosition bottom = LXMImagePositionBottom;
@@ -99,89 +64,54 @@
             [self addSubview:view];
         }
         
-        // layout
-        [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:50 tailSpacing:50];
-        [views mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 60));
-            make.bottom.mas_equalTo(-SafeAreaBottomHeight-20);
-        }];
-        
+        [_liveBtn addTarget:self action:@selector(toggleLive:) forControlEvents:UIControlEventTouchUpInside];
+        [_shootBtn addTarget:self action:@selector(toggleShooting:) forControlEvents:UIControlEventTouchUpInside];
     });
 
-    // 录制按钮 、道具、音乐
-    ({
-        _recordBtn = [[GARecordButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        [_recordBtn addTarget:self action:@selector(recordButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        _propsBtn = createButton(@"道具",@"",LXMImagePositionTop);
-        _musicBtn = createButton(@"音乐",@"",LXMImagePositionTop);
-        
-        [self addSubview:_recordBtn];
-        [self addSubview:_propsBtn];
-        [self addSubview:_musicBtn];
-        
-        [_recordBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self);
-            make.bottom.mas_equalTo(self.shootBtn.mas_top).inset(40);
-            make.size.mas_equalTo(CGSizeMake(100, 100));
-        }];
-        [_propsBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(self.recordBtn);
-            make.right.mas_equalTo(self.recordBtn.mas_left).inset(60);
-        }];
-        [_musicBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.recordBtn.mas_right).inset(60);
-            make.bottom.mas_equalTo(self.recordBtn);
-        }];
-        
-    });
-
+    
+    _openLiveView = GAOpenLiveControlView.new;
+    [_openLiveView setFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 200)];
+    
+    _recordView = GARecordControlView.new;
+    [self addSubview:_recordView];
+    [_recordView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(self);
+        make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
+    }];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-}
-
-- (void)recordButtonTapped:(GARecordButton*)send{
-    switch (self.recordBtn.buttonState) {
-            case GARecordButtonStateHidden:{
-                [self stop];
-            }break;
-            case GARecordButtonIdel:{
-                [self stop];
-            }break;
-            case GARecordButtonStateRecording:{
-                [self record];
-            }break;
-            
-    }
-}
-
-
-- (void)stop{
-    [self.timer invalidate];
-}
-- (void)record{
-    
-    [_recordBtn setButtonState:GARecordButtonStateRecording];
-    
-    CGFloat max = 15;
-    _pregress = 0;
-    
-    [_timer invalidate];
-    
-    __weak typeof(self) wself = self;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        wself.pregress += 0.05 / max;
-        [wself.recordBtn setProgress:wself.pregress];
-        
-        if (wself.pregress >= 1) {
-            [wself.timer invalidate];
-            [self stop];
-        }
-        
+    NSArray<UIView*> *views = @[_uploadBtn,_shootBtn,_liveBtn,_kSong];
+    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:50 tailSpacing:50];
+    [views mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 60));
+        make.bottom.mas_equalTo(-SafeAreaBottomHeight-20);
     }];
     
 }
+
+- (void)toggleShooting:(UIButton*)send{
+    [self.openLiveView setHidden:YES];
+    [self.recordView setHidden:NO];
+    
+}
+
+- (void)toggleLive:(UIButton*)send{
+    [self addSubview:_openLiveView];
+    
+    [self.openLiveView setHidden:NO];
+    [self.recordView setHidden:YES];
+    [self.openLiveView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.mas_equalTo(self);
+        make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
+    }];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self layoutIfNeeded];
+    }];
+}
+
+
 @end
