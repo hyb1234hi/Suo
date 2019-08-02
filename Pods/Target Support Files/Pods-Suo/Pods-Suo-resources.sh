@@ -105,11 +105,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png"
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png"
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png"
+  install_resource "${PODS_ROOT}/HZPhotoBrowser/HZPhotoBrowser/photoBrowser/ptotoBrowser/HZPhotoBrowser.bundle"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
   install_resource "${PODS_ROOT}/SuperPlayer/SuperPlayer/Resource/SuperPlayer.bundle"
+  install_resource "${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
   install_resource "${PODS_ROOT}/libksygpulive/resource/KSYGPUResource.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -121,11 +123,13 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png"
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png"
   install_resource "${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png"
+  install_resource "${PODS_ROOT}/HZPhotoBrowser/HZPhotoBrowser/photoBrowser/ptotoBrowser/HZPhotoBrowser.bundle"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle"
   install_resource "${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle"
   install_resource "${PODS_ROOT}/SuperPlayer/SuperPlayer/Resource/SuperPlayer.bundle"
+  install_resource "${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
   install_resource "${PODS_ROOT}/libksygpulive/resource/KSYGPUResource.bundle"
 fi
 

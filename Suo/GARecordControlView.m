@@ -91,7 +91,7 @@
     ({
          NSArray<UIView*> *views = @[_conversionLensBtn,_beautyBtn,_countdownBtn,_fsixedPointStopBtn,_speedChangeBtn];
             //layout
-        [views mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:4 leadSpacing:20 tailSpacing:300];
+        [views mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:16 leadSpacing:20 tailSpacing:200];
         [views mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 70));
             make.right.mas_equalTo(-16);

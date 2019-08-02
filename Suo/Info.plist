@@ -50,5 +50,11 @@
 	<string>App直播需要访问您的摄像头</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>App需要使用麦克风获取声音</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要读取相册图片</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string></string>
 </dict>
 </plist>

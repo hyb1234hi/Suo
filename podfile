@@ -13,6 +13,10 @@ pod 'SDCycleScrollView'
 pod 'SuperPlayer'
 pod 'XRWaterfallLayout'
 
+pod 'TZImagePickerController'
+pod 'HZPhotoBrowser'
+
+
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
 pod 'LXMButtonImagePosition'
