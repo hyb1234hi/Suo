@@ -12,8 +12,6 @@
 @interface GAShootingView ()
 
 
-
-
 @end
 
 @implementation GAShootingView

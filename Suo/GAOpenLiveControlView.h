@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GAOpenLiveControllerDelegate <NSObject>
 
+- (void)startLive;
 
 @end
 

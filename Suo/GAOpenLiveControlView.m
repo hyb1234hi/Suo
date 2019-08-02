@@ -7,6 +7,7 @@
 //
 
 #import "GAOpenLiveControlView.h"
+#import <TZImagePickerController.h>
 
 
 @interface GAOpenLiveControlView ()
@@ -27,9 +28,6 @@
 @property(nonatomic,strong)UIButton *beautyBtn;                 //!<美颜
 @property(nonatomic,strong)UIButton *filterBtn;                 //!<滤镜
 @property(nonatomic,strong)UIButton *startLiveBtn;              //!<开始直播
-
-
-
 
 
 @end
@@ -141,6 +139,9 @@
     
 
         [_coverView setBackgroundColor:UIColor.grayColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addCoverImage:)];
+        [_coverView setUserInteractionEnabled:YES];
+        [_coverView addGestureRecognizer:tap];
     });
     
     //bottom UI
@@ -162,6 +163,8 @@
         [self addSubview:_beautyBtn];
         [self addSubview:_filterBtn];
         [self addSubview:_startLiveBtn];
+        
+        [_startLiveBtn addTarget:self action:@selector(toggleStartButton:) forControlEvents:UIControlEventTouchUpInside];
     });
 }
 
@@ -245,6 +248,33 @@
             make.bottom.mas_equalTo(self.beautyBtn);
         }];
     });
+}
+
+- (void)toggleStartButton:(UIButton*)send{
+    if ([self.delegate respondsToSelector:@selector(startLive)]) {
+        [self.delegate startLive];
+    }
+}
+
+- (void)addCoverImage:(UITapGestureRecognizer*)tap{
+    TZImagePickerController *picker = [[TZImagePickerController alloc] init];
+    [picker setMaxImagesCount:1];
+    
+    [picker setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        [self.coverView setImage:photos.firstObject];
+    }];
+    
+    UIViewController *root = [UIApplication.sharedApplication keyWindow].rootViewController ;
+    while (root.presentedViewController) {
+        root = root.presentedViewController;
+    }
+    
+    [root setDefinesPresentationContext:YES];
+    [root presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.titleTextField resignFirstResponder];
 }
 
 - (void)shareToSina:(UIBarButtonItem*)send{

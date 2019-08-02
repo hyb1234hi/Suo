@@ -45,6 +45,7 @@
     
     _livePlayer = [[TXLivePlayer alloc] init];
     [self playVideoWithIndex:0 animated:NO];
+    
 }
 
 - (void)viewDidLayoutSubviews{

@@ -15,7 +15,7 @@
 #import <UIButton+LXMImagePosition.h>
 
 
-@interface GAShootControllerView ()
+@interface GAShootControllerView ()<GAOpenLiveControllerDelegate>
 
 //底部视频分类按钮
 @property(nonatomic,strong)UIButton *uploadBtn;     //!<上传按钮
@@ -63,6 +63,11 @@
         for (UIView *view in views) {
             [self addSubview:view];
         }
+        [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:SafeAreaTopHeight tailSpacing:50];
+        [views mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(30, 60));
+            make.bottom.mas_equalTo(-SafeAreaBottomHeight-20);
+        }];
         
         [_liveBtn addTarget:self action:@selector(toggleLive:) forControlEvents:UIControlEventTouchUpInside];
         [_shootBtn addTarget:self action:@selector(toggleShooting:) forControlEvents:UIControlEventTouchUpInside];
@@ -71,6 +76,7 @@
     
     _openLiveView = GAOpenLiveControlView.new;
     [_openLiveView setFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 200)];
+    _openLiveView.delegate = self;
     
     _recordView = GARecordControlView.new;
     [self addSubview:_recordView];
@@ -79,6 +85,8 @@
         make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
     }];
 }
+
+
 
 - (void)layoutSubviews{
     [super layoutSubviews];
@@ -113,5 +121,12 @@
     }];
 }
 
+
+#pragma mark - GAOpenLiveControllerDelegate
+-(void)startLive{
+    if ([self.delegate respondsToSelector:@selector(startLiveDidClick)]) {
+        [self.delegate startLiveDidClick];
+    }
+}
 
 @end

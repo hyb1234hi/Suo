@@ -7,9 +7,11 @@ ${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png
 ${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png
 ${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png
 ${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png
+${PODS_ROOT}/HZPhotoBrowser/HZPhotoBrowser/photoBrowser/ptotoBrowser/HZPhotoBrowser.bundle
 ${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist
 ${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist
 ${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle
 ${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle
 ${PODS_ROOT}/SuperPlayer/SuperPlayer/Resource/SuperPlayer.bundle
+${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle
 ${PODS_ROOT}/libksygpulive/resource/KSYGPUResource.bundle

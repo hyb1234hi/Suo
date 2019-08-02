@@ -13,6 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GAShootControllerViewDelegate <NSObject>
 
+
+/**
+ 开始直播按钮点击
+ */
+- (void)startLiveDidClick;
+
 - (void)switchLens;
 - (void)toggleRecord:(GARecordButton*)send;
 
