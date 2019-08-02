@@ -42,6 +42,9 @@
     [self.view addSubview:self.collectionView];
     
    // [self.navigationItem setTitleView:self.toolbar];
+    
+    _livePlayer = [[TXLivePlayer alloc] init];
+    [self playVideoWithIndex:0 animated:NO];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -66,6 +69,60 @@
     //[self.navigationController setNavigationBarHidden:YES];
 }
 
+/**播放指定下标的视频*/
+- (void)playVideoWithIndex:(NSInteger)index animated:(BOOL)animation {
+    
+    NSIndexPath *selectedItem = [NSIndexPath indexPathForItem:index inSection:0];
+    [self.collectionView selectItemAtIndexPath:selectedItem animated:animation scrollPosition:UICollectionViewScrollPositionTop];
+    
+    
+    __weak typeof(self) wself = self;
+    GALiveWatchCell*(^payCell)(void) = ^{
+        [wself.livePlayer stopPlay];         //停止播放， 可以处理播放下一个视频时第一帧显示的是上一个视频
+        [wself.livePlayer removeVideoWidget]; //移除，
+        
+        GALiveWatchCell *cell = (GALiveWatchCell*)[wself.collectionView cellForItemAtIndexPath:selectedItem];
+        NSLog(@"cell -------0000000000000000000000000000000000>>>>> %@, indexpath=%@",cell,selectedItem);
+        if (!cell) {
+            [wself.collectionView layoutIfNeeded];
+            cell = (GALiveWatchCell*)[wself.collectionView cellForItemAtIndexPath:selectedItem];
+            
+            //NSLog(@"layout 000000>>>>>>>>>>>>>>>>>>>>> %@",cell);
+        }
+        
+        [wself.livePlayer setupVideoWidget:cell.bounds containView:cell.contentView insertIndex:0];
+        [wself.livePlayer startPlay:RTMPURL_PULL type:0];
+        
+            //[wself setPlayerStateDelegate:cell];
+        
+            //        if (!wself.timer) {
+            ////            wself.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            ////                if ([wself.vodPlayer isPlaying]) {
+            ////                    if ([wself.playerStateDelegate respondsToSelector:@selector(player:currentTime:totalTime:)]) {
+            ////                        [wself.playerStateDelegate player:wself.vodPlayer currentTime:wself.vodPlayer.currentPlaybackTime totalTime:wself.vodPlayer.duration];
+            ////                    }
+            ////                }
+            ////            }];
+            //        }
+        return cell;
+    };
+    
+    
+    
+    [UIView animateWithDuration:0.35 animations:^{
+        
+    } completion:^(BOOL finished) {
+        GALiveWatchCell *cell =  payCell();
+        if (!cell) {
+                //如果此时还没能获取cell  在一次延后0.35 确保显示出来 再获取
+            [UIView animateWithDuration:0.35 animations:^{ } completion:^(BOOL finished) {
+                payCell();
+            }];
+        }
+    }];
+}
+
+
 #pragma mark - GALiveWatchCellDelegate
 - (void)clickUserWithCell:(GALiveWatchCell *)cell{
     GAAuthorViewController *vc = GAAuthorViewController.new;
@@ -86,6 +143,8 @@
     
     return cell;
 }
+
+
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
@@ -111,7 +170,6 @@
     }
     return _collectionView;
 }
-
 
 
 - (UIToolbar *)toolbar{

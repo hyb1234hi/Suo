@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GARecordButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GAShootControllerView : UIView
+@protocol GAShootControllerViewDelegate <NSObject>
 
+- (void)switchLens;
+- (void)toggleRecord:(GARecordButton*)send;
+
+@end
+
+@interface GAShootControllerView : UIView
+@property(nonatomic,weak)id<GAShootControllerViewDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

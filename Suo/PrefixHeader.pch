@@ -87,6 +87,9 @@ alpha:1.0]
 #define MainFont        [UIFont systemFontOfSize:17.0]
 #define MainBoldFont    [UIFont boldSystemFontOfSize:17.0]
 
+#define MainFontWithSize(size)      ([UIFont systemFontOfSize:(size)])
+#define MainBoldFontWithSize(size)  ([UIFont boldSystemFontOfSize:(size)])
+
 //iPhoneX
 #define isIPhoneX       ((CGRectGetHeight([UIScreen mainScreen].bounds) >= 812)&&([[UIDevice currentDevice].model isEqualToString:@"iPhone"]))
 
@@ -97,6 +100,10 @@ alpha:1.0]
 #define StatusBarHeight [UIApplication sharedApplication].statusBarFrame.size.height
 #define SafeAreaTopHeight ((ScreenHeight >= 812.0) && [[UIDevice currentDevice].model isEqualToString:@"iPhone"] ? 88 : 64)
 
+
+//URL
+#define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/test_atangge?txSecret=b7e154f983fbe5a3065b244160a39927&txTime=5D42C630"
+#define RTMPURL_PULL    @"rtmp://gajz.live.play.zsepoch.com/live/test_atangge?txSecret=604bd314c34586e6c366f3beaf922bd7&txTime=5D3ED1B0"
 
 //Pay and share
 #define AlipayAppID     @""
