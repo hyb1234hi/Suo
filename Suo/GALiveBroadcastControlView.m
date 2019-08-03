@@ -7,11 +7,15 @@
 //
 
 #import "GALiveBroadcastControlView.h"
+#import <BarrageRenderer.h>
 
-@interface GALiveBroadcastControlView ()
+
+@interface GALiveBroadcastControlView ()<BarrageRendererDelegate>
 @property(nonatomic,strong)UIButton *stopLiveBtn;   //!<退出直播
 @property(nonatomic,strong)UIButton *sendMSGBtn;    //!<发送消息
 @property(nonatomic,strong)UIButton *sendPrivateMSGBtn; //!<发送私信
+
+@property(nonatomic,strong)BarrageRenderer *renderer;   //!<弹幕渲染
 
 
 @end
@@ -27,6 +31,14 @@
 
 
 - (void)setupUI{
+    _renderer = [[BarrageRenderer alloc] init];
+    [_renderer setDelegate:self];
+    [_renderer setSmoothness:0.8];
+    [_renderer.view setUserInteractionEnabled:YES];
+    [self addSubview:_renderer.view];
+    [self sendSubviewToBack:_renderer.view];
+    [_renderer start];
+    
     _stopLiveBtn = UIButton.new;
     [_stopLiveBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_stopLiveBtn setTitle:@"STOP" forState:UIControlStateNormal];

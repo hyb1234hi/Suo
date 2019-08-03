@@ -1,2 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Suo/Pods-Suo-frameworks.sh
+${PODS_ROOT}/AlivcLivePusher/AlivcLivePusher.framework
+${PODS_ROOT}/AlivcLivePusher/AlivcLibRtmp.framework
+${PODS_ROOT}/AlivcLivePusher/AlivcLibBeauty.framework
+${PODS_ROOT}/AlivcLivePusher/AlivcLibFace.framework
 ${PODS_ROOT}/LookinServer/LookinServer.framework

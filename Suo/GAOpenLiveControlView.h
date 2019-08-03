@@ -12,7 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GAOpenLiveControllerDelegate <NSObject>
 
+/**
+ 开启直播点击
+ */
 - (void)startLive;
+
+/**
+ 切换镜头点击
+ */
+-(void)switchCamera;
 
 @end
 

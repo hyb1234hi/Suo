@@ -30,6 +30,7 @@ pod 'MLEmojiLabel'
 #直播
 pod 'libksygpulive/KSYGPUResource'
 pod 'libksygpulive/libksygpulive'
+pod 'AlivcLivePusher'
 
 #debug
 pod 'LookinServer', :configurations => ['Debug']

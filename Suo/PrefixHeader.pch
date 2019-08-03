@@ -113,6 +113,8 @@ alpha:1.0]
 
 #import <Masonry.h>
 #import <UIButton+LXMImagePosition.h>
+
+#import "NSObject+GAExtension.h"
 #import "UIView+GAExtension.h"
 
 #endif /* PrefixHeader_pch */

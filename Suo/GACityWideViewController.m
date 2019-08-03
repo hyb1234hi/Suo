@@ -47,7 +47,7 @@ static CGFloat menuViewHeight = 38.0;
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
     
-    return CGRectMake(0, 0, 414, menuViewHeight);
+    return CGRectMake(0, 0, ScreenWidth, menuViewHeight);
 }
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView{

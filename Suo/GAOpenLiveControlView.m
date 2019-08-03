@@ -8,9 +8,9 @@
 
 #import "GAOpenLiveControlView.h"
 #import <TZImagePickerController.h>
+#import <CoreLocation/CoreLocation.h>
 
-
-@interface GAOpenLiveControlView ()
+@interface GAOpenLiveControlView ()<CLLocationManagerDelegate>
 @property(nonatomic,strong)UILabel *titleLabel;     //!<模式title
 @property(nonatomic,strong)UIButton *modelTypeBtn;  //!<模式切换Btn
 @property(nonatomic,strong)UIButton *switchCamera;  //!<切换相机
@@ -29,6 +29,7 @@
 @property(nonatomic,strong)UIButton *filterBtn;                 //!<滤镜
 @property(nonatomic,strong)UIButton *startLiveBtn;              //!<开始直播
 
+@property(nonatomic,strong)CLLocationManager *manager;
 
 @end
 
@@ -107,6 +108,7 @@
         [_titleTextField setAttributedPlaceholder:att];
         
         [_locationLab setFont:MainFontWithSize(14)];
+        [_locationLab setTextColor:ColorWhite];
         NSTextAttachment *imageText = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
         [imageText setImage:[UIImage imageNamed:@"icon_home_like_after"]];
         [imageText setBounds:CGRectMake(0, 0, 24, 24)];
@@ -115,6 +117,9 @@
         NSAttributedString *titleAtt = [[NSAttributedString alloc] initWithString:@" 开启定位,收获更多人气" attributes:@{NSForegroundColorAttributeName:ColorWhite,}];
         [mutAtt appendAttributedString:titleAtt];
         [_locationLab setAttributedText:mutAtt];
+        UITapGestureRecognizer *tapLocatin = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fetchLocation:)];
+        [_locationLab addGestureRecognizer:tapLocatin];
+        [_locationLab setUserInteractionEnabled:YES];
         
         
         [_shareLab setTextColor:ColorWhite];
@@ -164,8 +169,9 @@
         [self addSubview:_filterBtn];
         [self addSubview:_startLiveBtn];
         
-        [_startLiveBtn addTarget:self action:@selector(toggleStartButton:) forControlEvents:UIControlEventTouchUpInside];
     });
+    [_startLiveBtn addTarget:self action:@selector(toggleStartButton:) forControlEvents:UIControlEventTouchUpInside];
+    [_switchCamera addTarget:self action:@selector(toggleSwitchCamera:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)layoutSubviews{
@@ -250,11 +256,71 @@
     });
 }
 
+- (void)fetchLocation:(UIGestureRecognizer*)tap{
+    //读取定位信息
+    
+    if (!CLLocationManager.locationServicesEnabled) {
+        //定位不可用
+        UIAlertController *alertCtl = [UIAlertController alertControllerWithTitle:@"定位功能不可用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        [alertCtl addAction:ok];
+        [self rootVCPresentViewController:alertCtl animated:YES completion:nil];
+        
+        return;
+    }
+    
+    
+    //跳转打开定位
+    void(^openLocation)(void) = ^(){
+        UIAlertController *alertVC = [[UIAlertController alloc] init];
+        UIAlertAction *openLocatin = [UIAlertAction actionWithTitle:@"打开定位,可以获得更多关注" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] canOpenURL:url];
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        [alertVC addAction:openLocatin];
+        [alertVC addAction:cancel];
+        [self rootVCPresentViewController:alertVC animated:YES completion:nil];
+    };
+    
+    // location
+    void(^location)(void) = ^(){
+        CLLocationManager *manager = [[CLLocationManager alloc] init];
+        [manager requestWhenInUseAuthorization];
+        [manager setDelegate:self];
+        [manager startUpdatingLocation];
+        self->_manager = manager;
+    };
+    
+
+    switch (CLLocationManager.authorizationStatus) {
+            
+        case kCLAuthorizationStatusDenied:{
+            openLocation();
+        }break;
+        
+        case kCLAuthorizationStatusNotDetermined:
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:{
+            location();
+        }break;
+            
+    }
+}
+
+- (void)toggleSwitchCamera:(UIButton*)send{
+    
+}
+
 - (void)toggleStartButton:(UIButton*)send{
     if ([self.delegate respondsToSelector:@selector(startLive)]) {
         [self.delegate startLive];
     }
 }
+
 
 - (void)addCoverImage:(UITapGestureRecognizer*)tap{
     TZImagePickerController *picker = [[TZImagePickerController alloc] init];
@@ -277,6 +343,8 @@
     [self.titleTextField resignFirstResponder];
 }
 
+
+#pragma mark - share action
 - (void)shareToSina:(UIBarButtonItem*)send{
     
 }
@@ -290,4 +358,21 @@
     
 }
 
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    [manager stopUpdatingLocation];
+    
+    //
+    CLGeocoder *geo = [[CLGeocoder alloc] init];
+    [geo reverseGeocodeLocation:locations.firstObject completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = placemarks.firstObject;
+        //市
+        NSString *locality = placemark.locality;
+        NSString *sublocality = placemark.subLocality;
+        
+        NSString *loca = [NSString stringWithFormat:@"%@ - %@",locality,sublocality];
+        [self.locationLab setText:loca];
+    }];
+}
 @end
