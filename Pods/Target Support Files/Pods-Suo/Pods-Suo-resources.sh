@@ -97,6 +97,7 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_ROOT}/AlivcLivePusher/AlivcLibFaceResource.bundle"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/bloom.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/fold.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/selected.caf"
@@ -115,6 +116,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/libksygpulive/resource/KSYGPUResource.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_ROOT}/AlivcLivePusher/AlivcLibFaceResource.bundle"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/bloom.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/fold.caf"
   install_resource "${PODS_ROOT}/DCPathButton/DCPathButton/Sounds/selected.caf"

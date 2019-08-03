@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22522F5698200C80375 /* NSObject+GAExtension.m */; };
 		027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */; };
 		027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */; };
 		027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */; };
@@ -27,6 +28,7 @@
 		02FBD63722F409ED00ED76CC /* GA_KSYLive.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD63622F409ED00ED76CC /* GA_KSYLive.m */; };
 		02FBD63A22F439EE00ED76CC /* GALiveBroadcastControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD63922F439EE00ED76CC /* GALiveBroadcastControlView.m */; };
 		02FBD63D22F5160600ED76CC /* GABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD63C22F5160600ED76CC /* GABaseViewController.m */; };
+		02FBD64222F53A6F00ED76CC /* GAAliveKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FBD64122F53A6F00ED76CC /* GAAliveKit.m */; };
 		3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00422EA90F8000974C7 /* AppDelegate.m */; };
 		3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B47C00722EA90F8000974C7 /* GAMainViewController.m */; };
 		3B47C00B22EA90F8000974C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B47C00922EA90F8000974C7 /* Main.storyboard */; };
@@ -62,7 +64,22 @@
 		9D29F30A8A0559825739EA25 /* libPods-Suo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		02FBD64522F53BDC00ED76CC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		022FF22422F5698200C80375 /* NSObject+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+GAExtension.h"; sourceTree = "<group>"; };
+		022FF22522F5698200C80375 /* NSObject+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GAExtension.m"; sourceTree = "<group>"; };
 		027DB66422EEED36001B0593 /* GALiveWatchControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchControllerView.h; sourceTree = "<group>"; };
 		027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchControllerView.m; sourceTree = "<group>"; };
 		027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLEmojiLabel+BarrageView.h"; sourceTree = "<group>"; };
@@ -104,6 +121,8 @@
 		02FBD63922F439EE00ED76CC /* GALiveBroadcastControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveBroadcastControlView.m; sourceTree = "<group>"; };
 		02FBD63B22F5160600ED76CC /* GABaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseViewController.h; sourceTree = "<group>"; };
 		02FBD63C22F5160600ED76CC /* GABaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABaseViewController.m; sourceTree = "<group>"; };
+		02FBD64022F53A6F00ED76CC /* GAAliveKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAliveKit.h; sourceTree = "<group>"; };
+		02FBD64122F53A6F00ED76CC /* GAAliveKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAliveKit.m; sourceTree = "<group>"; };
 		3B47C00022EA90F8000974C7 /* Suo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C00322EA90F8000974C7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3B47C00422EA90F8000974C7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -223,6 +242,8 @@
 				027DB69722F183BE001B0593 /* UIColor+GAExtension.m */,
 				02FBD63522F409ED00ED76CC /* GA_KSYLive.h */,
 				02FBD63622F409ED00ED76CC /* GA_KSYLive.m */,
+				02FBD64022F53A6F00ED76CC /* GAAliveKit.h */,
+				02FBD64122F53A6F00ED76CC /* GAAliveKit.m */,
 			);
 			name = "拍摄";
 			sourceTree = "<group>";
@@ -393,6 +414,8 @@
 				027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */,
 				3B47C03C22EAA792000974C7 /* UIView+GAExtension.h */,
 				3B47C03D22EAA792000974C7 /* UIView+GAExtension.m */,
+				022FF22422F5698200C80375 /* NSObject+GAExtension.h */,
+				022FF22522F5698200C80375 /* NSObject+GAExtension.m */,
 			);
 			name = EX;
 			sourceTree = "<group>";
@@ -430,6 +453,7 @@
 				3B47BFFE22EA90F8000974C7 /* Resources */,
 				6327758DF6DFB03F39DD7235 /* [CP] Embed Pods Frameworks */,
 				AC61FA045F29AEA694576890 /* [CP] Copy Pods Resources */,
+				02FBD64522F53BDC00ED76CC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -558,6 +582,7 @@
 				3B47C04122EAACD4000974C7 /* GAVideoPlayCell.m in Sources */,
 				3B99C72122EC071000ED8999 /* GAVideo.m in Sources */,
 				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
+				022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */,
 				02FBD63722F409ED00ED76CC /* GA_KSYLive.m in Sources */,
 				3B99C73922ED665B00ED8999 /* GASharePopView.m in Sources */,
 				3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */,
@@ -593,6 +618,7 @@
 				027DB6A022F2C891001B0593 /* GAOpenLiveControlView.m in Sources */,
 				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
 				027DB68D22F11D1A001B0593 /* GAShootingView.m in Sources */,
+				02FBD64222F53A6F00ED76CC /* GAAliveKit.m in Sources */,
 				027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */,
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
@@ -660,6 +686,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -719,6 +746,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -745,6 +773,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
+				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
@@ -771,6 +800,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
+				ENABLE_BITCODE = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
