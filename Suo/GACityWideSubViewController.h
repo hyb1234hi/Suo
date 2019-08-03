@@ -6,7 +6,7 @@
 //  Copyright © 2019 怪兽 🐙. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GABaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

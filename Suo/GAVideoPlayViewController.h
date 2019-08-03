@@ -6,11 +6,12 @@
 //  Copyright © 2019 怪兽 🐙. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GABaseViewController.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GAVideoPlayViewController : UIViewController
+@interface GAVideoPlayViewController : GABaseViewController
 - (instancetype)initWith:(id)dataSource index:(NSInteger)currentIndex;
 @end
 
