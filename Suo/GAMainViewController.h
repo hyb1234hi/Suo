@@ -6,9 +6,9 @@
 //  Copyright © 2019 怪兽 🐙. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GABaseViewController.h"
 
-@interface GAMainViewController : UIViewController
+@interface GAMainViewController : GABaseViewController
 
 
 @end

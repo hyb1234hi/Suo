@@ -41,7 +41,6 @@
     [_kit stopPreview];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -68,7 +67,7 @@
     [self.kit.streamerBase setStreamStateChange:^(KSYStreamState newState) {
         switch (newState) {
             case KSYStreamStateIdle:{
-                NSLog(@"空闲z状态");
+                NSLog(@"空闲状态");
             }break;
                 
             case KSYStreamStateConnecting:{
@@ -144,6 +143,41 @@
     }
 }
 
+
+
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    CGPoint point = [touches.anyObject locationInView:self.view];
+//    [_kit focusAtPoint:point];
+//    [_kit exposureAtPoint:point];
+//}
+
+#pragma mark - getter
+
+
+- (KSYGPUStreamerKit *)kit{
+    if (!_kit) {
+        _kit = [[KSYGPUStreamerKit alloc] initWithDefaultCfg];
+        
+        [_kit setVideoProcessingCallback:^(CMSampleBufferRef sampleBuffer) {
+           // NSLog(@"video数据  %p",sampleBuffer);
+        }];
+        [_kit setAudioProcessingCallback:^(CMSampleBufferRef sampleBuffer) {
+           // NSLog(@"处理音频数据- %p",sampleBuffer);
+        }];
+    }
+    return _kit;
+}
+- (GALiveBroadcastControlView *)liveBroadcast{
+    if (!_liveBroadcast) {
+        _liveBroadcast = GALiveBroadcastControlView.new;
+        [_liveBroadcast setDelegate:self];
+    }
+    return _liveBroadcast;
+}
+
+
+#pragma mark - GAShootControllerViewDelegate            (直播开始前，拍摄前 UIAction)
 - (void)startLiveDidClick{
     
     [UIView animateWithDuration:0.35 animations:^{
@@ -158,39 +192,13 @@
         [self.liveBroadcast mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
         }];
-
+        
     }];
 }
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    CGPoint point = [touches.anyObject locationInView:self.view];
-//    [_kit focusAtPoint:point];
-//    [_kit exposureAtPoint:point];
-//}
 
 
-- (KSYGPUStreamerKit *)kit{
-    if (!_kit) {
-        _kit = [[KSYGPUStreamerKit alloc] initWithDefaultCfg];
-        
-        [_kit setVideoProcessingCallback:^(CMSampleBufferRef sampleBuffer) {
-            NSLog(@"video数据  %p",sampleBuffer);
-        }];
-        [_kit setAudioProcessingCallback:^(CMSampleBufferRef sampleBuffer) {
-            NSLog(@"处理音频数据- %p",sampleBuffer);
-        }];
-    }
-    return _kit;
-}
-- (GALiveBroadcastControlView *)liveBroadcast{
-    if (!_liveBroadcast) {
-        _liveBroadcast = GALiveBroadcastControlView.new;
-        [_liveBroadcast setDelegate:self];
-    }
-    return _liveBroadcast;
-}
-
-
+#pragma mark  - GALiveBroadcastControlViewDelegate      (直播进行中的 UIAction)
 - (void)stopLive{
     if (self.liveStarted) {
         self.liveStarted = NO;
