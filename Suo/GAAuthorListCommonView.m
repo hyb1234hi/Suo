@@ -62,9 +62,14 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GAAuthListCommonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([GAAuthListCommonCollectionViewCell class]) forIndexPath:indexPath];
-    
+    if (_index == 0) {
+        cell.isImage = NO;
+    }else {
+        cell.isImage = YES;
+    }
     return cell;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(40, 40);
 }

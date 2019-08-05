@@ -27,19 +27,20 @@
 }
 
 - (void)setUI {
-
-        _shadowView = UIView.new;
-        _shadowView.backgroundColor = ColorGray;
-        [self.contentView addSubview:_shadowView];
-        
-        _days = UILabel.new;
-        _days.font = [MainFont fontWithSize:14];
-        _days.numberOfLines = 2;
-        _days.textColor = ColorGray;
-        [self.shadowView addSubview:_days];
-        _icon = UIImageView.new;
-        [_icon setImage:[UIImage imageNamed:@"微信"]];        
-        [self.contentView addSubview:_icon];
+    
+    _shadowView = UIView.new;
+    _shadowView.backgroundColor = ColorGray;
+    [self.contentView addSubview:_shadowView];
+    _shadowView.layer.cornerRadius = 20;
+    _days = UILabel.new;
+    _days.font = [MainFont fontWithSize:14];
+    _days.numberOfLines = 2;
+    _days.textColor = ColorGray;
+    [self.shadowView addSubview:_days];
+    _icon = UIImageView.new;
+    [_icon setImage:[UIImage imageNamed:@"微信"]];
+    _icon.layer.cornerRadius = 20;
+    [self.contentView addSubview:_icon];
 }
 
 - (void)setDayNums:(NSString *)dayNums {
@@ -70,9 +71,6 @@
     [self.icon mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView);
     }];
-    [self.shadowView setupMaskWithCorner:20 rectCorner:UIRectCornerAllCorners];
-    [self.icon setupMaskWithCorner:20 rectCorner:UIRectCornerAllCorners];
-    
 }
 
 @end

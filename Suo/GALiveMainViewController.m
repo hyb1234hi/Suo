@@ -12,10 +12,11 @@
 #import "GAVideoViewController.h"
 #import "GACityWideViewController.h"
 #import "GAShootingViewController.h"
-
+#import "GALiveChatViewController.h" // 私信
 
 #import <WMPageController.h>
 #import <DCPathButton.h>
+
 
 
 @interface GALiveMainViewController ()
@@ -42,6 +43,12 @@
    
     [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:UIImage.new];
+    
+    UIButton *chatBtn = UIButton.new;
+    [chatBtn setImage:[UIImage imageNamed:@"微信"] forState:UIControlStateNormal];
+    [chatBtn addTarget:self action:@selector(rightItemClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *chatItem = [[UIBarButtonItem alloc] initWithCustomView:chatBtn];
+    self.navigationItem.rightBarButtonItem = chatItem;
 
     [self setShowOnNavigationBar:YES];
     [self setMenuViewStyle:WMMenuViewStyleLine];
@@ -61,6 +68,11 @@
     [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"] forState:UIControlStateHighlighted];
     [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addButton];
+}
+
+- (void)rightItemClick {
+    GALiveChatViewController *chatVC = GALiveChatViewController.new;
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 - (void)addButtonAction:(UIButton*)send{
