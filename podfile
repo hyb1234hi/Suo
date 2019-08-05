@@ -9,6 +9,7 @@ pod 'MJExtension'
 pod 'WMPageController'
 pod 'BEMCheckBox'
 pod 'SDCycleScrollView'
+pod 'MBProgressHUD'
 
 pod 'SuperPlayer'
 pod 'XRWaterfallLayout'
