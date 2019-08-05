@@ -18,6 +18,8 @@
 @property(nonatomic,strong)UILabel *timeLab;        //!<时间信息
 
 @property(nonatomic,strong)UIButton *lookAllRep;    //!<查看所有回复
+
+@property (nonatomic, strong)NSMutableArray *dataSource;
 @end
 
 static CGFloat avatarH = 50;
@@ -33,6 +35,8 @@ static CGFloat avatarW = 50;
 }
 
 - (void)setupUI{
+    
+    
     _avatarView     = UIImageView.new;
     _userNameLab    = UILabel.new;
     _contentLab     = UILabel.new;
@@ -50,11 +54,13 @@ static CGFloat avatarW = 50;
     
     _lookAllRep = UIButton.new;
     [_lookAllRep setTitle:@"查看全部XX条回复 >" forState:UIControlStateNormal];
+    [_lookAllRep setTitle:@"收起 <" forState:UIControlStateSelected];
     [_lookAllRep setTitleColor:RGBA(101, 101, 125, 1) forState:UIControlStateNormal];
     [_lookAllRep setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [_lookAllRep setTitleEdgeInsets:UIEdgeInsetsMake(0, 16, 0, 0)];
     [_lookAllRep.titleLabel setFont:[MainFont fontWithSize:13]];
-    
+    [_lookAllRep addTarget:self action:@selector(lookAllRepClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_lookAllRep setFrame:CGRectMake(0, 0, 0, 15)];
     [_tableView setTableFooterView:_lookAllRep];
     
     [self.contentView addSubview:_avatarView];
@@ -78,6 +84,7 @@ static CGFloat avatarW = 50;
     
     UIImage *image = [UIImage imageNamed:@"微信"];
     [_avatarView setImage:image];
+    
 }
 
 - (void)layoutSubviews{
@@ -109,10 +116,19 @@ static CGFloat avatarW = 50;
         make.bottom.mas_equalTo(self.contentView).inset(8);
     }];
     
+    
    // [_avatarView setupMaskWithCorner:avatarH/2.0 rectCorner:UIRectCornerAllCorners];
 }
 
-
+- (void)lookAllRepClick:(UIButton *)button
+{
+    if ([self.delegate respondsToSelector:@selector(commentCellShowMoreWithCell:withHeight:)]) {
+        [self.delegate commentCellShowMoreWithCell:self withHeight:90.f];
+    }
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(160);
+    }];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -139,5 +155,12 @@ static CGFloat avatarW = 50;
 }
 
 
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 @end

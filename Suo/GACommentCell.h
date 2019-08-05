@@ -10,7 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GACommentCell;
+@protocol GACommentCellDelegate <NSObject>
+
+- (void)commentCellShowMoreWithCell:(GACommentCell *)cell withHeight:(CGFloat)height;
+
+@end
+
 @interface GACommentCell : GABaseTableViewCell
+
+/**delegate**/
+@property (nonatomic, weak)id<GACommentCellDelegate> delegate;
 
 @end
 

@@ -7,9 +7,9 @@
 //
 
 #import "GAAuthorHeaderView.h"
+#import "GAAuthorListCommonView.h"
 
-
-@interface GAAuthorHeaderView ()
+@interface GAAuthorHeaderView ()<GAAuthorListCommonViewDelegate>
 @property(nonatomic,strong)UIImageView *avatarView;  //!<头像
 
 @property(nonatomic,strong)UIStackView *stackView;  //粉丝数量等按钮容器
@@ -19,7 +19,15 @@
 
 @property(nonatomic,strong)UIButton *followBtn;     //!<关注按钮
 
+@property(nonatomic,strong)UIButton *locationBtn;     //!<定位
+@property(nonatomic, strong)UIButton *lvBtn;          //!<等级
 
+@property(nonatomic, strong)UILabel *explainLabel;    //!<说明
+
+/**直播数量**/
+@property (nonatomic, strong)GAAuthorListCommonView *liveNumView;
+/**礼物贡献**/
+@property (nonatomic, strong)GAAuthorListCommonView *giftListView;
 
 @end
 
@@ -62,6 +70,46 @@
     [_followBtn setTitle:@"关注" forState:UIControlStateNormal];
     [_followBtn setBackgroundColor:RGBA(255, 23, 45, 1)];
     
+    UIImage *image = [UIImage imageNamed:@"微信"];
+    _locationBtn = UIButton.new;
+    [_locationBtn setImage:image forState:UIControlStateNormal];
+    [_locationBtn setTitle:@"白银" forState:UIControlStateNormal];
+    [_locationBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    _locationBtn.titleLabel.font = [MainFont fontWithSize:14];
+    [_locationBtn setTitleColor:UIColorFromRGB(0x808080) forState:UIControlStateNormal];
+    [_locationBtn setBackgroundColor:UIColorFromRGB(0xf8f8f8)];
+    [_locationBtn addTarget:self action:@selector(locationBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_locationBtn];
+    
+    _lvBtn = UIButton.new;
+    [_lvBtn setImage:[UIImage imageNamed:@"微信"] forState:UIControlStateNormal];
+    [_lvBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [_lvBtn setTitle:@"lv.12" forState:UIControlStateNormal];
+    _lvBtn.titleLabel.font = [MainFont fontWithSize:14];
+    [_lvBtn setTitleColor:UIColorFromRGB(0x808080) forState:UIControlStateNormal];
+    [_lvBtn setBackgroundColor:UIColorFromRGB(0xf8f8f8)];
+    [_lvBtn addTarget:self action:@selector(lvBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_lvBtn];
+    
+    _explainLabel = UILabel.new;
+    _explainLabel.font = [MainFont fontWithSize:14];
+    _explainLabel.textColor = UIColorFromRGB(0x808080);
+    _explainLabel.text = @"每晚8点直播共享";
+    [self addSubview:_explainLabel];
+    
+    _liveNumView = GAAuthorListCommonView.new;
+    _liveNumView.index = 0;
+    _liveNumView.backgroundColor = ColorBlue;
+    _liveNumView.delegate = self;
+    [self addSubview:_liveNumView];
+    
+    _giftListView = GAAuthorListCommonView.new;
+    _giftListView.index = 1;
+    _giftListView.delegate = self;
+    [self addSubview:_giftListView];
+    
+    
+    
     //action
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarClick:)];
     [_avatarView setUserInteractionEnabled:YES];
@@ -95,6 +143,44 @@
         make.top.mas_equalTo(self.avatarView.mas_centerY).inset(10);
     }];
     [self.followBtn setupMaskWithCorner:4 rectCorner:UIRectCornerAllCorners];
+    
+    [self.locationBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.followBtn.mas_bottom).inset(20);
+        make.left.mas_equalTo(24);
+        make.size.mas_equalTo(CGSizeMake(66, 30));
+    }];
+    
+    [self.lvBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.locationBtn.mas_right).inset(20);
+        make.size.mas_equalTo(self.locationBtn);
+        make.top.mas_equalTo(self.locationBtn);
+    }];
+    
+    [self.locationBtn setupMaskWithCorner:4 rectCorner:UIRectCornerAllCorners];
+    [self.lvBtn setupMaskWithCorner:4 rectCorner:UIRectCornerAllCorners];
+    
+    [self.explainLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.lvBtn.mas_bottom).inset(20);
+        make.left.mas_equalTo(self.locationBtn);
+    }];
+    CGFloat width = ScreenWidth - 48 - 19;
+    [self.liveNumView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(80);
+        make.left.mas_equalTo(24);
+        make.top.mas_equalTo(self.explainLabel.mas_bottom).inset(10);
+        make.size.mas_equalTo(CGSizeMake(width/2, 80));
+    }];
+    
+    [self.giftListView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-24);
+        make.size.mas_equalTo(self.liveNumView);
+        make.top.mas_equalTo(self.liveNumView);
+    }];
+    
+}
+
+- (void)authorListCommonViewClickWithIndex:(NSInteger)index {
+    NSLog(@"%ld",index);
 }
 
 //Action
@@ -123,4 +209,16 @@
         [self.delegate headerViewAvatarClick:self];
     }
 }
+
+- (void)locationBtnClick:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(headerViewLocationClick:)]) {
+        [self.delegate headerViewLocationClick:self];
+    }
+}
+- (void)lvBtnClick:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(headerViewLevelClick:)]) {
+        [self.delegate headerViewLevelClick:self];
+    }
+}
+
 @end
