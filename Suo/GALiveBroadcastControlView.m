@@ -22,8 +22,6 @@
 @property(nonatomic,strong)UIButton *pushGoods;
 @property(nonatomic,strong)UIButton *pullMSG;
 
-
-
 @end
 
 @implementation GALiveBroadcastControlView
@@ -65,13 +63,6 @@
         [self addSubview:_pushGoods];
         [self addSubview:_pullMSG];
         
-//        NSArray<UIView*> *views = @[_sendMSG,_pushGoods];
-//        [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:8 leadSpacing:16 tailSpacing:16];
-//        [views mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                //make.width.mas_equalTo(60);
-//            make.size.mas_equalTo(CGSizeMake(60, 35));
-//            make.bottom.mas_equalTo(self).inset(8);
-//        }];
     });
 }
 
@@ -94,12 +85,6 @@
         make.bottom.mas_equalTo(self.pushGoods);
     }];
     
-//    NSArray<UIView*> *views = @[_sendMSG,_pushGoods,_pullMSG];
-//    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:8 leadSpacing:16 tailSpacing:16];
-//    [views mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.mas_equalTo(self).inset(8);
-//        make.width.mas_equalTo(60);
-//    }];
 }
 
 - (void)onButtonAction:(UIButton*)send{
