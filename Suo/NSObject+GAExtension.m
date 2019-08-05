@@ -10,9 +10,19 @@
 
 @implementation NSObject (GAExtension)
 
+- (MBProgressHUD *)showHUDToView:(UIView *)view message:(NSString *)msg{
+    if (!view) {
+        view = [UIApplication sharedApplication].delegate.window;
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    [hud setMode:MBProgressHUDModeText];
+    [hud.label setText:msg];
+    [hud hideAnimated:YES afterDelay:1.5];
+    return hud;
+}
 
 - (void)rootVCPresentViewController:(UIViewController *)vc animated:(BOOL)animate completion:(void (^)(void))completion{
-    UIViewController *root = [[UIApplication sharedApplication].keyWindow rootViewController];
+    UIViewController *root = [[UIApplication sharedApplication].delegate.window rootViewController];
     
     while (root.parentViewController) {
         root = root.parentViewController;

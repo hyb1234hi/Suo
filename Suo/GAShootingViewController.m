@@ -205,17 +205,17 @@
         [self.controllerView setAlpha:0];
     } completion:^(BOOL finished) {
         self.liveStarted = YES;
-        [self.kit startPreview:self.view];
-        NSURL *url = [NSURL URLWithString:RTMPURL_UP];
-        [self.kit.streamerBase startStream:url];
+        //[self.kit startPreview:self.view];
+        //NSURL *url = [NSURL URLWithString:RTMPURL_UP];
+        //[self.kit.streamerBase startStream:url];
         
         [self.view addSubview:self.liveBroadcast];
         [self.liveBroadcast mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
         }];
+        [self.view layoutIfNeeded];
         
         [self.pusher startPushWithURL:RTMPURL_UP];
-        
     }];
 }
 
@@ -224,7 +224,7 @@
 - (void)stopLive{
     if (self.liveStarted) {
         self.liveStarted = NO;
-        [self.kit.streamerBase stopStream];
+        //[self.kit.streamerBase stopStream];
         [self.pusher stopPush];
        
         [self.liveBroadcast removeFromSuperview];
