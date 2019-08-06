@@ -16,7 +16,7 @@ pod 'XRWaterfallLayout'
 
 pod 'TZImagePickerController'
 pod 'HZPhotoBrowser'
-
+pod 'YYKit'
 
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
@@ -32,6 +32,7 @@ pod 'MLEmojiLabel'
 pod 'libksygpulive/KSYGPUResource'
 pod 'libksygpulive/libksygpulive'
 pod 'AlivcLivePusher'
+pod 'SocketRocket'
 
 #debug
 pod 'LookinServer', :configurations => ['Debug']

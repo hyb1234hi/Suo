@@ -50,7 +50,7 @@
         return button;
     };
 
-
+/*
     //bottom button
     ({
         LXMImagePosition bottom = LXMImagePositionBottom;
@@ -72,18 +72,20 @@
         [_liveBtn addTarget:self action:@selector(toggleLive:) forControlEvents:UIControlEventTouchUpInside];
         [_shootBtn addTarget:self action:@selector(toggleShooting:) forControlEvents:UIControlEventTouchUpInside];
     });
-
+*/
     
     _openLiveView = GAOpenLiveControlView.new;
     [_openLiveView setFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight - 200)];
     _openLiveView.delegate = self;
     
-    _recordView = GARecordControlView.new;
-    [self addSubview:_recordView];
-    [_recordView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(self);
-        make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
-    }];
+//    _recordView = GARecordControlView.new;
+//    [self addSubview:_recordView];
+//    [_recordView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.right.mas_equalTo(self);
+//        make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
+//    }];
+    
+    [self toggleLive:nil];
 }
 
 
@@ -91,12 +93,12 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    NSArray<UIView*> *views = @[_uploadBtn,_shootBtn,_liveBtn,_kSong];
-    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:50 tailSpacing:50];
-    [views mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(30, 60));
-        make.bottom.mas_equalTo(-SafeAreaBottomHeight-20);
-    }];
+//    NSArray<UIView*> *views = @[_uploadBtn,_shootBtn,_liveBtn,_kSong];
+//    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:50 tailSpacing:50];
+//    [views mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(30, 60));
+//        make.bottom.mas_equalTo(-SafeAreaBottomHeight-20);
+//    }];
     
 }
 
@@ -113,7 +115,8 @@
     [self.recordView setHidden:YES];
     [self.openLiveView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self);
-        make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
+        make.bottom.mas_equalTo(self).inset(SafeAreaBottomHeight+40);
+        //make.bottom.mas_equalTo(self.liveBtn.mas_top).inset(34);
     }];
     
     [UIView animateWithDuration:0.3 animations:^{

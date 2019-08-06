@@ -58,6 +58,7 @@ PODS:
   - SDWebImage/GIF (4.4.7):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - SocketRocket (0.5.1)
   - SuperPlayer (3.1.1):
     - AFNetworking
     - Masonry
@@ -74,6 +75,9 @@ PODS:
   - VHBoomMenuButton/ObjC (2.0.0)
   - WMPageController (2.5.2)
   - XRWaterfallLayout (0.1.2)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - AlivcLivePusher
@@ -94,11 +98,13 @@ DEPENDENCIES:
   - Reveal-iOS-SDK
   - SDCycleScrollView
   - SDWebImage
+  - SocketRocket
   - SuperPlayer
   - TZImagePickerController
   - VHBoomMenuButton/ObjC
   - WMPageController
   - XRWaterfallLayout
+  - YYKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -123,12 +129,14 @@ SPEC REPOS:
     - Reveal-iOS-SDK
     - SDCycleScrollView
     - SDWebImage
+    - SocketRocket
     - SuperPlayer
     - TTTAttributedLabel
     - TZImagePickerController
     - VHBoomMenuButton
     - WMPageController
     - XRWaterfallLayout
+    - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -152,13 +160,15 @@ SPEC CHECKSUMS:
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SuperPlayer: de9540ac79b1db43875d82e514620989c9bc2bde
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TZImagePickerController: bf4c57b98d8707fce41ea6be872414a71c7a8c9d
   VHBoomMenuButton: 77a7ae6742220b57b54eec28183fc123a3dd98ed
   WMPageController: 0c7624d2b48e4f1ab92371688cf6744ed701575d
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 29279a1a25749677db1e8d1002757a4363a53caa
+PODFILE CHECKSUM: 4ce1f296d4cadba5ec55c11720a202d25374033b
 
 COCOAPODS: 1.7.5

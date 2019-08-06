@@ -27,12 +27,13 @@
     [self.view setBackgroundColor:ColorWhite];
     
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    [config.userContentController addScriptMessageHandler:self name:@""];
+    [config.userContentController addScriptMessageHandler:self name:@""];  //注册方法
 
     
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
     [_webView setNavigationDelegate:self];
     [_webView setUIDelegate:self];
+
     
     NSURL *url = [NSURL URLWithString:@"http://www.suo.com"];
     
@@ -45,17 +46,15 @@
     }];
     
     
-        //缓存
-    NSSet *dataSet = [WKWebsiteDataStore allWebsiteDataTypes];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
-    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:dataSet modifiedSince:date completionHandler:^{
-            //清除完成
-    }];
+//        //缓存
+//    NSSet *dataSet = [WKWebsiteDataStore allWebsiteDataTypes];
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+//    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:dataSet modifiedSince:date completionHandler:^{
+//            //清除完成
+//    }];
     
     [self.view addSubview:_webView];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-    
     
     [self pushToLive];
     
@@ -98,6 +97,35 @@
     if ([url isEqualToString:@"http://www.suo.com/mobile/html/pointspro_list.html"]) {
         [self pushToLive];
     }
+}
+
+//-(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+//    
+//}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    
+    NSHTTPURLResponse *res = (NSHTTPURLResponse*)navigationResponse.response;
+    NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:res.allHeaderFields forURL:res.URL];
+    
+    NSLog(@"alll ----------------- %@",[res allHeaderFields]);
+    NSLog(@"cooke s --- %@",cookies);
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@"00000000000 >>> cookie  %@",cookie);
+    }
+    
+    if (@available(iOS 12.0, *)) {
+        WKHTTPCookieStore *cookieStore = webView.configuration.websiteDataStore.httpCookieStore;
+        [cookieStore getAllCookies:^(NSArray* cookies) {
+            NSLog(@"cooooooooo --- %@",cookies);
+        }];
+    }else {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
+        NSArray *cookies =[NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
+        NSLog(@"------------------------cookies -- %@",cookies);
+    }
+    
+    decisionHandler(WKNavigationResponsePolicyAllow);
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{

@@ -7,10 +7,26 @@
 //
 
 #import "GAOpenLiveControlView.h"
+#import "GABaseCollectionViewCell.h"
+
 #import <TZImagePickerController.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface GAOpenLiveControlView ()<CLLocationManagerDelegate>
+
+@class _GAGoodsSelectedCell;
+
+@protocol _GAGoodsSelectedCellDelegate <NSObject>
+- (void)didClickDeleteBtn:(_GAGoodsSelectedCell*)cell;
+
+@end
+
+@interface _GAGoodsSelectedCell : GABaseCollectionViewCell
+@property(nonatomic,weak)id<_GAGoodsSelectedCellDelegate> delegate;
+@property(nonatomic,strong)UIButton *deleteButton;
+
+@end
+
+@interface GAOpenLiveControlView ()<CLLocationManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,_GAGoodsSelectedCellDelegate>
 @property(nonatomic,strong)UILabel *titleLabel;     //!<模式title
 @property(nonatomic,strong)UIButton *modelTypeBtn;  //!<模式切换Btn
 @property(nonatomic,strong)UIButton *switchCamera;  //!<切换相机
@@ -23,6 +39,11 @@
 @property(nonatomic,strong)UILabel *locationLab;                //!<位置信息
 @property(nonatomic,strong)UILabel *shareLab;                   //!<分享Lab
 @property(nonatomic,strong)UIToolbar *shareBar;                 //!<分享容器
+
+//直播商品
+@property(nonatomic,strong)UILabel *selGoodsLab;                //!<选择商品lab
+@property(nonatomic,strong)UICollectionView *collectionView;    //!<商品列表
+
 
 // bottom ui
 @property(nonatomic,strong)UIButton *beautyBtn;                 //!<美颜
@@ -47,17 +68,17 @@
     
     //top ui
     ({
-        _titleLabel = [UILabel new];
-        [_titleLabel setText:@"开播模式:"];
-        [_titleLabel setFont:[MainFont fontWithSize:16]];
-        [_titleLabel setTextColor:ColorWhite];
-        
-        _modelTypeBtn = UIButton.new ;
-        [_modelTypeBtn setTitle:@"视频" forState:UIControlStateNormal];
-        [_modelTypeBtn.titleLabel setFont:MainFontWithSize(14)];
-        [_modelTypeBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_modelTypeBtn setImagePosition:LXMImagePositionRight spacing:4];
-        [_modelTypeBtn setBackgroundColor:RGBA(128, 128, 128, 1)];
+//        _titleLabel = [UILabel new];
+//        [_titleLabel setText:@"开播模式:"];
+//        [_titleLabel setFont:[MainFont fontWithSize:16]];
+//        [_titleLabel setTextColor:ColorWhite];
+//
+//        _modelTypeBtn = UIButton.new ;
+//        [_modelTypeBtn setTitle:@"视频" forState:UIControlStateNormal];
+//        [_modelTypeBtn.titleLabel setFont:MainFontWithSize(14)];
+//        [_modelTypeBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//        [_modelTypeBtn setImagePosition:LXMImagePositionRight spacing:4];
+//        [_modelTypeBtn setBackgroundColor:RGBA(128, 128, 128, 1)];
         
         _switchCamera = UIButton.new;
         [_switchCamera setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -149,12 +170,35 @@
         [_coverView addGestureRecognizer:tap];
     });
     
+    
+    //直播商品
+    ({
+        _selGoodsLab = UILabel.new;
+        [_selGoodsLab setText:@"选择直播商品:"];
+        [_selGoodsLab setTextColor:ColorWhite];
+        
+        UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
+        [layout setItemSize:CGSizeMake(60, 60)];
+        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        [layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        [_collectionView setDelegate:self];
+        [_collectionView setDataSource:self];
+        [_collectionView registerClass:_GAGoodsSelectedCell.class forCellWithReuseIdentifier:_GAGoodsSelectedCell.identifier];
+        [_collectionView setBackgroundColor:ColorBlackAlpha40];
+        [_collectionView.layer setCornerRadius:16];
+        [_collectionView.layer setMasksToBounds:YES];
+        
+        [self addSubview:_selGoodsLab];
+        [self addSubview:_collectionView];
+    });
+    
     //bottom UI
     ({
         _beautyBtn = UIButton.new;
         _filterBtn = UIButton.new;
         _startLiveBtn = UIButton.new;
-        
         
         [_beautyBtn setTitle:@"美颜" forState:UIControlStateNormal];
         [_filterBtn setTitle:@"滤镜" forState:UIControlStateNormal];
@@ -179,19 +223,20 @@
     
     //layout top ui
     ({
-        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(44);
-            make.right.mas_equalTo(self.mas_centerX).inset(4);
-        }];
-        [self.modelTypeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.mas_centerX).inset(4);
-            make.centerY.mas_equalTo(self.titleLabel);
-            make.size.mas_equalTo(CGSizeMake(69, 30));
-        }];
-        [self.modelTypeBtn setupMaskWithCorner:15 rectCorner:UIRectCornerAllCorners];
+//        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(44);
+//            make.right.mas_equalTo(self.mas_centerX).inset(4);
+//        }];
+//        [self.modelTypeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(self.mas_centerX).inset(4);
+//            make.centerY.mas_equalTo(self.titleLabel);
+//            make.size.mas_equalTo(CGSizeMake(69, 30));
+//        }];
+//        [self.modelTypeBtn setupMaskWithCorner:15 rectCorner:UIRectCornerAllCorners];
         
         [self.switchCamera mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(self.titleLabel);
+            //make.centerY.mas_equalTo(self.titleLabel);
+            make.top.mas_equalTo(self).inset(40);
             make.right.mas_equalTo(self).inset(20);
         }];
         
@@ -201,7 +246,8 @@
     ({
         [self.containerView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self).inset(12);
-            make.top.mas_equalTo(self.modelTypeBtn.mas_bottom).inset(20);
+            //make.top.mas_equalTo(self.modelTypeBtn.mas_bottom).inset(20);
+            make.top.mas_equalTo(self.switchCamera.mas_bottom).inset(20);
             CGFloat h = (ScreenWidth - 24)*0.42;
             make.height.mas_equalTo(h);
         }];
@@ -234,6 +280,19 @@
             make.right.mas_equalTo(self.containerView).inset(4);
             make.bottom.mas_equalTo(self.containerView).inset(8);
             make.height.mas_equalTo(40);
+        }];
+    });
+    
+    //直播商品  ui
+    ({
+        [self.selGoodsLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self).inset(20);
+            make.top.mas_equalTo(self.containerView.mas_bottom).inset(20);
+        }];
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 20, 0, 20));
+            make.top.mas_equalTo(self.selGoodsLab.mas_bottom).inset(10);
+            make.height.mas_equalTo(100);
         }];
     });
     
@@ -312,7 +371,9 @@
 }
 
 - (void)toggleSwitchCamera:(UIButton*)send{
-    
+    if ([self.delegate respondsToSelector:@selector(switchCamera)]) {
+        [self.delegate switchCamera];
+    }
 }
 
 - (void)toggleStartButton:(UIButton*)send{
@@ -374,5 +435,95 @@
         NSString *loca = [NSString stringWithFormat:@"%@ - %@",locality,sublocality];
         [self.locationLab setText:loca];
     }];
+}
+
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 2;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    switch (section) {
+        case 0:{
+            return 4;
+        }break;
+        
+        case 1:{
+            return 1;
+        }break;
+            
+        default:
+            return 0;
+            break;
+    }
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    _GAGoodsSelectedCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:_GAGoodsSelectedCell.identifier forIndexPath:indexPath];
+    [cell setDelegate:self];
+    
+    switch (indexPath.section) {
+        case 0:{
+            [cell.deleteButton setHidden:NO];
+            [cell setBackgroundColor:ColorRoseRed];
+        }break;
+            
+        case 1:{
+            [cell.deleteButton setHidden:YES];
+            [cell setBackgroundColor:ColorGray];
+        }break;
+            
+        default:
+            return nil;
+            break;
+    }
+    
+    return cell;
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.section) {
+        case 1:{
+            //选择商品
+        }break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)didClickDeleteBtn:(_GAGoodsSelectedCell *)cell{
+    NSLog(@"delete ------ %@",cell);
+}
+@end
+
+
+
+@implementation _GAGoodsSelectedCell
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _deleteButton = UIButton.new;
+        [_deleteButton addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_deleteButton setTitle:@"X" forState:UIControlStateNormal];
+        
+        [self.contentView addSubview:_deleteButton];
+    }
+    return self;
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [_deleteButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.mas_equalTo(self.contentView);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    }];
+    
+}
+
+- (void)deleteClick:(UIButton*)send{
+    if ([self.delegate respondsToSelector:@selector(didClickDeleteBtn:)]) {
+        [self.delegate didClickDeleteBtn:self];
+    }
 }
 @end

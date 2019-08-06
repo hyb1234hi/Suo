@@ -102,7 +102,7 @@ alpha:1.0]
 
 
 //URL
-#define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/jjkk?txSecret=de057c0af926edcd257341e954955c29&txTime=5D480C30"
+#define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/jjkk?txSecret=8fe0b297d653ff599f88565026279e46&txTime=5D495DB0"
 #define RTMPURL_PULL    @"rtmp://gajz.live.play.zsepoch.com/live/test_atangge?txSecret=604bd314c34586e6c366f3beaf922bd7&txTime=5D3ED1B0"
 
 //Pay and share

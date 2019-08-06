@@ -14,10 +14,7 @@
 #import "GALiveBroadcastControlView.h"
 
 #import <AVKit/AVKit.h>
-
 #import <AlivcLivePusher/AlivcLivePusher.h>
-
-
 #import <KSYGPUStreamerKit.h>
 
 
@@ -28,11 +25,9 @@
 
 @property(nonatomic,strong)GALiveBroadcastControlView *liveBroadcast; //!<直播中的控制页面 等
 
-
 @property(nonatomic,strong)NSURL *hostURL;
 @property(nonatomic,strong)KSYGPUStreamerKit *kit;
 @property(nonatomic,strong)AlivcLivePusher *pusher;
-
 
 
 @property(nonatomic,assign)BOOL liveStarted;
@@ -64,7 +59,6 @@
     [_controllerView setDelegate:self];
     
 
-    
 //    
 //    NSDate* tmpStartData = [NSDate date] ;
 //
@@ -97,10 +91,12 @@
 //    }];
     
     
-        AlivcLivePushConfig *cfg = [[AlivcLivePushConfig alloc] init];
-        _pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
-        [_pusher startPreview:self.view];
-        [self.view addSubview:_controllerView];
+    AlivcLivePushConfig *cfg = [[AlivcLivePushConfig alloc] init];
+    [AlivcLivePusher showDebugView];
+    _pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
+    [_pusher startPreview:self.view];
+
+    [self.view addSubview:_controllerView];
    
 }
 
@@ -159,7 +155,6 @@
             break;
     }
 }
-
 
 
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -234,5 +229,8 @@
         }];
     }
 }
+
+
+#pragma mark 美颜
 
 @end
