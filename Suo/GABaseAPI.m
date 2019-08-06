@@ -108,6 +108,10 @@ static NSString *const rootPath = @"http://www.suo.com";
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *json = [self serializationDataWithData:data response:response error:error];
         
+        NSLog(@"error -- %@",error);
+        NSLog(@"response = %@",response);
+        NSLog(@"data -- %@",data);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (callBack) {
                 callBack(json,response);

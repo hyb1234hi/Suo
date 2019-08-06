@@ -13,6 +13,8 @@
 #import "GALiveTableCell.h"
 #import "GALiveHeaderView.h"
 
+#import "GAAPI.h"
+
 @interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GALiveHeaderViewDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,strong) UITableView *tableView;
@@ -25,10 +27,15 @@
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.collectionView];
+    
+    [GAAPI.new.videoAPI fetchLiveWithToken:@"4d909cb8c51cc6214cb6cc2bdc09aecc" completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+        NSLog(@"sjon --- %@",json);
+    }];
   
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
+    
     
 
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {

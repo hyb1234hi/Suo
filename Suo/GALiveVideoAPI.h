@@ -8,10 +8,10 @@
 
 #import "GABaseAPI.h"
 
-NS_ASSUME_NONNULL_BEGIN
+
 
 @interface GALiveVideoAPI : GABaseAPI
-
+- (void)fetchLiveWithToken:(NSString*)token completion:(CallBack)completion;
 @end
 
-NS_ASSUME_NONNULL_END
+

@@ -10,4 +10,11 @@
 
 @implementation GAAPI
 
+- (GALiveVideoAPI *)videoAPI{
+    if (!_videoAPI) {
+        _videoAPI = GALiveVideoAPI.new;
+    }
+    return _videoAPI;
+}
+
 @end

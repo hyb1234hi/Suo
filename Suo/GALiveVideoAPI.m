@@ -10,4 +10,13 @@
 
 @implementation GALiveVideoAPI
 
+
+- (void)fetchLiveWithToken:(NSString *)token completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live&t=live_index";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:token forKey:@"key"];
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
 @end

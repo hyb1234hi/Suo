@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GAAPI : NSObject
+@property(nonatomic,strong)GALiveVideoAPI *videoAPI;
 
 @end
 
