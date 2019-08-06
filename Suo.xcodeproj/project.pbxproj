@@ -68,6 +68,12 @@
 		3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73B22ED6CCC00ED8999 /* GALiveHeaderView.m */; };
 		3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B99C73D22ED8D1000ED8999 /* GACommentTextView.m */; };
 		9D29F30A8A0559825739EA25 /* libPods-Suo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */; };
+		AE8682FE22F4357F00811FB3 /* GACommentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8682FD22F4357F00811FB3 /* GACommentHeaderView.m */; };
+		AE9F037322F514A90073F5C1 /* GACommentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9F037222F514A90073F5C1 /* GACommentFooterView.m */; };
+		AE9F037622F519A10073F5C1 /* GACommentDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9F037522F519A10073F5C1 /* GACommentDetailTableViewCell.m */; };
+		AEB853C522F677970043A807 /* GAAuthorListCommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853C422F677970043A807 /* GAAuthorListCommonView.m */; };
+		AEB853C822F681BF0043A807 /* GAAuthorListCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853C722F681BF0043A807 /* GAAuthorListCollectionReusableView.m */; };
+		AEB853CB22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853CA22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -206,6 +212,18 @@
 		3B99C73E22ED8D1000ED8999 /* GACommentTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GACommentTextView.h; sourceTree = "<group>"; };
 		71DE5F39565E6B8B128BE66E /* Pods-Suo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Suo.debug.xcconfig"; path = "Target Support Files/Pods-Suo/Pods-Suo.debug.xcconfig"; sourceTree = "<group>"; };
 		97ED12025A225651A90D3F9D /* Pods-Suo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Suo.release.xcconfig"; path = "Target Support Files/Pods-Suo/Pods-Suo.release.xcconfig"; sourceTree = "<group>"; };
+		AE8682FC22F4357F00811FB3 /* GACommentHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACommentHeaderView.h; sourceTree = "<group>"; };
+		AE8682FD22F4357F00811FB3 /* GACommentHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACommentHeaderView.m; sourceTree = "<group>"; };
+		AE9F037122F514A90073F5C1 /* GACommentFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACommentFooterView.h; sourceTree = "<group>"; };
+		AE9F037222F514A90073F5C1 /* GACommentFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACommentFooterView.m; sourceTree = "<group>"; };
+		AE9F037422F519A10073F5C1 /* GACommentDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GACommentDetailTableViewCell.h; sourceTree = "<group>"; };
+		AE9F037522F519A10073F5C1 /* GACommentDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GACommentDetailTableViewCell.m; sourceTree = "<group>"; };
+		AEB853C322F677970043A807 /* GAAuthorListCommonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorListCommonView.h; sourceTree = "<group>"; };
+		AEB853C422F677970043A807 /* GAAuthorListCommonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorListCommonView.m; sourceTree = "<group>"; };
+		AEB853C622F681BF0043A807 /* GAAuthorListCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthorListCollectionReusableView.h; sourceTree = "<group>"; };
+		AEB853C722F681BF0043A807 /* GAAuthorListCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorListCollectionReusableView.m; sourceTree = "<group>"; };
+		AEB853C922F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthListCommonCollectionViewCell.h; sourceTree = "<group>"; };
+		AEB853CA22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthListCommonCollectionViewCell.m; sourceTree = "<group>"; };
 		F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Suo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -404,6 +422,12 @@
 				3B99C73D22ED8D1000ED8999 /* GACommentTextView.m */,
 				3B47C04B22EAD539000974C7 /* GACommentPopView.h */,
 				3B47C04C22EAD539000974C7 /* GACommentPopView.m */,
+				AE8682FC22F4357F00811FB3 /* GACommentHeaderView.h */,
+				AE8682FD22F4357F00811FB3 /* GACommentHeaderView.m */,
+				AE9F037122F514A90073F5C1 /* GACommentFooterView.h */,
+				AE9F037222F514A90073F5C1 /* GACommentFooterView.m */,
+				AE9F037422F519A10073F5C1 /* GACommentDetailTableViewCell.h */,
+				AE9F037522F519A10073F5C1 /* GACommentDetailTableViewCell.m */,
 				3B47C05122EADE4C000974C7 /* GACommentCell.h */,
 				3B47C05222EADE4C000974C7 /* GACommentCell.m */,
 				3B99C73822ED665B00ED8999 /* GASharePopView.h */,
@@ -422,6 +446,12 @@
 				3B99C72F22EC2FD300ED8999 /* GALiveTableCell.m */,
 				027DB66D22EFEAB3001B0593 /* GAAuthorHeaderView.h */,
 				027DB66E22EFEAB3001B0593 /* GAAuthorHeaderView.m */,
+				AEB853C322F677970043A807 /* GAAuthorListCommonView.h */,
+				AEB853C422F677970043A807 /* GAAuthorListCommonView.m */,
+				AEB853C922F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.h */,
+				AEB853CA22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m */,
+				AEB853C622F681BF0043A807 /* GAAuthorListCollectionReusableView.h */,
+				AEB853C722F681BF0043A807 /* GAAuthorListCollectionReusableView.m */,
 				027DB67022F016CB001B0593 /* GAAuthorVideoCell.h */,
 				027DB67122F016CB001B0593 /* GAAuthorVideoCell.m */,
 				027DB67622F026A6001B0593 /* GAFansFollowCell.h */,
@@ -620,6 +650,7 @@
 				3B47C03E22EAA792000974C7 /* UIView+GAExtension.m in Sources */,
 				3B47C02422EA97BC000974C7 /* GAVideoPlayViewController.m in Sources */,
 				3B47C04122EAACD4000974C7 /* GAVideoPlayCell.m in Sources */,
+				AE9F037322F514A90073F5C1 /* GACommentFooterView.m in Sources */,
 				3B99C72122EC071000ED8999 /* GAVideo.m in Sources */,
 				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
 				022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */,
@@ -628,6 +659,7 @@
 				3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */,
 				027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */,
 				3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */,
+				AE9F037622F519A10073F5C1 /* GACommentDetailTableViewCell.m in Sources */,
 				027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */,
 				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
 				02FBD63A22F439EE00ED76CC /* GALiveBroadcastControlView.m in Sources */,
@@ -666,9 +698,13 @@
 				027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */,
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
+				AEB853C822F681BF0043A807 /* GAAuthorListCollectionReusableView.m in Sources */,
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
 				3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */,
 				3B47C05922EAF30E000974C7 /* GACityWideCollectionCell.m in Sources */,
+				AE8682FE22F4357F00811FB3 /* GACommentHeaderView.m in Sources */,
+				AEB853CB22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m in Sources */,
+				AEB853C522F677970043A807 /* GAAuthorListCommonView.m in Sources */,
 				027DB68A22F04D51001B0593 /* GACaptureConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,9 +8,11 @@
 
 #import "GACommentPopView.h"
 #import "GACommentCell.h"
+#import "GACommentHeaderView.h"
+#import "GACommentFooterView.h"
+#import "GACommentDetailTableViewCell.h"
 
-
-@interface GACommentPopView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface GACommentPopView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GACommentFooterViewDelegate>
 //@property(nonatomic,strong) BaseItem *item;
 //@property(nonatomic,strong) NSArray<CommentModel*> *commentList;
 
@@ -24,6 +26,12 @@
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIImageView *close;
 @property(nonatomic,strong) UITableView *tableView;
+
+/**
+ section : 分组
+ selected : 是否显示收回
+ */
+@property(nonatomic,strong) NSMutableArray *sectionArray; // 记录组尾拓展
 
 @end
 
@@ -41,7 +49,7 @@
 }
 
 - (void)setupUI{
-        //容器
+    //容器
     ({
         _container = [UIView  new];
         [_container setFrame:CGRectMake(0, ScreenHeight, ScreenWidth, ScreenHeight*(3/4.0))];
@@ -62,7 +70,7 @@
         [_container addSubview:effectView];
     });
     
-        //顶部tip coloe
+    //顶部tip coloe
     ({
         _tipView = [UIView new];
         _titleLabel = [UILabel new];
@@ -98,20 +106,22 @@
         }];
     });
     
-        //中间tableVew
+    //中间tableVew
     ({
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        [_tableView registerClass:GACommentCell.class forCellReuseIdentifier:GACommentCell.identifier];
-        [_tableView setTableFooterView:UIView.new];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        //        [_tableView registerClass:GACommentCell.class forCellReuseIdentifier:GACommentCell.identifier];
         [_tableView setBackgroundColor:ColorClear];
         [_tableView setDataSource:self];
         [_tableView setDelegate:self];
-
-        
+        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [_tableView setSeparatorInset:UIEdgeInsetsZero];
         [_container addSubview:_tableView];
+        [self.tableView registerClass:[GACommentHeaderView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([GACommentHeaderView class])];
+        [self.tableView registerClass:[GACommentFooterView class] forHeaderFooterViewReuseIdentifier:NSStringFromClass([GACommentFooterView class])];
+        [self.tableView registerClass:GACommentDetailTableViewCell.class forCellReuseIdentifier:GACommentDetailTableViewCell.identifier];
     });
     
-        //低部评论
+    //低部评论
     ({
         _textField = [[UITextField alloc] init];
         [_textField setDelegate:self];
@@ -153,24 +163,24 @@
 - (void)show {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [window addSubview:self];
-//    [UIView animateWithDuration:0.15f
-//                          delay:0.0f
-//                        options:UIViewAnimationOptionCurveEaseOut
-//                     animations:^{
-//                         CGRect frame = self.container.frame;
-//                         frame.origin.y = frame.origin.y - frame.size.height;
-//                         self.container.frame = frame;
-//                     }
-//                     completion:^(BOOL finished) {
-//                     }];
-//
+    //    [UIView animateWithDuration:0.15f
+    //                          delay:0.0f
+    //                        options:UIViewAnimationOptionCurveEaseOut
+    //                     animations:^{
+    //                         CGRect frame = self.container.frame;
+    //                         frame.origin.y = frame.origin.y - frame.size.height;
+    //                         self.container.frame = frame;
+    //                     }
+    //                     completion:^(BOOL finished) {
+    //                     }];
+    //
     CGRect frame = self.container.frame;
     frame.origin.y = frame.origin.y - frame.size.height;
     [UIView animateWithDuration:0.35 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.container.frame = frame;
     } completion:^(BOOL finished) {}];
     
-   // [self.textView show];
+    // [self.textView show];
 }
 - (void)dismiss {
     [UIView animateWithDuration:0.15f
@@ -189,71 +199,142 @@
 
 #pragma mark - UITableViewdataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    for (NSDictionary *obj in self.sectionArray) {
+        NSInteger index = [[obj objectForKey:@"section"] integerValue];
+        BOOL isSelected = [[obj objectForKey:@"selected"] boolValue];
+        if (index == section) {
+            if (isSelected) {
+                return 3;
+            }
+    }
+    }
+    return 1;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 10;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    GACommentCell *cell = [tableView dequeueReusableCellWithIdentifier:GACommentCell.identifier forIndexPath:indexPath];
-    //[cell.textLabel setText:@"Could not signal service"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //    GACommentCell *cell = [tableView dequeueReusableCellWithIdentifier:GACommentCell.identifier forIndexPath:indexPath];
+    //    cell.delegate = self;
+    //    //[cell.textLabel setText:@"Could not signal service"];
+    //    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    GACommentDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GACommentDetailTableViewCell.identifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    GACommentHeaderView *header = GACommentHeaderView.new;
+    return header;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    GACommentFooterView *footer = GACommentFooterView.new;
+    footer.delegate = self;
+    footer.index = section;
+    [self.sectionArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger index = [[obj objectForKey:@"section"] integerValue];
+        BOOL isSelected = [[obj objectForKey:@"selected"] boolValue];
+        if (index == section) {
+            footer.isSelected = isSelected;
+        }
+    }];
+    return footer;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    CGFloat height = [@"内容回复" boundingRectWithSize:CGSizeMake(ScreenWidth - 91, MAXFLOAT) options:NSStringDrawingUsesDeviceMetrics attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size.height;
+    height += 60;
+    height -= 17;
+    return height;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 20.f;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+    
+    return 20;
 }
 
 #pragma mark - ======== UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   // CheckUserLogin;
-//
-//    CommentTextView *textView = [CommentTextView new];
-//    __weak typeof(self) wself = self;
-//    [textView setSendComment:^(NSString * _Nonnull text) {
-//        LCSendComment*comment = [LCSendComment new];
-//        comment.identifier = wself.item.identifier;
-//        comment.authkey = wself.currentUser.authkey;
-//        comment.content = text;
-//        comment.comment_id = [wself.commentList objectAtIndex:indexPath.row].identifier ;
-//        [LCDataStore.new sendComment:comment competion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-//            BOOL r = [[json valueForKey:@"r"] boolValue];
-//            NSString *title = r ? @"评论成功" : @"评论失败";
-//            [wself showHUDToView:wself withMessage:title];
-//            [wself loadComment];
-//        }];
-//    }];
-//    [textView show];
+    // CheckUserLogin;
+    //
+    //    CommentTextView *textView = [CommentTextView new];
+    //    __weak typeof(self) wself = self;
+    //    [textView setSendComment:^(NSString * _Nonnull text) {
+    //        LCSendComment*comment = [LCSendComment new];
+    //        comment.identifier = wself.item.identifier;
+    //        comment.authkey = wself.currentUser.authkey;
+    //        comment.content = text;
+    //        comment.comment_id = [wself.commentList objectAtIndex:indexPath.row].identifier ;
+    //        [LCDataStore.new sendComment:comment competion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+    //            BOOL r = [[json valueForKey:@"r"] boolValue];
+    //            NSString *title = r ? @"评论成功" : @"评论失败";
+    //            [wself showHUDToView:wself withMessage:title];
+    //            [wself loadComment];
+    //        }];
+    //    }];
+    //    [textView show];
 }
 
+#pragma mark ---- GACommentFooterViewDelegate
+- (void)commentFooterViewWithSection:(NSInteger)section withSelection:(BOOL)isSelected {
+    NSDictionary *dict = @{
+                           @"section":@(section),
+                           @"selected":@(isSelected)
+                           };
+    
+    [self.sectionArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger index = [[obj objectForKey:@"section"] integerValue];
+        if (index == section) {
+            [self.sectionArray removeObject:obj];
+        }
+    }];
+    [self.sectionArray addObject:dict];
+    [self.tableView reloadData];
+}
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    if (!self.currentUser) {
-//        [self showLoginViewController];
-//        return NO;
-//    }
-//
-//    CommentTextView *textView = [CommentTextView new];
-//    [textView setDelegate:self];
-//    [textView show];
+    //    if (!self.currentUser) {
+    //        [self showLoginViewController];
+    //        return NO;
+    //    }
+    //
+    //    CommentTextView *textView = [CommentTextView new];
+    //    [textView setDelegate:self];
+    //    [textView show];
     return NO;
 }
 
 #pragma mark - SendCommentProtocol
 -(void)sendComment:(NSString *)text{
-//    LCSendComment *comment = [LCSendComment new];
-//    comment.identifier = self.item.identifier;
-//    comment.authkey = self.currentUser.authkey;
-//    comment.content = text;
-//    
-//    [LCDataStore.new sendComment:comment competion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-//        BOOL r = [[json valueForKey:@"r"] boolValue];
-//        NSString *title = r ? @"评论成功" : @"评论失败";
-//        [self showHUDToView:self withMessage:title];
-//        [self loadComment];
-//    }];
+    //    LCSendComment *comment = [LCSendComment new];
+    //    comment.identifier = self.item.identifier;
+    //    comment.authkey = self.currentUser.authkey;
+    //    comment.content = text;
+    //
+    //    [LCDataStore.new sendComment:comment competion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+    //        BOOL r = [[json valueForKey:@"r"] boolValue];
+    //        NSString *title = r ? @"评论成功" : @"评论失败";
+    //        [self showHUDToView:self withMessage:title];
+    //        [self loadComment];
+    //    }];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self dismiss];
 }
+
+
+#pragma mark ----  懒加载
+- (NSMutableArray *)sectionArray {
+    if (!_sectionArray) {
+        _sectionArray = [NSMutableArray array];
+    }
+    return _sectionArray;
+}
+
 @end

@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)headerViewHotClick:(GAAuthorHeaderView*)view;
 - (void)headerViewFollowAuthorClick:(GAAuthorHeaderView*)view;
 - (void)headerViewAvatarClick:(GAAuthorHeaderView*)view;
+- (void)headerViewLocationClick:(GAAuthorHeaderView*)view;
+- (void)headerViewLevelClick:(GAAuthorHeaderView*)view;
 
 @end
 
