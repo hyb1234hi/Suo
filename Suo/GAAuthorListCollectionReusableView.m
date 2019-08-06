@@ -36,9 +36,6 @@
     [_icon setImage:[UIImage imageNamed:@"微信"]];
     [self addSubview:_icon];
     
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestireRecognizerClick:)];
-    [self addGestureRecognizer:tap];
 }
 
 - (void)setContent:(NSString *)content {

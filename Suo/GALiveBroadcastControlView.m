@@ -7,6 +7,9 @@
 //
 
 #import "GALiveBroadcastControlView.h"
+#import "GACommentTextView.h"
+#import "GAGoodsPushSelectView.h"
+
 #import <BarrageRenderer.h>
 
 
@@ -63,6 +66,8 @@
         [self addSubview:_pushGoods];
         [self addSubview:_pullMSG];
         
+        [_sendMSG addTarget:self action:@selector(onSendMSG:) forControlEvents:UIControlEventTouchUpInside];
+        [_pushGoods addTarget:self action:@selector(onPushGoods:) forControlEvents:UIControlEventTouchUpInside];
     });
 }
 
@@ -85,6 +90,14 @@
         make.bottom.mas_equalTo(self.pushGoods);
     }];
     
+}
+
+- (void)onPushGoods:(UIButton*)send{
+    [GAGoodsPushSelectView.new show];
+}
+- (void)onSendMSG:(UIButton*)send{
+    GACommentTextView *text = GACommentTextView.new;
+    [text show];
 }
 
 - (void)onButtonAction:(UIButton*)send{

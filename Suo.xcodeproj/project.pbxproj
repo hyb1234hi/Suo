@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22522F5698200C80375 /* NSObject+GAExtension.m */; };
+		022FF22922F7C2EA00C80375 /* GAGoodsPushSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22822F7C2EA00C80375 /* GAGoodsPushSelectView.m */; };
+		022FF22C22F7C9A100C80375 /* GAGoodsPushCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22B22F7C9A100C80375 /* GAGoodsPushCell.m */; };
 		027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */; };
 		027DB66922EFD94E001B0593 /* MLEmojiLabel+BarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66822EFD94E001B0593 /* MLEmojiLabel+BarrageView.m */; };
 		027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */; };
@@ -68,6 +70,13 @@
 		AEB853C522F677970043A807 /* GAAuthorListCommonView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853C422F677970043A807 /* GAAuthorListCommonView.m */; };
 		AEB853C822F681BF0043A807 /* GAAuthorListCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853C722F681BF0043A807 /* GAAuthorListCollectionReusableView.m */; };
 		AEB853CB22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB853CA22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m */; };
+		AEB9361022F7C1F600850332 /* GALiveChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9360F22F7C1F600850332 /* GALiveChatViewController.m */; };
+		AEB9361422F7C32A00850332 /* GALiveChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9361322F7C32A00850332 /* GALiveChatTableViewCell.m */; };
+		AEB9361722F7CF4A00850332 /* GALiveTalkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9361622F7CF4A00850332 /* GALiveTalkingViewController.m */; };
+		AEB9361A22F7D02B00850332 /* GATalkingMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9361922F7D02B00850332 /* GATalkingMineTableViewCell.m */; };
+		AEB9361D22F7D06100850332 /* GATalkingOtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9361C22F7D06100850332 /* GATalkingOtherTableViewCell.m */; };
+		AEB9362022F7D0C300850332 /* GATalkingHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9361F22F7D0C300850332 /* GATalkingHeader.m */; };
+		AEB9362322F7D0D100850332 /* GATalkingFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB9362222F7D0D100850332 /* GATalkingFooter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +95,10 @@
 /* Begin PBXFileReference section */
 		022FF22422F5698200C80375 /* NSObject+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+GAExtension.h"; sourceTree = "<group>"; };
 		022FF22522F5698200C80375 /* NSObject+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GAExtension.m"; sourceTree = "<group>"; };
+		022FF22722F7C2EA00C80375 /* GAGoodsPushSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAGoodsPushSelectView.h; sourceTree = "<group>"; };
+		022FF22822F7C2EA00C80375 /* GAGoodsPushSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAGoodsPushSelectView.m; sourceTree = "<group>"; };
+		022FF22A22F7C9A100C80375 /* GAGoodsPushCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAGoodsPushCell.h; sourceTree = "<group>"; };
+		022FF22B22F7C9A100C80375 /* GAGoodsPushCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAGoodsPushCell.m; sourceTree = "<group>"; };
 		027DB66422EEED36001B0593 /* GALiveWatchControllerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveWatchControllerView.h; sourceTree = "<group>"; };
 		027DB66522EEED36001B0593 /* GALiveWatchControllerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveWatchControllerView.m; sourceTree = "<group>"; };
 		027DB66722EFD94E001B0593 /* MLEmojiLabel+BarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLEmojiLabel+BarrageView.h"; sourceTree = "<group>"; };
@@ -206,6 +219,20 @@
 		AEB853C722F681BF0043A807 /* GAAuthorListCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthorListCollectionReusableView.m; sourceTree = "<group>"; };
 		AEB853C922F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAuthListCommonCollectionViewCell.h; sourceTree = "<group>"; };
 		AEB853CA22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAuthListCommonCollectionViewCell.m; sourceTree = "<group>"; };
+		AEB9360E22F7C1F600850332 /* GALiveChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveChatViewController.h; sourceTree = "<group>"; };
+		AEB9360F22F7C1F600850332 /* GALiveChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveChatViewController.m; sourceTree = "<group>"; };
+		AEB9361222F7C32A00850332 /* GALiveChatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveChatTableViewCell.h; sourceTree = "<group>"; };
+		AEB9361322F7C32A00850332 /* GALiveChatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveChatTableViewCell.m; sourceTree = "<group>"; };
+		AEB9361522F7CF4A00850332 /* GALiveTalkingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveTalkingViewController.h; sourceTree = "<group>"; };
+		AEB9361622F7CF4A00850332 /* GALiveTalkingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveTalkingViewController.m; sourceTree = "<group>"; };
+		AEB9361822F7D02B00850332 /* GATalkingMineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GATalkingMineTableViewCell.h; sourceTree = "<group>"; };
+		AEB9361922F7D02B00850332 /* GATalkingMineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GATalkingMineTableViewCell.m; sourceTree = "<group>"; };
+		AEB9361B22F7D06100850332 /* GATalkingOtherTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GATalkingOtherTableViewCell.h; sourceTree = "<group>"; };
+		AEB9361C22F7D06100850332 /* GATalkingOtherTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GATalkingOtherTableViewCell.m; sourceTree = "<group>"; };
+		AEB9361E22F7D0C300850332 /* GATalkingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GATalkingHeader.h; sourceTree = "<group>"; };
+		AEB9361F22F7D0C300850332 /* GATalkingHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GATalkingHeader.m; sourceTree = "<group>"; };
+		AEB9362122F7D0D100850332 /* GATalkingFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GATalkingFooter.h; sourceTree = "<group>"; };
+		AEB9362222F7D0D100850332 /* GATalkingFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GATalkingFooter.m; sourceTree = "<group>"; };
 		F2A6B398AEE550DE1CAA46C5 /* libPods-Suo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Suo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -251,8 +278,6 @@
 				027DB68622F049BD001B0593 /* GAShootControllerView.m */,
 				027DB6A122F2EB43001B0593 /* GARecordControlView.h */,
 				027DB6A222F2EB43001B0593 /* GARecordControlView.m */,
-				02FBD63822F439EE00ED76CC /* GALiveBroadcastControlView.h */,
-				02FBD63922F439EE00ED76CC /* GALiveBroadcastControlView.m */,
 				027DB69322F16FCF001B0593 /* GARecordButton.h */,
 				027DB69422F16FCF001B0593 /* GARecordButton.m */,
 				027DB68E22F16D79001B0593 /* Suo-Bridging-Header.h */,
@@ -273,6 +298,12 @@
 				027DB69C22F2C0F2001B0593 /* GALiveStartedViewController.m */,
 				027DB69E22F2C891001B0593 /* GAOpenLiveControlView.h */,
 				027DB69F22F2C891001B0593 /* GAOpenLiveControlView.m */,
+				02FBD63822F439EE00ED76CC /* GALiveBroadcastControlView.h */,
+				02FBD63922F439EE00ED76CC /* GALiveBroadcastControlView.m */,
+				022FF22722F7C2EA00C80375 /* GAGoodsPushSelectView.h */,
+				022FF22822F7C2EA00C80375 /* GAGoodsPushSelectView.m */,
+				022FF22A22F7C9A100C80375 /* GAGoodsPushCell.h */,
+				022FF22B22F7C9A100C80375 /* GAGoodsPushCell.m */,
 			);
 			name = "开播";
 			sourceTree = "<group>";
@@ -334,6 +365,7 @@
 				3B99C71B22EC064700ED8999 /* Model */,
 				3B47C05A22EAF9BA000974C7 /* Player */,
 				3B47C02C22EA9F99000974C7 /* View */,
+				AEB9361122F7C30700850332 /* LiveChat */,
 				3B47C02322EA97BC000974C7 /* GACityWideViewController.h */,
 				3B47C02122EA97BC000974C7 /* GACityWideViewController.m */,
 				3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */,
@@ -352,6 +384,10 @@
 				027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */,
 				027DB67322F01D70001B0593 /* GAFansAndFollowViewController.h */,
 				027DB67422F01D70001B0593 /* GAFansAndFollowViewController.m */,
+				AEB9360E22F7C1F600850332 /* GALiveChatViewController.h */,
+				AEB9360F22F7C1F600850332 /* GALiveChatViewController.m */,
+				AEB9361522F7CF4A00850332 /* GALiveTalkingViewController.h */,
+				AEB9361622F7CF4A00850332 /* GALiveTalkingViewController.m */,
 			);
 			name = "直播";
 			sourceTree = "<group>";
@@ -468,6 +504,23 @@
 				3B99C72622EC0A8200ED8999 /* GAUser.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		AEB9361122F7C30700850332 /* LiveChat */ = {
+			isa = PBXGroup;
+			children = (
+				AEB9361222F7C32A00850332 /* GALiveChatTableViewCell.h */,
+				AEB9361322F7C32A00850332 /* GALiveChatTableViewCell.m */,
+				AEB9361822F7D02B00850332 /* GATalkingMineTableViewCell.h */,
+				AEB9361922F7D02B00850332 /* GATalkingMineTableViewCell.m */,
+				AEB9361B22F7D06100850332 /* GATalkingOtherTableViewCell.h */,
+				AEB9361C22F7D06100850332 /* GATalkingOtherTableViewCell.m */,
+				AEB9361E22F7D0C300850332 /* GATalkingHeader.h */,
+				AEB9361F22F7D0C300850332 /* GATalkingHeader.m */,
+				AEB9362122F7D0D100850332 /* GATalkingFooter.h */,
+				AEB9362222F7D0D100850332 /* GATalkingFooter.m */,
+			);
+			name = LiveChat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -620,6 +673,8 @@
 				027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */,
 				3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */,
 				AE9F037622F519A10073F5C1 /* GACommentDetailTableViewCell.m in Sources */,
+				AEB9361A22F7D02B00850332 /* GATalkingMineTableViewCell.m in Sources */,
+				AEB9362322F7D0D100850332 /* GATalkingFooter.m in Sources */,
 				027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */,
 				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
 				02FBD63A22F439EE00ED76CC /* GALiveBroadcastControlView.m in Sources */,
@@ -632,13 +687,17 @@
 				02FBD63D22F5160600ED76CC /* GABaseViewController.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
+				AEB9361022F7C1F600850332 /* GALiveChatViewController.m in Sources */,
 				027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */,
 				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
 				3B99C73F22ED8D1000ED8999 /* GACommentTextView.m in Sources */,
 				3B99C73322EC3F5F00ED8999 /* GALiveWatchViewController.m in Sources */,
+				022FF22922F7C2EA00C80375 /* GAGoodsPushSelectView.m in Sources */,
 				027DB67522F01D70001B0593 /* GAFansAndFollowViewController.m in Sources */,
 				027DB67222F016CB001B0593 /* GAAuthorVideoCell.m in Sources */,
+				AEB9361722F7CF4A00850332 /* GALiveTalkingViewController.m in Sources */,
 				027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */,
+				022FF22C22F7C9A100C80375 /* GAGoodsPushCell.m in Sources */,
 				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
 				027DB6A322F2EB43001B0593 /* GARecordControlView.m in Sources */,
 				027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */,
@@ -658,10 +717,13 @@
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
 				3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */,
 				3B47C05922EAF30E000974C7 /* GACityWideCollectionCell.m in Sources */,
+				AEB9362022F7D0C300850332 /* GATalkingHeader.m in Sources */,
+				AEB9361D22F7D06100850332 /* GATalkingOtherTableViewCell.m in Sources */,
 				AE8682FE22F4357F00811FB3 /* GACommentHeaderView.m in Sources */,
 				AEB853CB22F68B9F0043A807 /* GAAuthListCommonCollectionViewCell.m in Sources */,
 				AEB853C522F677970043A807 /* GAAuthorListCommonView.m in Sources */,
 				027DB68A22F04D51001B0593 /* GACaptureConfiguration.m in Sources */,
+				AEB9361422F7C32A00850332 /* GALiveChatTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
