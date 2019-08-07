@@ -19,6 +19,7 @@ PODS:
   - AlivcLivePusher/AlivcLivePusher (3.4.0)
   - BarrageRenderer (2.1.0)
   - BEMCheckBox (1.4.1)
+  - Bugly (2.5.0)
   - DCPathButton (2.1.4)
   - FLAnimatedImage (1.0.12)
   - GPUImage (0.1.7)
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - AlivcLivePusher
   - BarrageRenderer
   - BEMCheckBox
+  - Bugly
   - DCPathButton
   - HZPhotoBrowser
   - libksygpulive/KSYGPUResource
@@ -112,6 +114,7 @@ SPEC REPOS:
     - AlivcLivePusher
     - BarrageRenderer
     - BEMCheckBox
+    - Bugly
     - DCPathButton
     - FLAnimatedImage
     - GPUImage
@@ -143,6 +146,7 @@ SPEC CHECKSUMS:
   AlivcLivePusher: ea9d7869556884865dd53f40d28fe7c0b006cedb
   BarrageRenderer: 00e5f8081d81f29c1fc12712ddf2f875bd9c6f77
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   DCPathButton: 99c8211ef3eafc3b438c917a4c7b4502fa77eee7
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
@@ -169,6 +173,6 @@ SPEC CHECKSUMS:
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 4ce1f296d4cadba5ec55c11720a202d25374033b
+PODFILE CHECKSUM: 22082f7f2e7ba05f6d63fe9d0c8456478c333d73
 
 COCOAPODS: 1.7.5

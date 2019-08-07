@@ -27,7 +27,8 @@
     [self.view setBackgroundColor:ColorWhite];
     
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    [config.userContentController addScriptMessageHandler:self name:@""];  //注册方法
+    [config.userContentController addScriptMessageHandler:self name:@"onClickButton"];  //注册方法
+    [config.userContentController addScriptMessageHandler:self name:@"jsCallOC"];
 
     
     _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
@@ -35,11 +36,10 @@
     [_webView setUIDelegate:self];
 
     
-    NSURL *url = [NSURL URLWithString:@"http://www.suo.com"];
+    NSURL *url = [NSURL URLWithString:@"http://www.suo.com/mobile/index0.html"];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
     [_webView loadRequest:request];
-    
     
     [_webView evaluateJavaScript:@"" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         
@@ -122,7 +122,7 @@
                 //共享用户 key username cookies
                 if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"key"]) {
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-                    NSLog(@"cookie == %@",cookie);
+                    //NSLog(@"cookie == %@",cookie);
                 }
                 if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"username"]) {
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
@@ -142,9 +142,14 @@
     NSLog(@"finish -- %@",webView.URL);
 }
 
+- (void)jsCallOC:(NSDictionary*)dict{
+    NSLog(@">>>");
+}
 
-
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+- (void)userContentController:(WKUserContentController *)userContentController
+      didReceiveScriptMessage:(WKScriptMessage *)message{
     NSLog(@"JS message --%@",message);
+    NSLog(@" name == %@",message.name);
+    NSLog(@" body --%@",message.body);
 }
 @end

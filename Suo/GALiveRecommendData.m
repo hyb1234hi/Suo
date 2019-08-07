@@ -20,6 +20,7 @@
 - (void)reloadDataWithCompletion:(LiveDataBlock)completion{
     
 }
+
 - (void)loadNextPathWithCompletion:(LiveDataBlock)completion{
     
 }

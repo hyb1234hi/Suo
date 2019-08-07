@@ -8,16 +8,37 @@
 
 #import "GALiveHeaderView.h"
 
-#import <SDCycleScrollView.h>
-#import <WMMenuView.h>
+#import "GABaseTableViewCell.h"
+#import "GABaseCollectionViewCell.h"
 
-@interface GALiveHeaderView ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,WMMenuViewDataSource,WMMenuViewDelegate>
+#import <SDCycleScrollView.h>
+
+// 内部Cell
+
+@interface _BannerCell : GABaseCollectionViewCell
+@property(nonatomic,strong)UIImageView *imageView;
+@end
+
+
+/**
+ 排行榜
+ */
+@interface _RankingCell : GABaseTableViewCell
+@property(nonatomic,strong)UIImageView *imageView1;
+@property(nonatomic,strong)UIImageView *imageView2;
+@property(nonatomic,strong)UIImageView *imageView3;
+
+@end
+
+
+
+@interface GALiveHeaderView ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) SDCycleScrollView *cycleView; //!<轮播图
 @property(nonatomic,strong) UITableView *tableView;       //!<主播榜单
-@property(nonatomic,strong) WMMenuView *menuView;         //!<分页
-@property(nonatomic,strong) NSArray *titles;
 
 @property(nonatomic,strong) NSTimer *timer;                //定时滚动tableView cell
+@property(nonatomic,strong)NSArray *urls;
+
 @end
 
 @implementation GALiveHeaderView
@@ -32,26 +53,21 @@
 - (void)setupUI{
     _cycleView = SDCycleScrollView.new;
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _menuView  = [[WMMenuView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
-    
-    
+
     [self addSubview:_cycleView];
     [self addSubview:_tableView];
-    [self addSubview:_menuView];
     
     [_cycleView setDelegate:self];
-    [_cycleView setImageURLStringsGroup:@[@"",@"",@""]];
+    
+    NSString *path = [NSBundle.mainBundle pathForResource:@"banner" ofType:@"jpeg"];
+    
+    _urls = @[path,path,path];
+    [_cycleView setImageURLStringsGroup:_urls];
+    [_cycleView setBackgroundColor:ColorWhite];
     
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    [_menuView setDataSource:self];
-    [_menuView setDelegate:self];
-    [_menuView selectItemAtIndex:0];
-    
-    _titles = @[@"推荐",@"游戏",@"电台"];
-    [_menuView reload];
 }
 
 - (void)layoutSubviews{
@@ -59,16 +75,11 @@
     
     [self.cycleView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self);
-        make.height.mas_equalTo(ScreenWidth*0.3);
+        make.bottom.mas_equalTo(self.tableView.mas_top);
     }];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.cycleView.mas_bottom);
-        make.height.mas_equalTo(44);
-    }];
-    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.tableView.mas_bottom).inset(6);
+        make.height.mas_equalTo(44);
     }];
     
     [self.timer fire];
@@ -80,42 +91,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[_RankingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     NSString *text = [NSString stringWithFormat:@"👤 主播榜 %ld",indexPath.row];
     [cell.textLabel setText:text];
+    [cell.textLabel setFont:MainFontWithSize(14)];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
-}
-
-- (NSInteger)numbersOfTitlesInMenuView:(WMMenuView *)menu{
-    return self.titles.count;
-}
-- (NSString *)menuView:(WMMenuView *)menu titleAtIndex:(NSInteger)index{
-    return self.titles[index];
-}
-- (UIColor *)menuView:(WMMenuView *)menu titleColorForState:(WMMenuItemState)state atIndex:(NSInteger)index{
-    switch (state) {
-        case WMMenuItemStateNormal:
-            return ColorBlack;
-            break;
-            
-        case WMMenuItemStateSelected:
-            return  UIColor.redColor;
-            break ;
-    }
-}
-- (WMMenuItem *)menuView:(WMMenuView *)menu initialMenuItem:(WMMenuItem *)initialMenuItem atIndex:(NSInteger)index{
-    [initialMenuItem setFont:[MainFont fontWithSize:18]];
-    return initialMenuItem;
-}
-
-- (void)menuView:(WMMenuView *)menu didSelesctedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex{
-    if ([self.delegate respondsToSelector:@selector(menuView:selectedIndex:)]) {
-        [self.delegate menuView:menu selectedIndex:index];
-    }
 }
 
 - (NSTimer *)timer{
@@ -128,7 +112,7 @@
             [UIView animateWithDuration:0.35 animations:^{
                 [wself.tableView scrollToRowAtIndexPath:indexPath1 atScrollPosition:UITableViewScrollPositionTop animated:YES];
             } completion:^(BOOL finished) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [wself.tableView scrollToRowAtIndexPath:indexPath0 atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 });
             }];
@@ -136,4 +120,94 @@
     }
     return _timer;
 }
+
+#pragma mark - SDCycleScrollViewDelegate
+-(Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view{
+    return _BannerCell.class;
+}
+- (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view{
+    //setup image
+    if ([cell isKindOfClass:_BannerCell.class]) {
+        UIImage *image = [UIImage imageNamed:_urls[index]];
+        
+        [((_BannerCell*)cell).imageView setImage:image];
+    }
+  
+}
+@end
+
+
+@implementation _BannerCell
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _imageView = UIImageView.new;
+        [_imageView setBackgroundColor:ColorWhite];
+        [_imageView.layer setCornerRadius:6];
+        [_imageView.layer setMasksToBounds:YES];
+        
+        [self.contentView addSubview:_imageView];
+    }
+    return self;
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    UIEdgeInsets padding = UIEdgeInsetsMake(11, 11, 11, 11);
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentView).insets(padding);
+        [self.imageView layoutIfNeeded];
+    }];
+    
+    //[self.imageView setupMaskWithCorner:6 rectCorner:UIRectCornerAllCorners];;
+}
+
+@end
+
+
+@implementation _RankingCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        CGRect frame = CGRectMake(0, 0, 25, 25) ;
+        _imageView1 = [[UIImageView alloc] initWithFrame:frame];
+        _imageView2 = [[UIImageView alloc] initWithFrame:frame];
+        _imageView3 = [[UIImageView alloc] initWithFrame:frame];
+        
+        UIImage *image = [UIImage imageNamed:@"icon_profile_share_weibo"];
+        _imageView3.image = _imageView2.image = _imageView1.image = [UIImage imageNamed:@"icon_profile_share_weibo"];
+        
+        
+        [_imageView3 setContentMode:UIViewContentModeScaleAspectFill];
+        
+        [self.contentView addSubview:_imageView1];
+        [self.contentView addSubview:_imageView2];
+        [self.contentView addSubview:_imageView3];
+    }
+    return self;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    CGSize size = CGSizeMake(30, 30);
+    [self.imageView3 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.contentView);
+        make.right.mas_equalTo(self.contentView).inset(11);
+        make.size.mas_equalTo(size);
+    }];
+    [self.imageView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(self.imageView3.mas_left).inset(11);
+        make.size.mas_equalTo(size);
+    }];
+    [self.imageView1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(self.imageView2.mas_left).inset(11);
+        make.size.mas_equalTo(size);
+    }];
+    
+    
+}
+
 @end

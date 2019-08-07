@@ -15,7 +15,7 @@
 
 #import "GAAPI.h"
 
-@interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GALiveHeaderViewDelegate>
+@interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,GALiveHeaderViewDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
 
 @end
@@ -39,7 +39,7 @@
     }
     
     [GAAPI.new.videoAPI fetchLiveWithToken:key completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-        NSLog(@"sjon --- %@",json);
+        //NSLog(@"sjon --- %@",json);
     }];
   
 }
@@ -50,7 +50,13 @@
     }];
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 3;
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }
     
     return 10;
 }
@@ -64,10 +70,34 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        GALiveHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
-        [header setFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*0.58)];
-        [header setDelegate:self];
-        return header;
+        //第一节节头
+        UICollectionReusableView*(^firstSection)(void) = ^{
+            GALiveHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                          withReuseIdentifier:@"firstHeader"
+                                                                                 forIndexPath:indexPath];
+            [header setDelegate:self];
+            return header;
+        };
+        
+        //其他节
+        UICollectionReusableView*(^otherSectin)(void) = ^{
+            UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                                withReuseIdentifier:@"secHeader"
+                                                                                       forIndexPath:indexPath];
+            
+            return view;
+        };
+        
+        switch (indexPath.section) {
+            case 0:{
+                return firstSection();
+            }break;
+                
+            default:
+                return  otherSectin();
+                break;
+        }
+        
     }else{
         return nil;
     }
@@ -78,23 +108,46 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return CGSizeMake(ScreenWidth, ScreenWidth*(180.0/414.0));
+    }
+    
+    return CGSizeMake(ScreenWidth, 60);
+}
 
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
-        CGFloat rate = 410.0 / 414;
-        CGFloat w = ScreenWidth;
+        CGFloat space = 12;
+        
+        CGFloat rate = 289/174;  // h /w
+        
+        CGFloat w = (ScreenWidth-27*2-space)/2;
         CGFloat h = w * rate;
         [layout setItemSize:CGSizeMake(w, h)];
         [layout setMinimumInteritemSpacing:4.0];
-        [layout setHeaderReferenceSize:CGSizeMake(ScreenWidth, ScreenWidth*0.58)];
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        
         [_collectionView registerClass:GALiveCell.class forCellWithReuseIdentifier:GALiveCell.identifier];
-        [_collectionView registerClass:GALiveHeaderView.class forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+        
+        [_collectionView registerClass:GALiveHeaderView.class
+            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                   withReuseIdentifier:@"firstHeader"];
+        
+        [_collectionView registerClass:UICollectionReusableView.class
+            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                   withReuseIdentifier:@"secHeader"];
+        
+        
         [_collectionView setDelegate:self];
         [_collectionView setDataSource:self];
         [_collectionView setBackgroundColor:ColorWhite];
+        //[_collectionView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    
+    
     }
     return _collectionView;
 }

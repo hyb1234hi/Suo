@@ -100,6 +100,11 @@ SOFTWARE.
 
 
 
+## Bugly
+
+Copyright (C) 2017 Tencent Bugly, Inc. All rights reserved.
+
+
 ## DCPathButton
 
 The DCPathButton use the MIT license

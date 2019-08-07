@@ -53,7 +53,7 @@
     
     [self.menuView reload];
     [self reloadData];
-    [self.menuView selectItemAtIndex:1];
+    [self.menuView selectItemAtIndex:0];
     
     // add button
     _addButton = UIButton.new;
@@ -68,10 +68,7 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-    
-}
+
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];

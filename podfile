@@ -34,9 +34,12 @@ pod 'libksygpulive/libksygpulive'
 pod 'AlivcLivePusher'
 pod 'SocketRocket'
 
+pod 'Bugly'
+
 #debug
 pod 'LookinServer', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+
 
 end
 
