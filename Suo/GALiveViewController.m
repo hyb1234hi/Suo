@@ -17,7 +17,7 @@
 
 @interface GALiveViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GALiveHeaderViewDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
-@property(nonatomic,strong) UITableView *tableView;
+
 @end
 
 @implementation GALiveViewController
@@ -28,16 +28,23 @@
     
     [self.view addSubview:self.collectionView];
     
-    [GAAPI.new.videoAPI fetchLiveWithToken:@"4d909cb8c51cc6214cb6cc2bdc09aecc" completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+    
+    //获取 cookie keyValue
+    NSString *key = nil;
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"key"]) {
+            key = [cookie.properties valueForKey:NSHTTPCookieValue];
+        }
+    }
+    
+    [GAAPI.new.videoAPI fetchLiveWithToken:key completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
         NSLog(@"sjon --- %@",json);
     }];
   
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-    
-    
-
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];

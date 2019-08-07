@@ -78,7 +78,6 @@
     [super viewDidLayoutSubviews];
     
     
-    
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
             make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
@@ -89,6 +88,8 @@
         }
     }];
 }
+
+
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     
@@ -105,24 +106,33 @@
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
     
-    NSHTTPURLResponse *res = (NSHTTPURLResponse*)navigationResponse.response;
-    NSArray *cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:res.allHeaderFields forURL:res.URL];
-    
-    NSLog(@"alll ----------------- %@",[res allHeaderFields]);
-    NSLog(@"cooke s --- %@",cookies);
-    for (NSHTTPCookie *cookie in cookies) {
-        NSLog(@"00000000000 >>> cookie  %@",cookie);
+    if ([navigationResponse.response.URL.absoluteString isEqualToString:@"http://www.suo.com/mobile/html/pointspro_list.html"]) {
+        decisionHandler(WKNavigationResponsePolicyCancel);
+        return;
     }
+    
     
     if (@available(iOS 12.0, *)) {
         WKHTTPCookieStore *cookieStore = webView.configuration.websiteDataStore.httpCookieStore;
         [cookieStore getAllCookies:^(NSArray* cookies) {
-            NSLog(@"cooooooooo --- %@",cookies);
+           // NSLog(@"cookies  --- %@",cookies);
+            for (NSHTTPCookie *cookie in cookies) {
+                //NSLog(@"cookie pt -- %@",cookie.properties);
+                
+                //共享用户 key username cookies
+                if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"key"]) {
+                    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+                    NSLog(@"cookie == %@",cookie);
+                }
+                if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"username"]) {
+                    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+                }
+            }
         }];
     }else {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
         NSArray *cookies =[NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
-        NSLog(@"------------------------cookies -- %@",cookies);
+        //NSLog(@"------------------------cookies -- %@",cookies);
     }
     
     decisionHandler(WKNavigationResponsePolicyAllow);
@@ -135,6 +145,6 @@
 
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    NSLog(@"message --%@",message);
+    NSLog(@"JS message --%@",message);
 }
 @end

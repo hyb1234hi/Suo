@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0208838322FA72BE00B1E873 /* GALiveRecommendData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0208838222FA72BE00B1E873 /* GALiveRecommendData.m */; };
+		0208838622FA732100B1E873 /* GALiveItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0208838522FA732100B1E873 /* GALiveItem.m */; };
 		022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22522F5698200C80375 /* NSObject+GAExtension.m */; };
 		022FF22922F7C2EA00C80375 /* GAGoodsPushSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22822F7C2EA00C80375 /* GAGoodsPushSelectView.m */; };
 		022FF22C22F7C9A100C80375 /* GAGoodsPushCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 022FF22B22F7C9A100C80375 /* GAGoodsPushCell.m */; };
@@ -90,6 +92,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0208838122FA72BE00B1E873 /* GALiveRecommendData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveRecommendData.h; sourceTree = "<group>"; };
+		0208838222FA72BE00B1E873 /* GALiveRecommendData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveRecommendData.m; sourceTree = "<group>"; };
+		0208838422FA732100B1E873 /* GALiveItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveItem.h; sourceTree = "<group>"; };
+		0208838522FA732100B1E873 /* GALiveItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveItem.m; sourceTree = "<group>"; };
 		022FF22422F5698200C80375 /* NSObject+GAExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+GAExtension.h"; sourceTree = "<group>"; };
 		022FF22522F5698200C80375 /* NSObject+GAExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GAExtension.m"; sourceTree = "<group>"; };
 		022FF22722F7C2EA00C80375 /* GAGoodsPushSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAGoodsPushSelectView.h; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 			children = (
 				027DB67E22F02FBB001B0593 /* GAVideoDataSource.h */,
 				027DB67F22F02FBB001B0593 /* GAVideoDataSource.m */,
+				0208838122FA72BE00B1E873 /* GALiveRecommendData.h */,
+				0208838222FA72BE00B1E873 /* GALiveRecommendData.m */,
 			);
 			name = DataSource;
 			sourceTree = "<group>";
@@ -504,6 +512,8 @@
 				3B99C72322EC098800ED8999 /* GAVideoClassify.m */,
 				3B99C72522EC0A8200ED8999 /* GAUser.h */,
 				3B99C72622EC0A8200ED8999 /* GAUser.m */,
+				0208838422FA732100B1E873 /* GALiveItem.h */,
+				0208838522FA732100B1E873 /* GALiveItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -684,6 +694,7 @@
 				027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */,
 				022FF22C22F7C9A100C80375 /* GAGoodsPushCell.m in Sources */,
 				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
+				0208838622FA732100B1E873 /* GALiveItem.m in Sources */,
 				027DB6A322F2EB43001B0593 /* GARecordControlView.m in Sources */,
 				027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */,
 				3B47C01322EA9102000974C7 /* main.m in Sources */,
@@ -691,6 +702,7 @@
 				3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */,
 				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
 				3B47C00522EA90F8000974C7 /* AppDelegate.m in Sources */,
+				0208838322FA72BE00B1E873 /* GALiveRecommendData.m in Sources */,
 				027DB6A022F2C891001B0593 /* GAOpenLiveControlView.m in Sources */,
 				3B47C04A22EAAD80000974C7 /* GAVideoPlayControllerView.m in Sources */,
 				027DB68D22F11D1A001B0593 /* GAShootingView.m in Sources */,
