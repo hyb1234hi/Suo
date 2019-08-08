@@ -69,6 +69,22 @@
  @param completion  数据返回
  */
 - (void)fetchLiveFollowListForKey:(NSString*)userKey page:(int)page size:(int)pageSize completion:(CallBack)completion;
+
+
+/**
+ 获取所有直播分类
+
+ @param completion 数据返回
+ */
+- (void)fetchLiveTypeCompletion:(CallBack)completion;
+
+
+/**
+ 获取banner
+
+ @param completion 数据返回
+ */
+- (void)fetchLiveBannerCompletion:(CallBack)completion;
 @end
 
 

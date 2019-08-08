@@ -31,4 +31,16 @@
     [root setDefinesPresentationContext:YES];
     [root presentViewController:vc animated:animate completion:completion];
 }
+
+
+- (NSString *)loginKey{
+    NSString *key = nil;
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"key"]) {
+            key = [cookie.properties valueForKey:NSHTTPCookieValue];
+        }
+    }
+    return key;
+}
 @end

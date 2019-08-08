@@ -12,9 +12,6 @@
 
 
 
-
-
-
 @end
 
 @implementation GALiveVideoAPI (Live)
@@ -84,6 +81,20 @@
     [payload setValue:userKey forKey:@"key"];
     
     NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
+
+- (void)fetchLiveTypeCompletion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live&t=getLiveIndexTypeList";
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:nil method:@"GET"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
+
+- (void)fetchLiveBannerCompletion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live&t=getLiveBanner";
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:nil method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];
 }
 @end

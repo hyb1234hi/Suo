@@ -31,11 +31,15 @@ GALiveHeaderViewDelegate
 
 @property(nonatomic,strong)NSMutableArray<GABaseDataSource*> *dataSourceList;   //!<节数量
 
+@property(nonatomic,strong)NSMutableArray<GALiveType*> *liveTypeList;           //!<live类型
+
+
 //数据源
 @property(nonatomic,strong)GALiveRecommendData *recommendData;  //!<推荐数据
 @property(nonatomic,strong)GATopListData *topListData;          //!<排行榜数据
 @property(nonatomic,strong)GAFollowLiveListData *followLiveData;//!<关注数据
-@property(nonatomic,strong)GAAllTypeLiveData *allTypeData;      //!<类型数
+
+//@property(nonatomic,strong)NSMutableArray<GABaseDataSource*> *allTypeDataList;  //所有类型列表
 
 @end
 
@@ -47,60 +51,77 @@ GALiveHeaderViewDelegate
     
     [self.view addSubview:self.collectionView];
     
-    //获取 cookie keyValue
-    NSString *key = nil;
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    for (NSHTTPCookie *cookie in cookies) {
-        if ([[cookie.properties valueForKey:NSHTTPCookieName] isEqualToString:@"key"]) {
-            key = [cookie.properties valueForKey:NSHTTPCookieValue];
-        }
-    }
+    [self reloadAllData];
+}
+
+/**
+ 刷新所有数据源
+ */
+- (void)reloadAllData{
+    
+    _dataSourceList = @[].mutableCopy;
+    //_allTypeDataList = @[].mutableCopy;
     
     _topListData    = GATopListData.new;
     _recommendData  = GALiveRecommendData.new;
-    _followLiveData = [[GAFollowLiveListData alloc] initWithUserKey:key];
     
-    GALiveType *type = [GALiveType instanceWithDict:@{@"id":@"593",@"name":@"食品饮料"}];
     
-    _allTypeData    = [[GAAllTypeLiveData alloc] initWithType:type];
+    [_dataSourceList addObject:_topListData];
+    [_dataSourceList addObject:_recommendData];
     
-    _dataSourceList = @[_topListData,_recommendData,_followLiveData,_allTypeData].mutableCopy;  // 后期在数据返回后 再确定是否将数据添加到列表
+    //用户已经登录 添加关注列表数据
+    if (self.loginKey.length > 0) {
+        _followLiveData = [[GAFollowLiveListData alloc] initWithUserKey:self.loginKey];
+        [_dataSourceList addObject:_followLiveData];
+        [_followLiveData reloadDataWithCompletion:^(NSArray *lives) {
+            if (lives.count > 0) {
+                [self reloadSectionForSource:self.followLiveData];
+            }
+        }];
+    }
+    
     
     // load data
     [_recommendData reloadDataWithCompletion:^(NSArray *lives) {
         if (lives.count > 0) {
-            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 1)]];
-            //将数据添加到数据源列表、 全列表刷新
+            [self reloadSectionForSource:self.recommendData];
         }
     }];
+    [_topListData reloadDataWithCompletion:^(NSArray *lives) {}];
     
-    [_topListData reloadDataWithCompletion:^(NSArray *lives) {
-        
-    }];
+    //分类直播数据
+    [GAAPI.new.videoAPI fetchLiveTypeCompletion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
     
-    [_followLiveData reloadDataWithCompletion:^(NSArray *lives) {
-        if (lives.count > 0) {
-            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)]];
+        if ([json valueForKey:@"datas"]) {
+            NSMutableArray<GALiveType*> *allType = @[].mutableCopy;
+            NSArray *tmp = [json valueForKey:@"datas"];
+            for (NSDictionary *dict in tmp) {
+                [allType addObject:[GALiveType instanceWithDict:dict]];
+            }
+            self.liveTypeList = allType; //保存分类数据
+            
+            // NOTE 注意这部分的数据刷新顺序
+            // 01setp 添加section     ->刷新ColletionView
+            // 02setp 添加sectionItem ->刷新section
+            
+            for (GALiveType *type in allType) {
+                GAAllTypeLiveData *typeData = [[GAAllTypeLiveData alloc] initWithType:type];
+                [self.dataSourceList addObject:typeData];
+                [typeData reloadDataWithCompletion:^(NSArray *lives) {
+                    if (lives.count>0) {
+                         [self reloadSectionForSource:typeData];        //02 setp
+                    }
+                }];
+            }
+            [self.collectionView reloadData];   // 01 setp
         }
     }];
-    [_allTypeData reloadDataWithCompletion:^(NSArray *lives) {
-        if (lives.count > 0) {
-            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(3, 1)]];
-        }
-    }];
-    
-    
-    
-//    [GAAPI.new.videoAPI fetchLiveFollowListForKey:key page:0 size:0 completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-//        NSLog(@"follow list -- %@  ",json);
-//    }];
-  
+}
+- (void)reloadSectionForSource:(GABaseDataSource*)dataSource{
+    NSInteger index = [self.dataSourceList indexOfObject:dataSource];
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, 1)]];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-}
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -217,15 +238,15 @@ GALiveHeaderViewDelegate
     
     switch (indexPath.section) {
         case 0:
-            return CGSizeMake(ScreenWidth, 44);
+            return CGSizeMake(ScreenWidth, 44.0);
             break;
             
         default:{
-            CGFloat space = 12;
+            CGFloat space = 12.0;
             
-            CGFloat rate = 289/174.0;  // h /w
+            CGFloat rate = 289/174.0;  //  h=289 / w =174.0      //宽高比
             
-            CGFloat w = (ScreenWidth-space*3)/2;
+            CGFloat w = (ScreenWidth-space*3)/2.0;    //两列
             CGFloat h = w * rate;
             return CGSizeMake(w, h);
         }break;
