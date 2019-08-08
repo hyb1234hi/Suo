@@ -7,10 +7,12 @@
 //
 
 #import "GABaseCollectionViewCell.h"
-
+@class GALiveItem;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GALiveCell : GABaseCollectionViewCell
+@property(nonatomic,strong)GALiveItem *liveItem;
+
 
 @end
 
