@@ -11,7 +11,10 @@
 #import "GALiveViewController.h"
 #import "GAVideoViewController.h"
 #import "GACityWideViewController.h"
+
+
 #import "GAShootingViewController.h"
+#import "GAOpenLiveViewController.h"
 
 
 #import <WMPageController.h>
@@ -64,7 +67,7 @@
 }
 
 - (void)addButtonAction:(UIButton*)send{
-    GAShootingViewController *vc = GAShootingViewController.new;
+    UIViewController *vc = GAOpenLiveViewController.new; //GAShootingViewController.new;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

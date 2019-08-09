@@ -131,5 +131,10 @@
         [self.delegate startLiveDidClick];
     }
 }
+- (void)switchCamera{
+    if ([self.delegate respondsToSelector:@selector(switchLensDidClick)]) {
+        [self.delegate switchLensDidClick];
+    }
+}
 
 @end
