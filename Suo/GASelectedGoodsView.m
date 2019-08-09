@@ -24,6 +24,11 @@
 @end
 
 @implementation GASelectedGoodsView
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         _goodsArray = @[@"icon_profile_share_qqZone",

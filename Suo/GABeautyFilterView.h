@@ -10,8 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, BFViewState) {
+    BFViewStateBeauty,
+    BFViewStateFilter,
+};
+
 @interface GABeautyFilterView : UIView
 
+/**
+ 切换选中状态
+
+ @param state 视图状态
+ */
+- (void)selectedState:(BFViewState)state;
 @end
 
 NS_ASSUME_NONNULL_END

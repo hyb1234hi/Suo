@@ -17,12 +17,6 @@
 
 @end
 
-
-typedef NS_ENUM(NSUInteger, BFViewState) {
-    BFViewStateBeauty,
-    BFViewStateFilter,
-};
-
 @interface GABeautyFilterView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)UIButton *beautyBtn; //!<滤镜按钮
 @property(nonatomic,strong)UIButton *filterBtn; //!<美颜按钮
@@ -35,6 +29,10 @@ typedef NS_ENUM(NSUInteger, BFViewState) {
 @end
 
 @implementation GABeautyFilterView
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -131,6 +129,19 @@ typedef NS_ENUM(NSUInteger, BFViewState) {
         [self.beautyBtn setSelected:NO];
         self.viewState = BFViewStateFilter;
         [self.collectionView reloadData];
+    }
+}
+
+- (void)selectedState:(BFViewState)state{
+    //self.viewState = state;
+    switch (state) {
+        case BFViewStateBeauty:
+            [self onButtonAction:self.beautyBtn];
+            break;
+            
+        case BFViewStateFilter:
+            [self onButtonAction:self.filterBtn];
+            break;
     }
 }
 

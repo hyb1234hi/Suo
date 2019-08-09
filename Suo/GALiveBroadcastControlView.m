@@ -139,7 +139,7 @@
 
 #pragma mark - SRWebSocketDelegate
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message{
-    NSLog(@"message --->>>>>>>>>>>>>>>>>>>>>>>>>>> %@",message);
+    NSLog(@"接收 >>>>>>>>>>>>>>>>>> %@",message);
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
     NSString *b = [dict valueForKeyPath:@"data.msg"];
@@ -147,11 +147,11 @@
     [self.renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideDefault msg:b]];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
-    NSLog(@"error ---- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>%@",error);
+    NSLog(@"弹幕连接错误 ---->%@",error);
 }
 
 -(void)webSocketDidOpen:(SRWebSocket *)webSocket{
-    NSLog(@"------------->>>>>>>>>>>>>>>>>>>>>>>>>>>连接成功");
+    NSLog(@"------------->>>>>>弹幕连接成功");
     [self.socket send:self.data];
 }
 

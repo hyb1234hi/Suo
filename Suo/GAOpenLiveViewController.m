@@ -8,6 +8,7 @@
 
 #import "GAOpenLiveViewController.h"
 #import "GAOpenLiveControlView.h"
+#import "GALiveBroadcastControlView.h"
 
 #import <AlivcLivePusher/AlivcLivePusher.h>
 
@@ -16,10 +17,11 @@
 
 @end
 
-@interface GAOpenLiveViewController ()<GAOpenLiveControllerDelegate>
+@interface GAOpenLiveViewController ()<GAOpenLiveControllerDelegate,GALiveBroadcastControlViewDelegate>
 
 @property(nonatomic,strong)GAOpenLiveControlView *controlView;  //!<UI
 @property(nonatomic,strong)AlivcLivePusher *pusher;             //!<相机与推流
+@property(nonatomic,strong)GALiveBroadcastControlView *liveBroadcast;
 
 @end
 
@@ -31,6 +33,9 @@
     _pusher = nil;
     
 }
+- (void)dismiss{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,12 +45,16 @@
     //初始化推流、相机
     ({
         AlivcLivePushConfig *cfg = [[AlivcLivePushConfig alloc] init];
-        //[AlivcLivePusher showDebugView];
+        [AlivcLivePusher showDebugView];
         self.pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
         [self.pusher startPreview:self.view];
     });
     
     [self setupUI];
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    [swipe setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:swipe];
 }
 
 - (void)setupUI{
@@ -60,12 +69,39 @@
     [super viewDidLayoutSubviews];
 }
 
+#pragma mari - getter
+- (GALiveBroadcastControlView *)liveBroadcast{
+    if (!_liveBroadcast) {
+        _liveBroadcast = GALiveBroadcastControlView.new;
+        [_liveBroadcast setDelegate:self];
+    }
+    return _liveBroadcast;
+}
+
 #pragma mark - GAOpenLiveControllerDelegate
 - (void)startLive{
-    
+    [UIView animateWithDuration:0.35 animations:^{
+        [self.controlView setAlpha:0];
+    } completion:^(BOOL finished) {
+       
+        [self.view addSubview:self.liveBroadcast];
+        [self.liveBroadcast mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
+        }];
+        [self.view layoutIfNeeded];
+    }];
+    [self.pusher startPushWithURL:RTMPURL_UP];
 }
 - (void)switchCamera{
     [self.pusher switchCamera];
+}
+
+#pragma mark  - GALiveBroadcastControlViewDelegate      (直播进行中的 UIAction)
+- (void)stopLive{
+    [self.liveBroadcast removeFromSuperview];
+    [UIView animateWithDuration:0.35 animations:^{
+        [self.controlView setAlpha:1];
+    }];
 }
 
 @end
@@ -74,7 +110,5 @@
 #pragma mark - cammera setter
 
 @implementation GAOpenLiveViewController (CameraSetter)
-
-
 
 @end

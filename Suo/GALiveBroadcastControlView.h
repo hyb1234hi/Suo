@@ -13,12 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GALiveBroadcastControlViewDelegate <NSObject>
 
-
 /**
  停止直播
  */
 - (void)stopLive;
-
 
 @end
 
