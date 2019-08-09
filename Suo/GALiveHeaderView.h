@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GABannerItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,11 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol GALiveHeaderViewDelegate <NSObject>
 
-- (void)menuView:(WMMenuView*)menuView selectedIndex:(NSUInteger)index;
+- (void)liveHeaderView:(GALiveHeaderView*)header didSelectedBanner:(GABannerItem*)item;
 
 @end
 
 @interface GALiveHeaderView : UICollectionReusableView
+@property(nonatomic,strong)NSArray<GABannerItem*> *banners;
+
 @property(nonatomic,weak)id<GALiveHeaderViewDelegate> delegate;
 @end
 

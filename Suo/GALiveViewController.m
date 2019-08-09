@@ -8,6 +8,8 @@
 
 #import "GALiveViewController.h"
 #import "GALiveWatchViewController.h"
+#import "GABannerTargetViewController.h"
+#import "GALiveTopListViewController.h"
 
 #import "GALiveTopCell.h"
 #import "GALiveCell.h"
@@ -21,18 +23,20 @@
 #import "GAFollowLiveListData.h"
 #import "GAAllTypeLiveData.h"
 
+#import "GABannerItem.h"
+
+#import <WebKit/WebKit.h>
+
 @interface GALiveViewController ()<
 UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,
-GALiveHeaderViewDelegate
+GALiveHeaderViewDelegate,
+GALiveTopCellDelegate
 >
 
 
 @property(nonatomic,strong) UICollectionView *collectionView;
-
 @property(nonatomic,strong)NSMutableArray<GABaseDataSource*> *dataSourceList;   //!<节数量
-
 @property(nonatomic,strong)NSMutableArray<GALiveType*> *liveTypeList;           //!<live类型
-
 
 //数据源
 @property(nonatomic,strong)GALiveRecommendData *recommendData;  //!<推荐数据
@@ -40,6 +44,7 @@ GALiveHeaderViewDelegate
 @property(nonatomic,strong)GAFollowLiveListData *followLiveData;//!<关注数据
 
 //@property(nonatomic,strong)NSMutableArray<GABaseDataSource*> *allTypeDataList;  //所有类型列表
+@property(nonatomic,strong)NSArray<GABannerItem*> *bannerList;     //banner 列表
 
 @end
 
@@ -50,7 +55,6 @@ GALiveHeaderViewDelegate
     // Do any additional setup after loading the view.
     
     [self.view addSubview:self.collectionView];
-    
     [self reloadAllData];
 }
 
@@ -60,11 +64,9 @@ GALiveHeaderViewDelegate
 - (void)reloadAllData{
     
     _dataSourceList = @[].mutableCopy;
-    //_allTypeDataList = @[].mutableCopy;
     
     _topListData    = GATopListData.new;
     _recommendData  = GALiveRecommendData.new;
-    
     
     [_dataSourceList addObject:_topListData];
     [_dataSourceList addObject:_recommendData];
@@ -116,12 +118,27 @@ GALiveHeaderViewDelegate
             [self.collectionView reloadData];   // 01 setp
         }
     }];
+    
+    //banner 数据
+    [GAAPI.new.videoAPI fetchLiveBannerCompletion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+        
+        //NSLog(@"banner data res%@  - %@",response,json);
+        
+        if ([json valueForKeyPath:@"datas.data"]) {
+            NSArray *tmp = [json valueForKeyPath:@"datas.data"];
+            NSMutableArray *banners = @[].mutableCopy;
+            for (NSDictionary *dict in tmp) {
+                [banners addObject:[GABannerItem instanceWithDict:dict]];
+            }
+            self.bannerList = banners;
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)]];
+        }
+    }];
 }
 - (void)reloadSectionForSource:(GABaseDataSource*)dataSource{
     NSInteger index = [self.dataSourceList indexOfObject:dataSource];
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, 1)]];
 }
-
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -130,6 +147,7 @@ GALiveHeaderViewDelegate
     }];
 }
 
+#pragma mark - UICollectionViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.dataSourceList.count;
 }
@@ -153,7 +171,7 @@ GALiveHeaderViewDelegate
     
     GALiveTopCell*(^firstSectionCell)(void) = ^{
         GALiveTopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GALiveTopCell.identifier forIndexPath:indexPath];
-        
+        [cell setDelegate:self];
         
         return cell;
     };
@@ -186,6 +204,7 @@ GALiveHeaderViewDelegate
             GALiveHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                           withReuseIdentifier:@"firstHeader"
                                                                                  forIndexPath:indexPath];
+            [header setBanners:self.bannerList];
             [header setDelegate:self];
             return header;
         };
@@ -202,6 +221,7 @@ GALiveHeaderViewDelegate
             return view;
         };
         
+        
         if (indexPath.section == 0) {
             return firstSection();
         }else{
@@ -213,7 +233,6 @@ GALiveHeaderViewDelegate
                                                                               withReuseIdentifier:@"footer"
                                                                                      forIndexPath:indexPath];
         [footer setBackgroundColor:RGBA(248, 248, 248, 1)];
-        
         return footer;
     }
 }
@@ -253,6 +272,8 @@ GALiveHeaderViewDelegate
     }
 }
 
+
+#pragma mark - getter
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
@@ -280,9 +301,16 @@ GALiveHeaderViewDelegate
 }
 
 #pragma mark - GALiveHeaderViewDelegate
-- (void)menuView:(WMMenuView *)menuView selectedIndex:(NSUInteger)index{
-    //刷新数据源
-   // NSLog(@"index -- %d",index);
+- (void)liveHeaderView:(GALiveHeaderView *)header didSelectedBanner:(GABannerItem *)item{
+    GABannerTargetViewController *vc = [[GABannerTargetViewController alloc] initWithBanner:item];
+    [vc setTitle:item.title];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
+#pragma mark - GALiveTopCellDelegate
+-(void)liveTopCellDidSelected:(GALiveTopCell *)cell{
+    GALiveTopListViewController *top = [[GALiveTopListViewController alloc] init];
+    [self.navigationController pushViewController:top animated:YES];
+}
 @end

@@ -43,4 +43,15 @@
     }
     return key;
 }
+
+- (UIImage *)imageForSize:(CGSize)size color:(UIColor *)color{
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 @end

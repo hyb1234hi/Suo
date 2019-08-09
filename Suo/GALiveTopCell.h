@@ -10,8 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GALiveTopCell : GABaseCollectionViewCell
+@class GALiveTopCell;
 
+@protocol GALiveTopCellDelegate <NSObject>
+
+- (void)liveTopCellDidSelected:(GALiveTopCell*)cell;
+
+@end
+@interface GALiveTopCell : GABaseCollectionViewCell
+@property(nonatomic,weak)id<GALiveTopCellDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

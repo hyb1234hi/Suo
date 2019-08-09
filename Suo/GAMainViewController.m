@@ -77,7 +77,6 @@
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
             make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
@@ -100,17 +99,12 @@
     }
 }
 
-//-(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-//    
-//}
-
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
     
     if ([navigationResponse.response.URL.absoluteString isEqualToString:@"http://www.suo.com/mobile/html/pointspro_list.html"]) {
         decisionHandler(WKNavigationResponsePolicyCancel);
         return;
     }
-    
     
     if (@available(iOS 12.0, *)) {
         WKHTTPCookieStore *cookieStore = webView.configuration.websiteDataStore.httpCookieStore;

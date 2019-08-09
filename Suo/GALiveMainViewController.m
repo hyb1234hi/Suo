@@ -69,7 +69,6 @@
 }
 
 
-
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
@@ -95,17 +94,12 @@
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index{
-//    WMMenuItem *item = [pageController.menuView itemAtIndex:index];
-//    [item setFont:[UIFont boldSystemFontOfSize:24]];
-    
     return  self.pages[index];
 }
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index{
     UIColor *color = UIColor.whiteColor;
     UIViewController *vc = UIViewController.new;
     [vc.view setBackgroundColor:color];
-    
-    
     
     if (index == 0) {
         vc = GALiveViewController.new;
@@ -117,7 +111,6 @@
     if (index == 2) {
         vc = GACityWideViewController.new;
     }
-    
     
     return vc;
 }
@@ -136,28 +129,5 @@
     
     return frame;
 }
-
-
-
-//- (DCPathButton *)pathButton{
-//    if (!_pathButton) {
-//
-//        DCPathItemButton*(^createItem)(NSString*image,NSString*highlightedImage,NSString*bac)
-//
-//        _pathButton = [[DCPathButton alloc] initWithCenterImage:[UIImage imageNamed:@"chooser-button-tab"]
-//                                               highlightedImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"]];
-//    }
-//    return _pathButton;
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

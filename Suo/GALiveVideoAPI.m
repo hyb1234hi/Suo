@@ -92,7 +92,7 @@
 }
 
 - (void)fetchLiveBannerCompletion:(CallBack)completion{
-    NSString *api = @"api/mobile/index.php?w=live&t=getLiveBanner";
+    NSString *api = @"api/mobile/index.php?w=live&t=getLiveBannerList";
     
     NSURLRequest *request = [self createRequestWithPath:api parameter:nil method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];

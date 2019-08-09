@@ -17,6 +17,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (MBProgressHUD*)showHUDToView:(UIView* __nullable)view message:(NSString*)msg;
 
 - (void)rootVCPresentViewController:(UIViewController*)vc animated:(BOOL)animate completion:(void(^__nullable)(void))completion;
+
+
+/**
+ 生成指定颜色图片
+
+ @param size 图片大小
+ @param color 颜色
+ @return image
+ */
+- (UIImage*)imageForSize:(CGSize)size color:(UIColor*)color;
 @end
 
 NS_ASSUME_NONNULL_END

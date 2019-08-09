@@ -23,7 +23,7 @@
 - (void)reloadDataWithCompletion:(LiveDataBlock)completion{
     self.currentPage = 1;
     [GAAPI.new.videoAPI fetchLiveByTypeForPage:self.currentPage size:self.pageSize typeID:self.type.identifier completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-        NSLog(@"json --url==%@ \n id == %@  %@",response.URL.absoluteString,self.type.identifier ,json);
+       // NSLog(@"json --url==%@ \n id == %@  %@",response.URL.absoluteString,self.type.identifier ,json);
         self.liveItems = [self serializationToModel:json];
         if (completion) {
             completion(self.liveItems);
@@ -40,7 +40,5 @@
         }
     }];
 }
-//- (NSMutableArray<GALiveItem *> *)serializationToModel:(NSDictionary *)json{
-//    NSMutableArray
-//}
+
 @end

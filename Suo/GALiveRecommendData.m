@@ -32,7 +32,7 @@
             completion(self.liveItems);
         }
         
-        NSLog(@"推荐直播 ----- %@",json);
+       // NSLog(@"推荐直播 ----- %@",json);
     }];
 }
 
@@ -47,17 +47,5 @@
     }];
 }
 
-//-(NSMutableArray<GALiveItem*>*)serializationToModel:(NSDictionary*)json{
-//    NSMutableArray<GALiveItem*> *list = @[].mutableCopy;
-//
-//    if ([json valueForKeyPath:@"datas.data"]) {
-//        NSArray *tmp = [json valueForKeyPath:@"datas.data"];
-//        for (NSDictionary *dict in tmp) {
-//            [list addObject:[GALiveItem instanceWithDict:dict]];
-//        }
-//    }
-//
-//    return list;
-//}
 
 @end

@@ -68,6 +68,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.delegate respondsToSelector:@selector(liveTopCellDidSelected:)]) {
+        [self.delegate liveTopCellDidSelected:self];
+    }
+}
+
 - (NSTimer *)timer{
     if (!_timer) {
         __weak typeof(self) wself = self;

@@ -12,11 +12,8 @@
 #import "GABaseCollectionViewCell.h"
 #import "GATopListData.h"
 
-
 #import <SDCycleScrollView.h>
-
-
-
+#import <UIImageView+YYWebImage.h>
 
 /**
  轮播图cell
@@ -29,7 +26,6 @@
 
 @interface GALiveHeaderView ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong) SDCycleScrollView *cycleView; //!<轮播图
-
 @property(nonatomic,strong) NSArray *urls;
 @end
 
@@ -43,20 +39,10 @@
 }
 
 - (void)setupUI{
-    _cycleView = SDCycleScrollView.new;
-   
-
+    //UIImage *image = [UIImage imageNamed:@"banner"];
+    _cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil] ;
     [self addSubview:_cycleView];
-    
-
-    [_cycleView setDelegate:self];
-    
-    NSString *path = [NSBundle.mainBundle pathForResource:@"banner" ofType:@"jpeg"];
-    
-    _urls = @[path,path,path];
-    [_cycleView setImageURLStringsGroup:_urls];
     [_cycleView setBackgroundColor:ColorWhite];
-    
 }
 
 - (void)layoutSubviews{
@@ -65,22 +51,45 @@
     [self.cycleView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
-
 }
 
+
+- (void)setBanners:(NSArray<GABannerItem *> *)banners{
+    if (_banners != banners) {
+        _banners = banners;
+        
+        NSMutableArray *urlList = @[].mutableCopy;
+        for (GABannerItem *item in banners) {
+            [urlList addObject:item.img];
+        }
+        self.urls = urlList;
+        [self.cycleView setImageURLStringsGroup:self.urls];
+    }
+}
 #pragma mark - SDCycleScrollViewDelegate
 -(Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view{
     return _BannerCell.class;
 }
+
 - (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view{
     //setup image
     if ([cell isKindOfClass:_BannerCell.class]) {
-        UIImage *image = [UIImage imageNamed:_urls[index]];
         
-        [((_BannerCell*)cell).imageView setImage:image];
+        _BannerCell *bcell = (_BannerCell*)cell;
+        NSURL *url =  [NSURL URLWithString:self.banners[index].img];
+        [bcell.imageView setImageWithURL:url placeholder:nil options:YYWebImageOptionProgressive completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+            [bcell.imageView setupMaskWithCorner:6 rectCorner:UIRectCornerAllCorners];
+            NSLog(@"cell .image --- %@",bcell.imageView);
+        }];
     }
-  
 }
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    if ([self.delegate respondsToSelector:@selector(liveHeaderView:didSelectedBanner:)]) {
+        [self.delegate liveHeaderView:self didSelectedBanner:self.banners[index]];
+    }
+}
+
 @end
 
 
@@ -90,9 +99,6 @@
     if (self = [super initWithFrame:frame]) {
         _imageView = UIImageView.new;
         [_imageView setBackgroundColor:ColorWhite];
-        [_imageView.layer setCornerRadius:6];
-        [_imageView.layer setMasksToBounds:YES];
-        
         [self.contentView addSubview:_imageView];
     }
     return self;
@@ -103,10 +109,7 @@
     UIEdgeInsets padding = UIEdgeInsetsMake(11, 11, 0, 11);
     [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.contentView).insets(padding);
-        [self.imageView layoutIfNeeded];
     }];
-    
-    //[self.imageView setupMaskWithCorner:6 rectCorner:UIRectCornerAllCorners];;
 }
 
 @end
