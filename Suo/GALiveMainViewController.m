@@ -39,14 +39,14 @@
     
   //  [self.view setBackgroupColor:UIColor.whiteColor];
     
-    [self setTitle:@""]; 
+    //[self setTitle:@""];
     
     self.pages = @[@"直播",@"视频",@"同城"];
    
-    [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:UIImage.new];
+ //   [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
+ //   [self.navigationController.navigationBar setShadowImage:UIImage.new];
 
-    [self setShowOnNavigationBar:YES];
+    //[self setShowOnNavigationBar:YES];
     [self setMenuViewStyle:WMMenuViewStyleLine];
     [self setProgressColor:UIColor.redColor];
     [self setProgressViewCornerRadius:2.0];
@@ -59,11 +59,11 @@
     [self.menuView selectItemAtIndex:0];
     
     // add button
-    _addButton = UIButton.new;
-    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab"] forState:UIControlStateNormal];
-    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"] forState:UIControlStateHighlighted];
-    [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_addButton];
+//    _addButton = UIButton.new;
+//    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab"] forState:UIControlStateNormal];
+//    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"] forState:UIControlStateHighlighted];
+//    [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_addButton];
 }
 
 - (void)addButtonAction:(UIButton*)send{
@@ -75,22 +75,20 @@
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    [self.addButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.mas_equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight+10, 16));
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-    }];
+
+//   // [self setShowOnNavigationBar:YES];
+//    [self.addButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.right.bottom.mas_equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight+10, 16));
+//        make.size.mas_equalTo(CGSizeMake(50, 50));
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
+
 
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController{
     return  self.pages.count;
@@ -120,16 +118,21 @@
 
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
-
-    return self.navigationController.navigationBar.frame;
+    [menuView setBackgroundColor:UIColor.whiteColor];
+    return  CGRectMake(0, 20, ScreenWidth, 44);
+    
+    //return self.navigationController.navigationBar.frame;
 }
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView{
-    CGFloat y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-    CGFloat h = ScreenHeight - y - SafeAreaBottomHeight;
-    CGRect frame  = ScreenBounds;
-    frame.origin.y = y;
-    frame.size.height = h;
+//    CGFloat y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+//    CGFloat h = ScreenHeight - y - SafeAreaBottomHeight;
+//    CGRect frame  = ScreenBounds;
+//    frame.origin.y = y;
+//    frame.size.height = h;
     
+    CGRect frame = ScreenBounds;
+    frame.origin.y = CGRectGetHeight(pageController.menuView.bounds);
+
     return frame;
 }
 

@@ -59,11 +59,12 @@ GALiveTopCellDelegate
 }
 
 /**
- 刷新所有数据源
+ 刷新所有数据源 （数据源也有可能刷新， 所以需要覆盖原有数据源）
  */
 - (void)reloadAllData{
     
-    _dataSourceList = @[].mutableCopy;
+    _dataSourceList = @[].mutableCopy;          //数据源添加到数组后马上刷新CollectionView  再加载数据
+    [self.collectionView reloadData];
     
     _topListData    = GATopListData.new;
     _recommendData  = GALiveRecommendData.new;
@@ -75,6 +76,7 @@ GALiveTopCellDelegate
     if (self.loginKey.length > 0) {
         _followLiveData = [[GAFollowLiveListData alloc] initWithUserKey:self.loginKey];
         [_dataSourceList addObject:_followLiveData];
+        
         [_followLiveData reloadDataWithCompletion:^(NSArray *lives) {
             if (lives.count > 0) {
                 [self reloadSectionForSource:self.followLiveData];
@@ -100,22 +102,30 @@ GALiveTopCellDelegate
             for (NSDictionary *dict in tmp) {
                 [allType addObject:[GALiveType instanceWithDict:dict]];
             }
-            self.liveTypeList = allType; //保存分类数据
-            
+            self.liveTypeList = allType; //保留分类数据
+        
             // NOTE 注意这部分的数据刷新顺序
             // 01setp 添加section     ->刷新ColletionView
             // 02setp 添加sectionItem ->刷新section
             
+            // setp 01
+            NSMutableArray<GABaseDataSource*> *dataSourceArray = @[].mutableCopy;
             for (GALiveType *type in allType) {
                 GAAllTypeLiveData *typeData = [[GAAllTypeLiveData alloc] initWithType:type];
-                [self.dataSourceList addObject:typeData];
-                [typeData reloadDataWithCompletion:^(NSArray *lives) {
+                [dataSourceArray addObject:typeData];
+            }
+            
+            [self.dataSourceList addObjectsFromArray:dataSourceArray];
+            [self.collectionView reloadData];
+            
+            // setp02
+            for (GAAllTypeLiveData *ds in dataSourceArray) {
+                [ds reloadDataWithCompletion:^(NSArray *lives) {
                     if (lives.count>0) {
-                         [self reloadSectionForSource:typeData];        //02 setp
+                         [self reloadSectionForSource:ds];        //02 setp
                     }
                 }];
             }
-            [self.collectionView reloadData];   // 01 setp
         }
     }];
     
@@ -134,10 +144,16 @@ GALiveTopCellDelegate
             [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)]];
         }
     }];
+    
+    [self.collectionView.refreshControl endRefreshing];
 }
 - (void)reloadSectionForSource:(GABaseDataSource*)dataSource{
-    NSInteger index = [self.dataSourceList indexOfObject:dataSource];
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, 1)]];
+    
+    //异步数据回调，回调调用时，可能已经重新刷新 数据源列表  判断是否在
+    if ([self.dataSourceList containsObject:dataSource]) {
+        NSInteger index = [self.dataSourceList indexOfObject:dataSource];
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, 1)]];
+    }
 }
 
 - (void)viewDidLayoutSubviews{
@@ -292,6 +308,10 @@ GALiveTopCellDelegate
         [_collectionView registerClass:GALiveHeaderView.class forSupplementaryViewOfKind:header withReuseIdentifier:@"firstHeader"];
         [_collectionView registerClass:GALiveSectionTitleView.class forSupplementaryViewOfKind:header withReuseIdentifier:@"secHeader"];
         [_collectionView registerClass:UICollectionReusableView.class forSupplementaryViewOfKind:footer withReuseIdentifier:@"footer"];
+        
+        UIRefreshControl *ref = [[UIRefreshControl alloc] init];
+        [ref addTarget:self action:@selector(reloadAllData) forControlEvents:UIControlEventValueChanged];
+        [_collectionView setRefreshControl:ref];
         
         [_collectionView setDelegate:self];
         [_collectionView setDataSource:self];

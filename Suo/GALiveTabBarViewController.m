@@ -7,8 +7,10 @@
 //
 
 #import "GALiveTabBarViewController.h"
-
-@interface GALiveTabBarViewController ()
+#import "GALiveMainViewController.h"
+#import "GAHomeViewController.h"
+@interface GALiveTabBarViewController ()<UITabBarControllerDelegate>
+@property(nonatomic,strong)GAHomeViewController *homeVC;
 
 @end
 
@@ -17,16 +19,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    GAHomeViewController *home = GAHomeViewController.new;
+    _homeVC = home;
+    [home setTitle:@"Home"];
+    
+    UIViewController *liveMain = GALiveMainViewController.new;
+    [liveMain setTitle:@"直播推荐"];
+    
+    UIViewController *openVC = UIViewController.new;
+    [openVC setTitle:@"开播"];
+    
+    UIViewController *classVC = UIViewController.new;
+    [classVC setTitle:@"直播分类"];
+    
+    UIViewController *centre = UIViewController.new;
+    [centre setTitle:@"个人中心"];
+    
+    [self addChildViewController:home];
+    [self addChildViewController:liveMain];
+    [self addChildViewController:openVC];
+    [self addChildViewController:classVC];
+    [self addChildViewController:centre];
+    
+    
+    [self setDelegate:self];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    if (viewController == self.homeVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+
+    }
 }
-*/
+
+
 
 @end

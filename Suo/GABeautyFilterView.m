@@ -10,18 +10,25 @@
 #import "GABaseCollectionViewCell.h"
 
 
-
 @interface _EffectCell : GABaseCollectionViewCell
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UILabel *titleLabel;
 
 @end
 
-@interface GABeautyFilterView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+@interface GABeautyFilterView ()<
+UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
+>
+
+@property(nonatomic,strong)UIView *containerView;
+
 @property(nonatomic,strong)UIButton *beautyBtn; //!<滤镜按钮
 @property(nonatomic,strong)UIButton *filterBtn; //!<美颜按钮
 
 @property(nonatomic,strong)UICollectionView *collectionView; //!<效果预览
+@property(nonatomic,strong)UISlider *slider;                //!<效果大小 0-100;
+
 
 @property(nonatomic,strong)NSArray<NSDictionary*> *beautyArray;    //美颜效果
 @property(nonatomic,strong)NSArray<NSDictionary*> *filterArray;    //滤镜效果
@@ -38,15 +45,13 @@
     if (self = [super initWithFrame:frame]) {
         
         _viewState = BFViewStateBeauty;
-        _beautyArray = @[@{@"氧气":@""},
-                         @{@"水嫩":@""},
-                         @{@"清晰":@""},
-                         @{@"白皙":@""},
-                         @{@"灰调":@""},
-                         @{@"白皙":@""},
-                         @{@"灰调":@""},
-                         @{@"白皙":@""},
-                         @{@"灰调":@""},
+        _beautyArray = @[@{@"磨皮":@""},
+                         @{@"美白":@""},
+                         @{@"红润":@""},
+                         @{@"缩下巴":@""},
+                         @{@"大眼":@""},
+                         @{@"瘦脸":@""},
+                         @{@"腮红":@""},
                          ];
         _filterArray = @[@{@"黑白":@""},
                          @{@"日系":@""},
@@ -61,15 +66,14 @@
         
         [self setupUI];
         
-        [self setBackgroundColor:ColorBlackAlpha40];
-        [self.layer setCornerRadius:6];
-        [self.layer setMasksToBounds:YES];
-        
+        [self setBackgroundColor:UIColor.clearColor];
     }
     return self;
 }
 
 - (void)setupUI{
+    _containerView = UIView.new;
+    
     _beautyBtn = UIButton.new;
     _filterBtn = UIButton.new;
     
@@ -84,9 +88,10 @@
     [_collectionView registerClass:_EffectCell.class forCellWithReuseIdentifier:_EffectCell.identifier];
     [_collectionView setShowsHorizontalScrollIndicator:NO];
     
-    [self addSubview:_beautyBtn];
-    [self addSubview:_filterBtn];
-    [self addSubview:_collectionView];
+    [_containerView addSubview:_beautyBtn];
+    [_containerView addSubview:_filterBtn];
+    [_containerView addSubview:_collectionView];
+    [self addSubview:_containerView];
     
     [_beautyBtn setTitle:@"美颜" forState:UIControlStateNormal];
     [_beautyBtn setTitleColor:UIColor.redColor forState:UIControlStateSelected];
@@ -97,23 +102,33 @@
     
     [_beautyBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_filterBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_containerView setBackgroundColor:ColorBlackAlpha40];
+    [self setBackgroundColor:UIColor.clearColor];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    [self.containerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self).insets(UIEdgeInsetsMake(44, 0, 0, 0));
+    }];
+    
     [self.beautyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(-ScreenWidth/4.0);
-        make.top.mas_equalTo(self).inset(19);
+        make.bottom.mas_equalTo(self.containerView).inset(10);
     }];
     [self.filterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ScreenWidth/4.0);
-        make.top.mas_equalTo(self.beautyBtn);
+        make.bottom.mas_equalTo(self.beautyBtn);
     }];
+    
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 25, 10, 25));
-        make.top.mas_equalTo(self.beautyBtn.mas_bottom).inset(10);
+        make.left.top.right.mas_equalTo(self.containerView).insets(UIEdgeInsetsMake(10, 25, 10, 25));
+        make.bottom.mas_equalTo(self.beautyBtn.mas_top).inset(10);
     }];
+    
+    [self.containerView setupMaskWithCorner:16 rectCorner:UIRectCornerAllCorners] ;
 }
 
 - (void)onButtonAction:(UIButton*)button{
@@ -144,6 +159,8 @@
             break;
     }
 }
+
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     switch (self.viewState) {
@@ -180,7 +197,29 @@
     return CGSizeMake(w, h);
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self addSubview:self.slider];
+    [self.slider setFrame:CGRectMake(0, -30, 414, 44)];
+
+}
+
+- (void)sliderValueChange:(UISlider*)slider{
+    
+}
+
+
+- (UISlider *)slider{
+    if (!_slider) {
+        _slider = [[UISlider alloc] init];
+        [_slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _slider;
+}
 @end
+
+
+
 
 @implementation _EffectCell
 
@@ -213,4 +252,13 @@
         make.top.mas_equalTo(self.imageView.mas_bottom);
     }];
 }
+
+
+- (void)select:(id)sender{
+    [super select:sender];
+    
+    
+}
 @end
+
+

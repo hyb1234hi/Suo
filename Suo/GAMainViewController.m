@@ -8,6 +8,7 @@
 
 #import "GAMainViewController.h"
 #import "GALiveMainViewController.h"
+#import "GALiveTabBarViewController.h"
 
 #import <WebKit/WebKit.h>
 
@@ -70,7 +71,8 @@
 
 
 - (void)pushToLive{
-    UIViewController *vc = GALiveMainViewController.new;
+    GALiveTabBarViewController *vc = GALiveTabBarViewController.new; //GALiveMainViewController.new;
+    [vc setSelectedIndex:1];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

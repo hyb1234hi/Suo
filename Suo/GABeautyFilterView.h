@@ -8,15 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class GABeautyFilterView;
 
 typedef NS_ENUM(NSUInteger, BFViewState) {
     BFViewStateBeauty,
     BFViewStateFilter,
 };
 
-@interface GABeautyFilterView : UIView
+@protocol GABeautyFilterViewDelegate <NSObject>
 
+
+
+@end
+
+
+@interface GABeautyFilterView : UIView
+@property(nonatomic,weak)id<GABeautyFilterViewDelegate> delegate;
 /**
  切换选中状态
 

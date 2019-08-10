@@ -44,7 +44,7 @@ static CGFloat space = 19.0;
                 make.bottom.mas_equalTo(wself).inset(bottomOffset+20);
             }];
             [UIView animateWithDuration:0.35 animations:^{
-                [wself.infoView layoutIfNeeded];
+                [wself layoutIfNeeded];
             }];
         }];
         [nc addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -65,6 +65,7 @@ static CGFloat space = 19.0;
     _infoView           = GALiveInfoView.new;
     _selectedGoodsView  = GASelectedGoodsView.new;
     _beautyFilter       = GABeautyFilterView.new;
+
     
     [self addSubview:_switchCamera];
     [self addSubview:_beautyBtn];
@@ -105,8 +106,6 @@ static CGFloat space = 19.0;
     CGFloat corner = 16;
     [_infoView.layer setCornerRadius:corner];
     [_infoView.layer setMasksToBounds:YES];
-    [_beautyFilter.layer setCornerRadius:corner];
-    [_beautyFilter.layer setMasksToBounds:YES];
     [_selectedGoodsView.layer setCornerRadius:corner];
     [_selectedGoodsView.layer setMasksToBounds:YES];
     
@@ -185,25 +184,25 @@ static CGFloat space = 19.0;
 - (void)beautyFilterViewHinddenLayout{
     [_beautyFilter mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(ScreenWidth-space*2);
-        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy(140/375.0);
+        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy((140/375.0)+(44/375.0));
         make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
         make.left.mas_equalTo(self.mas_right);
     }];
     
     [UIView animateWithDuration:0.35 animations:^{
-        [self->_beautyFilter layoutIfNeeded];
-    }];
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {}];
 }
 - (void)beautyFilterViewShowLayout{
     [_beautyFilter mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(ScreenWidth-space*2);
-        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy(140/375.0);
+        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy((140/375.0)+(44/375.0));
         make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
         make.left.mas_equalTo(self).inset(space);
     }];
     [UIView animateWithDuration:0.35 animations:^{
         [self layoutIfNeeded];
-    }];
+    } completion:^(BOOL finished) {}];
 }
 
 //注销响应者， 恢复布局

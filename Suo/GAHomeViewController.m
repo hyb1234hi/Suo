@@ -19,6 +19,18 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"nav ----- %@",self.navigationController);
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 

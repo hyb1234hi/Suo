@@ -44,6 +44,9 @@
 		027DB69822F183BE001B0593 /* UIColor+GAExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB69722F183BE001B0593 /* UIColor+GAExtension.m */; };
 		027DB6A022F2C891001B0593 /* GAOpenLiveControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB69F22F2C891001B0593 /* GAOpenLiveControlView.m */; };
 		027DB6A322F2EB43001B0593 /* GARecordControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 027DB6A222F2EB43001B0593 /* GARecordControlView.m */; };
+		02E0E47E22FE78CC00E2BEA9 /* GABeautyFilterParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */; };
+		02E0E48122FEAF0600E2BEA9 /* GALiveTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */; };
+		02E0E48422FEB94400E2BEA9 /* GAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */; };
 		02EFD49922F96506008122FA /* GAAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49822F96506008122FA /* GAAPI.m */; };
 		02EFD49F22F96574008122FA /* GABaseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49E22F96574008122FA /* GABaseAPI.m */; };
 		02EFD4A222F96669008122FA /* GALiveVideoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD4A122F96669008122FA /* GALiveVideoAPI.m */; };
@@ -179,6 +182,12 @@
 		027DB69F22F2C891001B0593 /* GAOpenLiveControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAOpenLiveControlView.m; sourceTree = "<group>"; };
 		027DB6A122F2EB43001B0593 /* GARecordControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GARecordControlView.h; sourceTree = "<group>"; };
 		027DB6A222F2EB43001B0593 /* GARecordControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GARecordControlView.m; sourceTree = "<group>"; };
+		02E0E47C22FE78CC00E2BEA9 /* GABeautyFilterParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABeautyFilterParams.h; sourceTree = "<group>"; };
+		02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GABeautyFilterParams.m; sourceTree = "<group>"; };
+		02E0E47F22FEAF0600E2BEA9 /* GALiveTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveTabBarViewController.h; sourceTree = "<group>"; };
+		02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveTabBarViewController.m; sourceTree = "<group>"; };
+		02E0E48222FEB94400E2BEA9 /* GAHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAHomeViewController.h; sourceTree = "<group>"; };
+		02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAHomeViewController.m; sourceTree = "<group>"; };
 		02EFD49722F96506008122FA /* GAAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAPI.h; sourceTree = "<group>"; };
 		02EFD49822F96506008122FA /* GAAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAPI.m; sourceTree = "<group>"; };
 		02EFD49D22F96574008122FA /* GABaseAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseAPI.h; sourceTree = "<group>"; };
@@ -426,6 +435,8 @@
 				027DB69F22F2C891001B0593 /* GAOpenLiveControlView.m */,
 				020883B522FD2BAE00B1E873 /* GABeautyFilterView.h */,
 				020883B622FD2BAE00B1E873 /* GABeautyFilterView.m */,
+				02E0E47C22FE78CC00E2BEA9 /* GABeautyFilterParams.h */,
+				02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */,
 				020883B822FD554300B1E873 /* GASelectedGoodsView.h */,
 				020883B922FD554300B1E873 /* GASelectedGoodsView.m */,
 				020883BB22FD615000B1E873 /* GALiveInfoView.h */,
@@ -501,6 +512,10 @@
 				3B47C01922EA915E000974C7 /* 视频 */,
 				3B47C00622EA90F8000974C7 /* GAMainViewController.h */,
 				3B47C00722EA90F8000974C7 /* GAMainViewController.m */,
+				02E0E47F22FEAF0600E2BEA9 /* GALiveTabBarViewController.h */,
+				02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */,
+				02E0E48222FEB94400E2BEA9 /* GAHomeViewController.h */,
+				02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */,
 			);
 			path = Suo;
 			sourceTree = "<group>";
@@ -794,6 +809,7 @@
 				0208839222FBCDDC00B1E873 /* GATopListData.m in Sources */,
 				3B47C02522EA97BC000974C7 /* GALiveMainViewController.m in Sources */,
 				AE9F037622F519A10073F5C1 /* GACommentDetailTableViewCell.m in Sources */,
+				02E0E47E22FE78CC00E2BEA9 /* GABeautyFilterParams.m in Sources */,
 				0208839A22FBF3DC00B1E873 /* GAFollowLiveListData.m in Sources */,
 				027DB66F22EFEAB3001B0593 /* GAAuthorHeaderView.m in Sources */,
 				3B47C02722EA97BC000974C7 /* GAVideoViewController.m in Sources */,
@@ -801,6 +817,7 @@
 				02FBD63A22F439EE00ED76CC /* GALiveBroadcastControlView.m in Sources */,
 				3B47C03022EA9FE0000974C7 /* GABaseCollectionViewCell.m in Sources */,
 				020883BA22FD554300B1E873 /* GASelectedGoodsView.m in Sources */,
+				02E0E48122FEAF0600E2BEA9 /* GALiveTabBarViewController.m in Sources */,
 				027DB69522F16FCF001B0593 /* GARecordButton.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
 				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
@@ -844,6 +861,7 @@
 				3B99C72D22EC2E6300ED8999 /* GALiveCell.m in Sources */,
 				3B99C73022EC2FD300ED8999 /* GALiveTableCell.m in Sources */,
 				020883B322FD133C00B1E873 /* GAOpenLiveViewController.m in Sources */,
+				02E0E48422FEB94400E2BEA9 /* GAHomeViewController.m in Sources */,
 				AEB853C822F681BF0043A807 /* GAAuthorListCollectionReusableView.m in Sources */,
 				3B99C72422EC098800ED8999 /* GAVideoClassify.m in Sources */,
 				3B47C03322EAA03E000974C7 /* GAVideoCell.m in Sources */,
