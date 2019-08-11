@@ -66,7 +66,6 @@ static CGFloat space = 19.0;
     _selectedGoodsView  = GASelectedGoodsView.new;
     _beautyFilter       = GABeautyFilterView.new;
 
-    
     [self addSubview:_switchCamera];
     [self addSubview:_beautyBtn];
     [self addSubview:_filterBtn];
@@ -130,13 +129,25 @@ static CGFloat space = 19.0;
         make.top.mas_equalTo(self.filterBtn.mas_bottom).inset(16);
     }];
 
-    [self.startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        CGFloat space = 24.0;
-        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
-        make.height.mas_equalTo(70);
-    }];
+//    [self.startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        CGFloat space = 24.0;
+//        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
+//        make.height.mas_equalTo(70);
+//    }];
 }
 
+- (void)setParams:(GABeautyFilterParams *)params{
+    if (_params != params) {
+        _params = params;
+        [self.beautyFilter setParams:params];
+    }
+}
+- (void)setPusher:(AlivcLivePusher *)pusher{
+    if (_pusher != pusher) {
+        _pusher = pusher;
+        [self.beautyFilter setPusher:pusher];
+    }
+}
 
 #pragma mark 视图状态
 //信息视图原始坐标
@@ -147,16 +158,21 @@ static CGFloat space = 19.0;
         make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
         make.height.mas_equalTo(self.infoView.mas_width).multipliedBy(151/375.0);
     }];
+    [self.startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        CGFloat space = 24.0;
+        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
+        make.height.mas_equalTo(70);
+    }];
     
     [UIView animateWithDuration:0.35 animations:^{
         [self layoutIfNeeded];
     }];
 }
 - (void)infoViewHinddenLayout{
-    [_infoView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self).inset(space);
-        make.bottom.mas_equalTo(self).inset(-500);
-        make.height.mas_equalTo(self.infoView.mas_width).multipliedBy(151/375.0);
+    [_startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        CGFloat space = 24.0;
+        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, -(800), space));
+        make.height.mas_equalTo(70);
     }];
 }
 
@@ -165,7 +181,9 @@ static CGFloat space = 19.0;
     [_selectedGoodsView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(ScreenWidth-space*2);
         make.height.mas_equalTo(self.selectedGoodsView.mas_width).multipliedBy(140/375.0);
-        make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+        //make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+        make.bottom.mas_equalTo(self).inset(SafeAreaBottomHeight + 20);
+        
         make.left.mas_equalTo(self.mas_right);
     }];
     [UIView animateWithDuration:0.1 animations:^{
@@ -185,7 +203,8 @@ static CGFloat space = 19.0;
     [_beautyFilter mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(ScreenWidth-space*2);
         make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy((140/375.0)+(44/375.0));
-        make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+        //make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+         make.bottom.mas_equalTo(self).inset(SafeAreaBottomHeight + 20);
         make.left.mas_equalTo(self.mas_right);
     }];
     
@@ -194,10 +213,11 @@ static CGFloat space = 19.0;
     } completion:^(BOOL finished) {}];
 }
 - (void)beautyFilterViewShowLayout{
-    [_beautyFilter mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(ScreenWidth-space*2);
-        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy((140/375.0)+(44/375.0));
-        make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+    [_beautyFilter mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(ScreenWidth-space*2);
+//        make.height.mas_equalTo(self.beautyFilter.mas_width).multipliedBy((140/375.0)+(44/375.0));
+//        make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
+//        make.left.mas_equalTo(self).inset(space);
         make.left.mas_equalTo(self).inset(space);
     }];
     [UIView animateWithDuration:0.35 animations:^{

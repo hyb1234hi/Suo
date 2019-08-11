@@ -8,7 +8,7 @@
 
 #import "GABeautyFilterView.h"
 #import "GABaseCollectionViewCell.h"
-
+#import <AlivcLibBeauty/AlivcLibBeautyManager.h>
 
 @interface _EffectCell : GABaseCollectionViewCell
 @property(nonatomic,strong)UIImageView *imageView;
@@ -28,7 +28,7 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
 
 @property(nonatomic,strong)UICollectionView *collectionView; //!<效果预览
 @property(nonatomic,strong)UISlider *slider;                //!<效果大小 0-100;
-
+@property(nonatomic,copy)NSString *key;                     //!<当前选中的key
 
 @property(nonatomic,strong)NSArray<NSDictionary*> *beautyArray;    //美颜效果
 @property(nonatomic,strong)NSArray<NSDictionary*> *filterArray;    //滤镜效果
@@ -37,9 +37,7 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
 
 @implementation GABeautyFilterView
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -53,6 +51,7 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
                          @{@"瘦脸":@""},
                          @{@"腮红":@""},
                          ];
+        
         _filterArray = @[@{@"黑白":@""},
                          @{@"日系":@""},
                          @{@"薄荷":@""},
@@ -161,7 +160,6 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
 }
 
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     switch (self.viewState) {
         case BFViewStateBeauty:{
@@ -197,27 +195,123 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
     return CGSizeMake(w, h);
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self addSubview:self.slider];
-    [self.slider setFrame:CGRectMake(0, -30, 414, 44)];
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    _EffectCell *cell = (_EffectCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    self.key = cell.titleLabel.text;
+    CGFloat value = [self valueForString:self.key] / 100.0;
+    [self.slider setValue:value animated:NO];
+    
+    if (!self.slider.superview) {
+        [self addSubview:self.slider];
+        [self showSlider];
+        
+    }else{
+        [UIView animateWithDuration:0.35 animations:^{
+            [self.slider setAlpha:0];
+        } completion:^(BOOL finished) {
+            [self showSlider];
+        }];
+    }
+    
+
+}
+
+
+- (void)showSlider{
+    
+    [self.slider mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self);
+        make.bottom.mas_equalTo(self.containerView.mas_top).inset(10);
+        make.height.mas_equalTo(34);
+    }];
+    [UIView animateWithDuration:0.35 animations:^{
+         [self.slider setAlpha:1];
+        [self layoutIfNeeded];
+    }];
+}
+
+- (CGFloat)valueForString:(NSString*)key{
+    CGFloat value = 0;
+    if ([key isEqualToString:@"磨皮"]) {
+        value = self.params.beautyBuffing;
+    }
+    if ([key isEqualToString:@"美白"]) {
+        value = self.params.beautyWhite;
+    }
+    if ([key isEqualToString:@"红润"]) {
+        value = self.params.beautyRuddy;
+    }
+    if ([key isEqualToString:@"缩下巴"]) {
+        value = self.params.beautyShortenFace;
+    }
+    if ([key isEqualToString:@"大眼"]) {
+        value = self.params.beautyBigEye;
+    }
+    if ([key isEqualToString:@"瘦脸"]) {
+        value = self.params.beautySlimFace;
+    }
+    if ([key isEqualToString:@"腮红"]) {
+        value = self.params.beautyCheekPink;
+    }
+    
+    return value;
+}
+- (void)setvalueForString:(NSString*)key value:(CGFloat)value{
+    if ([key isEqualToString:@"磨皮"]) {
+        self.params.beautyBuffing = value;
+        [self.pusher setBeautyBuffing:value];
+    }
+    if ([key isEqualToString:@"美白"]) {
+        self.params.beautyWhite = value;
+        [self.pusher setBeautyWhite:value];
+    }
+    if ([key isEqualToString:@"红润"]) {
+        self.params.beautyRuddy = value;
+        [self.pusher setBeautyRuddy:value];
+    }
+    if ([key isEqualToString:@"缩下巴"]) {
+        self.params.beautyShortenFace = value;
+        [self.pusher setBeautyShortenFace:value];
+    }
+    if ([key isEqualToString:@"大眼"]) {
+        self.params.beautyBigEye = value;
+        [self.pusher setBeautyBigEye:value];
+    }
+    if ([key isEqualToString:@"瘦脸"]) {
+        self.params.beautySlimFace = value;
+        [self.pusher setBeautyThinFace:value];
+    }
+    if ([key isEqualToString:@"腮红"]) {
+        self.params.beautyCheekPink = value;
+        [self.pusher setBeautyCheekPink:value];
+    }
 }
 
 - (void)sliderValueChange:(UISlider*)slider{
     
+    //改值 再传回代理
+    [self setvalueForString:self.key value:(slider.value*100.0)];
+    
+    
+    if ([self.delegate respondsToSelector:@selector(beautyFilterParamsValueChange:)]) {
+        [self.delegate beautyFilterParamsValueChange:self.params];
+    }
 }
-
 
 - (UISlider *)slider{
     if (!_slider) {
         _slider = [[UISlider alloc] init];
         [_slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
+        [self.slider setFrame:CGRectMake(ScreenWidth, 0, CGRectGetWidth(self.bounds), 34)];
+        [self.slider setBackgroundColor:self.containerView.backgroundColor];
+        [self.slider.layer setCornerRadius:8];
+        [self.slider.layer setMasksToBounds:YES];
     }
     return _slider;
 }
 @end
-
 
 
 
@@ -253,12 +347,14 @@ UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlow
     }];
 }
 
-
-- (void)select:(id)sender{
-    [super select:sender];
+- (void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
     
-    
+    UIColor *color = selected ? UIColor.redColor : UIColor.whiteColor;
+    [self.titleLabel setTextColor:color];
 }
+
+
 @end
 
 

@@ -10,6 +10,9 @@
 #import "GAOpenLiveControlView.h"
 #import "GALiveBroadcastControlView.h"
 
+#import "GABeautyFilterParams.h"
+#import "GALivePushConfig.h"
+
 #import <AlivcLivePusher/AlivcLivePusher.h>
 #import <AlivcLibFace/AlivcLibFaceManager.h>
 #import <AlivcLibBeauty/AlivcLibBeautyManager.h>
@@ -28,6 +31,9 @@ AlivcLivePusherCustomDetectorDelegate
 @property(nonatomic,strong)GAOpenLiveControlView *controlView;  //!<UI
 @property(nonatomic,strong)AlivcLivePusher *pusher;             //!<相机与推流
 @property(nonatomic,strong)GALiveBroadcastControlView *liveBroadcast;
+
+@property(nonatomic,strong)GABeautyFilterParams *params;
+
 
 @end
 
@@ -48,14 +54,17 @@ AlivcLivePusherCustomDetectorDelegate
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:RGBA(80, 185, 249, 1)];
 
+    _params = [GABeautyFilterParams defaultBeautyParamsWithLevel:GABeautyParamsLevel4];
+    
     //初始化推流、相机
     ({
-        AlivcLivePushConfig *cfg = [[AlivcLivePushConfig alloc] init];
-        [cfg setBeautyMode:AlivcLivePushBeautyModeProfessional];
-        [cfg setBeautyBuffing:100];
-        [cfg setBeautyWhite:100];
+        GALivePushConfig *cfg = [[GALivePushConfig alloc] init];
+        [cfg setParams:_params];
+//        [cfg setBeautyMode:AlivcLivePushBeautyModeProfessional];
+//        [cfg setBeautyBuffing:_params.beautyBuffing];
+//        [cfg setBeautyWhite:_params.beautyWhite];
         
-        [AlivcLivePusher showDebugView];
+       // [AlivcLivePusher showDebugView];
         self.pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
         
         [self.pusher setCustomFilterDelegate:self];
@@ -64,6 +73,8 @@ AlivcLivePusherCustomDetectorDelegate
     });
     
     [self setupUI];
+    [self.controlView setParams:self.params];
+    [self.controlView setPusher:self.pusher];
     
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [swipe setDirection:UISwipeGestureRecognizerDirectionDown];
@@ -134,6 +145,8 @@ AlivcLivePusherCustomDetectorDelegate
 - (void)updateParam:(AlivcLivePusher *)pusher buffing:(float)buffing whiten:(float)whiten pink:(float)pink cheekpink:(float)cheekpink thinface:(float)thinface shortenface:(float)shortenface bigeye:(float)bigeye
 {
     [[AlivcLibBeautyManager shareManager] setParam:buffing whiten:whiten pink:pink cheekpink:cheekpink thinface:thinface shortenface:shortenface bigeye:bigeye];
+    
+    NSLog(@" huidia ---------------- ");
 }
 
 - (void)switchOn:(AlivcLivePusher *)pusher on:(bool)on

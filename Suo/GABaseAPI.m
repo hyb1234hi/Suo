@@ -139,5 +139,13 @@ static NSString *const rootPath = @"http://www.suo.com";
     return nil;
 }
 
-
+- (void)fetchUserInfoWithKey:(NSString *)key completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=member_account&t=get_base_myself_info";
+    
+    NSMutableDictionary *payload = @[].mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
 @end

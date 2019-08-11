@@ -50,7 +50,7 @@ PODS:
   - MMLayout (0.2.0)
   - OCBarrage (1.0.5)
   - PRTween (0.1.0)
-  - Reveal-iOS-SDK (1.6.2)
+  - Reveal-SDK (24)
   - SDCycleScrollView (1.75):
     - SDWebImage (>= 4.0.0)
   - SDWebImage (4.4.7):
@@ -97,7 +97,7 @@ DEPENDENCIES:
   - MLEmojiLabel
   - OCBarrage
   - PRTween
-  - Reveal-iOS-SDK
+  - Reveal-SDK
   - SDCycleScrollView
   - SDWebImage
   - SocketRocket
@@ -129,7 +129,7 @@ SPEC REPOS:
     - MMLayout
     - OCBarrage
     - PRTween
-    - Reveal-iOS-SDK
+    - Reveal-SDK
     - SDCycleScrollView
     - SDWebImage
     - SocketRocket
@@ -161,7 +161,7 @@ SPEC CHECKSUMS:
   MMLayout: 3fb59d58eeb8656c64e61d550fb0088e10666c11
   OCBarrage: 5ee1a922afacb2c04739621ccda71872185e2e59
   PRTween: 6c58c7e32ebcf31e33e6a6e6bc727ebef3b668ef
-  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
+  Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
@@ -173,6 +173,6 @@ SPEC CHECKSUMS:
   XRWaterfallLayout: 8d615c21e7be46dc220e0ece45697fdd4bfa0f3b
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 22082f7f2e7ba05f6d63fe9d0c8456478c333d73
+PODFILE CHECKSUM: 73e41e91cc796675135cab470fbf538b936fc8c0
 
 COCOAPODS: 1.7.5

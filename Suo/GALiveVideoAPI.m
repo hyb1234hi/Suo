@@ -97,5 +97,18 @@
     NSURLRequest *request = [self createRequestWithPath:api parameter:nil method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];
 }
+
+- (void)fetchLiveGoodsForKey:(NSString *)key withGoodsKey:(NSString *)goodsKey page:(int)page size:(int)pageSize completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live_center&t=get_can_push_goods_list";
+    
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:@(page) forKey:@"page_num"];
+    [payload setValue:@(pageSize) forKey:@"page_limits"];
+    [payload setValue:goodsKey forKey:@"search"];
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
 @end
 

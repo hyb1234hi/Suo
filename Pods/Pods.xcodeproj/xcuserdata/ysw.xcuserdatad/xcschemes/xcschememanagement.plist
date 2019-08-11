@@ -137,7 +137,7 @@
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
-		<key>Reveal-iOS-SDK.xcscheme</key>
+		<key>Reveal-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

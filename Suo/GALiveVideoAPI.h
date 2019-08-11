@@ -85,6 +85,19 @@
  @param completion 数据返回
  */
 - (void)fetchLiveBannerCompletion:(CallBack)completion;
+
+
+
+/**
+ 获取用户可以推送的商品
+
+ @param key         用户key
+ @param goodsKey    商品搜索关键字
+ @param page        当前分页
+ @param pageSize    分页大小
+ @param completion  数据返回
+ */
+- (void)fetchLiveGoodsForKey:(NSString*)key withGoodsKey:(NSString*)goodsKey page:(int)page size:(int)pageSize completion:(CallBack)completion;
 @end
 
 

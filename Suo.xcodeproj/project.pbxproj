@@ -47,6 +47,10 @@
 		02E0E47E22FE78CC00E2BEA9 /* GABeautyFilterParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */; };
 		02E0E48122FEAF0600E2BEA9 /* GALiveTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */; };
 		02E0E48422FEB94400E2BEA9 /* GAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */; };
+		02E0E48F22FFAC5800E2BEA9 /* GALiveCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */; };
+		02E0E49322FFAD5C00E2BEA9 /* GALiveCenterProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49222FFAD5C00E2BEA9 /* GALiveCenterProfileView.m */; };
+		02E0E49622FFC9F800E2BEA9 /* GALiveCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */; };
+		02E0E49922FFFA2A00E2BEA9 /* GALivePushConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */; };
 		02EFD49922F96506008122FA /* GAAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49822F96506008122FA /* GAAPI.m */; };
 		02EFD49F22F96574008122FA /* GABaseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49E22F96574008122FA /* GABaseAPI.m */; };
 		02EFD4A222F96669008122FA /* GALiveVideoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD4A122F96669008122FA /* GALiveVideoAPI.m */; };
@@ -188,6 +192,14 @@
 		02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveTabBarViewController.m; sourceTree = "<group>"; };
 		02E0E48222FEB94400E2BEA9 /* GAHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAHomeViewController.h; sourceTree = "<group>"; };
 		02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAHomeViewController.m; sourceTree = "<group>"; };
+		02E0E48D22FFAC5800E2BEA9 /* GALiveCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveCenterViewController.h; sourceTree = "<group>"; };
+		02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCenterViewController.m; sourceTree = "<group>"; };
+		02E0E49122FFAD5C00E2BEA9 /* GALiveCenterProfileView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveCenterProfileView.h; sourceTree = "<group>"; };
+		02E0E49222FFAD5C00E2BEA9 /* GALiveCenterProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCenterProfileView.m; sourceTree = "<group>"; };
+		02E0E49422FFC9F800E2BEA9 /* GALiveCenterHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveCenterHeaderView.h; sourceTree = "<group>"; };
+		02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCenterHeaderView.m; sourceTree = "<group>"; };
+		02E0E49722FFFA2A00E2BEA9 /* GALivePushConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALivePushConfig.h; sourceTree = "<group>"; };
+		02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALivePushConfig.m; sourceTree = "<group>"; };
 		02EFD49722F96506008122FA /* GAAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAPI.h; sourceTree = "<group>"; };
 		02EFD49822F96506008122FA /* GAAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAPI.m; sourceTree = "<group>"; };
 		02EFD49D22F96574008122FA /* GABaseAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseAPI.h; sourceTree = "<group>"; };
@@ -419,38 +431,121 @@
 			isa = PBXGroup;
 			children = (
 				020883B422FD14A600B1E873 /* 拍视频 */,
-				027DB69922F2C04A001B0593 /* 开播 */,
 				027DB68222F044E2001B0593 /* GAShootingViewController.h */,
 				027DB68322F044E2001B0593 /* GAShootingViewController.m */,
 			);
 			name = "拍摄&开播";
 			sourceTree = "<group>";
 		};
-		027DB69922F2C04A001B0593 /* 开播 */ = {
+		02E0E48522FFA64900E2BEA9 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				3B47C02D22EA9FB7000974C7 /* Basic */,
+				02EFD49622F964E3008122FA /* Net */,
+				3B47C03622EAA64F000974C7 /* EX */,
+				3B47C01B22EA917D000974C7 /* Support */,
+				02E0E48C22FFA74600E2BEA9 /* Personal Center */,
+				02E0E48B22FFA6BF00E2BEA9 /* LiveClassify */,
+				02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast */,
+				02E0E48922FFA69000E2BEA9 /* LiveRecom */,
+				02E0E48822FFA68600E2BEA9 /* Home */,
+				02E0E48622FFA66800E2BEA9 /* MainVC */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
+		02E0E48622FFA66800E2BEA9 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C00622EA90F8000974C7 /* GAMainViewController.h */,
+				3B47C00722EA90F8000974C7 /* GAMainViewController.m */,
+				02E0E47F22FEAF0600E2BEA9 /* GALiveTabBarViewController.h */,
+				02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */,
+			);
+			name = MainVC;
+			sourceTree = "<group>";
+		};
+		02E0E48822FFA68600E2BEA9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				02E0E48222FEB94400E2BEA9 /* GAHomeViewController.h */,
+				02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		02E0E48922FFA69000E2BEA9 /* LiveRecom */ = {
+			isa = PBXGroup;
+			children = (
+				3B47C02322EA97BC000974C7 /* GACityWideViewController.h */,
+				3B47C02122EA97BC000974C7 /* GACityWideViewController.m */,
+				3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */,
+				3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */,
+				3B47C01F22EA97BC000974C7 /* GAVideoPlayViewController.h */,
+				3B47C01C22EA97BC000974C7 /* GAVideoPlayViewController.m */,
+				3B47C01D22EA97BC000974C7 /* GAVideoViewController.h */,
+				3B47C02222EA97BC000974C7 /* GAVideoViewController.m */,
+				3B47C02022EA97BC000974C7 /* GALiveMainViewController.h */,
+				3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */,
+			);
+			name = LiveRecom;
+			sourceTree = "<group>";
+		};
+		02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast */ = {
+			isa = PBXGroup;
+			children = (
+				02E0E47C22FE78CC00E2BEA9 /* GABeautyFilterParams.h */,
+				02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */,
+				02E0E49022FFAD2A00E2BEA9 /* View */,
+				02E0E48D22FFAC5800E2BEA9 /* GALiveCenterViewController.h */,
+				02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */,
 				020883B122FD133C00B1E873 /* GAOpenLiveViewController.h */,
 				020883B222FD133C00B1E873 /* GAOpenLiveViewController.m */,
+				02E0E49722FFFA2A00E2BEA9 /* GALivePushConfig.h */,
+				02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */,
+				022FF22D22F8327C00C80375 /* GACandidateGoodsViewController.h */,
+				022FF22E22F8327C00C80375 /* GACandidateGoodsViewController.m */,
+			);
+			name = LiveBroadcast;
+			sourceTree = "<group>";
+		};
+		02E0E48B22FFA6BF00E2BEA9 /* LiveClassify */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LiveClassify;
+			sourceTree = "<group>";
+		};
+		02E0E48C22FFA74600E2BEA9 /* Personal Center */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Personal Center";
+			sourceTree = "<group>";
+		};
+		02E0E49022FFAD2A00E2BEA9 /* View */ = {
+			isa = PBXGroup;
+			children = (
 				027DB69E22F2C891001B0593 /* GAOpenLiveControlView.h */,
 				027DB69F22F2C891001B0593 /* GAOpenLiveControlView.m */,
 				020883B522FD2BAE00B1E873 /* GABeautyFilterView.h */,
 				020883B622FD2BAE00B1E873 /* GABeautyFilterView.m */,
-				02E0E47C22FE78CC00E2BEA9 /* GABeautyFilterParams.h */,
-				02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */,
 				020883B822FD554300B1E873 /* GASelectedGoodsView.h */,
 				020883B922FD554300B1E873 /* GASelectedGoodsView.m */,
 				020883BB22FD615000B1E873 /* GALiveInfoView.h */,
 				020883BC22FD615000B1E873 /* GALiveInfoView.m */,
-				022FF22D22F8327C00C80375 /* GACandidateGoodsViewController.h */,
-				022FF22E22F8327C00C80375 /* GACandidateGoodsViewController.m */,
 				02FBD63822F439EE00ED76CC /* GALiveBroadcastControlView.h */,
 				02FBD63922F439EE00ED76CC /* GALiveBroadcastControlView.m */,
 				022FF22722F7C2EA00C80375 /* GAGoodsPushSelectView.h */,
 				022FF22822F7C2EA00C80375 /* GAGoodsPushSelectView.m */,
 				022FF22A22F7C9A100C80375 /* GAGoodsPushCell.h */,
 				022FF22B22F7C9A100C80375 /* GAGoodsPushCell.m */,
+				02E0E49122FFAD5C00E2BEA9 /* GALiveCenterProfileView.h */,
+				02E0E49222FFAD5C00E2BEA9 /* GALiveCenterProfileView.m */,
+				02E0E49422FFC9F800E2BEA9 /* GALiveCenterHeaderView.h */,
+				02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */,
 			);
-			name = "开播";
+			name = View;
 			sourceTree = "<group>";
 		};
 		02EFD49622F964E3008122FA /* Net */ = {
@@ -504,18 +599,9 @@
 		3B47C00222EA90F8000974C7 /* Suo */ = {
 			isa = PBXGroup;
 			children = (
-				02EFD49622F964E3008122FA /* Net */,
+				02E0E48522FFA64900E2BEA9 /* Class */,
 				027DB68122F04499001B0593 /* 拍摄&开播 */,
-				3B47C03622EAA64F000974C7 /* EX */,
-				3B47C02D22EA9FB7000974C7 /* Basic */,
-				3B47C01B22EA917D000974C7 /* Support */,
 				3B47C01922EA915E000974C7 /* 视频 */,
-				3B47C00622EA90F8000974C7 /* GAMainViewController.h */,
-				3B47C00722EA90F8000974C7 /* GAMainViewController.m */,
-				02E0E47F22FEAF0600E2BEA9 /* GALiveTabBarViewController.h */,
-				02E0E48022FEAF0600E2BEA9 /* GALiveTabBarViewController.m */,
-				02E0E48222FEB94400E2BEA9 /* GAHomeViewController.h */,
-				02E0E48322FEB94400E2BEA9 /* GAHomeViewController.m */,
 			);
 			path = Suo;
 			sourceTree = "<group>";
@@ -527,18 +613,7 @@
 				027DB67A22F02F58001B0593 /* DataSource */,
 				027DB67922F02EBC001B0593 /* Network */,
 				3B99C71B22EC064700ED8999 /* Model */,
-				3B47C05A22EAF9BA000974C7 /* Player */,
 				3B47C02C22EA9F99000974C7 /* View */,
-				3B47C02322EA97BC000974C7 /* GACityWideViewController.h */,
-				3B47C02122EA97BC000974C7 /* GACityWideViewController.m */,
-				3B47C05422EAF1E8000974C7 /* GACityWideSubViewController.h */,
-				3B47C05522EAF1E8000974C7 /* GACityWideSubViewController.m */,
-				3B47C02022EA97BC000974C7 /* GALiveMainViewController.h */,
-				3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */,
-				3B47C01F22EA97BC000974C7 /* GAVideoPlayViewController.h */,
-				3B47C01C22EA97BC000974C7 /* GAVideoPlayViewController.m */,
-				3B47C01D22EA97BC000974C7 /* GAVideoViewController.h */,
-				3B47C02222EA97BC000974C7 /* GAVideoViewController.m */,
 				027DB66A22EFDFEE001B0593 /* GAAuthorViewController.h */,
 				027DB66B22EFDFEE001B0593 /* GAAuthorViewController.m */,
 				027DB67322F01D70001B0593 /* GAFansAndFollowViewController.h */,
@@ -632,13 +707,6 @@
 				022FF22522F5698200C80375 /* NSObject+GAExtension.m */,
 			);
 			name = EX;
-			sourceTree = "<group>";
-		};
-		3B47C05A22EAF9BA000974C7 /* Player */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Player;
 			sourceTree = "<group>";
 		};
 		3B99C71B22EC064700ED8999 /* Model */ = {
@@ -799,6 +867,7 @@
 				3B47C02422EA97BC000974C7 /* GAVideoPlayViewController.m in Sources */,
 				3B47C04122EAACD4000974C7 /* GAVideoPlayCell.m in Sources */,
 				AE9F037322F514A90073F5C1 /* GACommentFooterView.m in Sources */,
+				02E0E49622FFC9F800E2BEA9 /* GALiveCenterHeaderView.m in Sources */,
 				3B99C72122EC071000ED8999 /* GAVideo.m in Sources */,
 				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
 				022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */,
@@ -820,12 +889,14 @@
 				02E0E48122FEAF0600E2BEA9 /* GALiveTabBarViewController.m in Sources */,
 				027DB69522F16FCF001B0593 /* GARecordButton.m in Sources */,
 				3B99C72A22EC2A7400ED8999 /* GALiveViewController.m in Sources */,
+				02E0E49922FFFA2A00E2BEA9 /* GALivePushConfig.m in Sources */,
 				3B47C05322EADE4C000974C7 /* GACommentCell.m in Sources */,
 				027DB66C22EFDFEE001B0593 /* GAAuthorViewController.m in Sources */,
 				027DB69822F183BE001B0593 /* UIColor+GAExtension.m in Sources */,
 				020883BD22FD615000B1E873 /* GALiveInfoView.m in Sources */,
 				02FBD63D22F5160600ED76CC /* GABaseViewController.m in Sources */,
 				3B99C73C22ED6CCC00ED8999 /* GALiveHeaderView.m in Sources */,
+				02E0E49322FFAD5C00E2BEA9 /* GALiveCenterProfileView.m in Sources */,
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
 				027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */,
 				020883AD22FD021500B1E873 /* GABannerTargetViewController.m in Sources */,
@@ -842,6 +913,7 @@
 				02EFD49922F96506008122FA /* GAAPI.m in Sources */,
 				027DB68722F049BD001B0593 /* GAShootControllerView.m in Sources */,
 				022FF22C22F7C9A100C80375 /* GAGoodsPushCell.m in Sources */,
+				02E0E48F22FFAC5800E2BEA9 /* GALiveCenterViewController.m in Sources */,
 				027DB66622EEED36001B0593 /* GALiveWatchControllerView.m in Sources */,
 				0208838622FA732100B1E873 /* GALiveItem.m in Sources */,
 				027DB6A322F2EB43001B0593 /* GARecordControlView.m in Sources */,
@@ -1029,12 +1101,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Suo/Suo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s arm64e arm64";
 			};
 			name = Debug;
 		};
@@ -1056,11 +1130,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suo.Suo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Suo/Suo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s arm64e arm64";
 			};
 			name = Release;
 		};

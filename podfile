@@ -38,8 +38,8 @@ pod 'Bugly'
 
 #debug
 pod 'LookinServer', :configurations => ['Debug']
-pod 'Reveal-iOS-SDK', :configurations => ['Debug']
-
+#pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+pod 'Reveal-SDK', :configurations => ['Debug']
 
 end
 

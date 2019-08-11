@@ -7,8 +7,13 @@
 //
 
 #import "GALiveTabBarViewController.h"
-#import "GALiveMainViewController.h"
+
 #import "GAHomeViewController.h"
+#import "GALiveMainViewController.h"
+#import "GALiveCenterViewController.h"
+#import "GAAuthorViewController.h"
+
+
 @interface GALiveTabBarViewController ()<UITabBarControllerDelegate>
 @property(nonatomic,strong)GAHomeViewController *homeVC;
 
@@ -27,8 +32,8 @@
     UIViewController *liveMain = GALiveMainViewController.new;
     [liveMain setTitle:@"直播推荐"];
     
-    UIViewController *openVC = UIViewController.new;
-    [openVC setTitle:@"开播"];
+    UIViewController *openVC = GALiveCenterViewController.new;
+    [openVC setTitle:@"直播中心"];
     
     UIViewController *classVC = UIViewController.new;
     [classVC setTitle:@"直播分类"];
@@ -42,8 +47,10 @@
     [self addChildViewController:classVC];
     [self addChildViewController:centre];
     
-    
+    [self.view setBackgroundColor:UIColor.whiteColor];
     [self setDelegate:self];
+    
+    [self setSelectedIndex:2];
 }
 
 

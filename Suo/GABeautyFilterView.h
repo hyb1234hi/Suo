@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GABeautyFilterParams.h"
+#import <AlivcLivePusher/AlivcLivePusher.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,13 +21,19 @@ typedef NS_ENUM(NSUInteger, BFViewState) {
 
 @protocol GABeautyFilterViewDelegate <NSObject>
 
-
+- (void)beautyFilterParamsValueChange:(GABeautyFilterParams*)params;
 
 @end
 
 
 @interface GABeautyFilterView : UIView
+
 @property(nonatomic,weak)id<GABeautyFilterViewDelegate> delegate;
+
+@property(nonatomic,strong)GABeautyFilterParams *params;    //!<默认参数,修改后 内部持久化数据
+@property(nonatomic,strong)AlivcLivePusher *pusher;         //!<修改画质
+
+
 /**
  切换选中状态
 

@@ -37,6 +37,9 @@
     [_webView setUIDelegate:self];
 
     
+    NSLog(@"cookie -------- %@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+    
+    
     NSURL *url = [NSURL URLWithString:@"http://www.suo.com/mobile/index0.html"];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
@@ -45,6 +48,7 @@
     [_webView evaluateJavaScript:@"" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
         
     }];
+    
     
     
 //        //缓存
@@ -72,7 +76,6 @@
 
 - (void)pushToLive{
     GALiveTabBarViewController *vc = GALiveTabBarViewController.new; //GALiveMainViewController.new;
-    [vc setSelectedIndex:1];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
