@@ -140,8 +140,11 @@ static NSString *const sectionFooter        = @"sectionFooter";
 
 #pragma mark -  GALiveCenterProfileViewDelegate  (头部按钮 点击事件 代理)
 - (void)profileViewDidClickOpenLiveButton{
-    GAOpenLiveViewController *open = GAOpenLiveViewController.new;
-    [self presentViewController:open animated:YES completion:nil];
+//    GAOpenLiveViewController *open = GAOpenLiveViewController.new;
+//
+//    [self setDefinesPresentationContext:YES];
+//    [self presentViewController:open animated:YES completion:nil];
+    [self.tabBarController setSelectedIndex:2];
 }
 - (void)profileViewDidClickPublishButton{
     

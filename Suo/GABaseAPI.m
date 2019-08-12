@@ -148,4 +148,5 @@ static NSString *const rootPath = @"http://www.suo.com";
     NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];
 }
+
 @end

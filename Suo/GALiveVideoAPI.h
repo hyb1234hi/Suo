@@ -98,6 +98,9 @@
  @param completion  数据返回
  */
 - (void)fetchLiveGoodsForKey:(NSString*)key withGoodsKey:(NSString*)goodsKey page:(int)page size:(int)pageSize completion:(CallBack)completion;
+
+
+- (void)openLiveWithKey:(NSString*)key title:(NSString*)title type:(int)type;
 @end
 
 

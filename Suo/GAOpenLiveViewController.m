@@ -40,11 +40,16 @@ AlivcLivePusherCustomDetectorDelegate
 @implementation GAOpenLiveViewController
 
 - (void)dealloc{
+
+    [self disPusher];
+}
+- (void)disPusher{
     [_pusher stopPush];
+    [_pusher stopPreview];
     [_pusher destory];
     _pusher = nil;
-    
 }
+
 - (void)dismiss{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -89,8 +94,17 @@ AlivcLivePusherCustomDetectorDelegate
     [self.view addSubview:self.controlView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+}
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
+    
+    [self.controlView  mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
+    }];
 }
 
 #pragma mari - getter
@@ -115,6 +129,7 @@ AlivcLivePusherCustomDetectorDelegate
         [self.view layoutIfNeeded];
     }];
     [self.pusher startPushWithURL:RTMPURL_UP];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 - (void)switchCamera{
     [self.pusher switchCamera];
@@ -126,6 +141,8 @@ AlivcLivePusherCustomDetectorDelegate
     [UIView animateWithDuration:0.35 animations:^{
         [self.controlView setAlpha:1];
     }];
+    
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 @end
@@ -146,7 +163,6 @@ AlivcLivePusherCustomDetectorDelegate
 {
     [[AlivcLibBeautyManager shareManager] setParam:buffing whiten:whiten pink:pink cheekpink:cheekpink thinface:thinface shortenface:shortenface bigeye:bigeye];
     
-    NSLog(@" huidia ---------------- ");
 }
 
 - (void)switchOn:(AlivcLivePusher *)pusher on:(bool)on

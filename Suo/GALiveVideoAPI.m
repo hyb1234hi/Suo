@@ -101,6 +101,10 @@
 - (void)fetchLiveGoodsForKey:(NSString *)key withGoodsKey:(NSString *)goodsKey page:(int)page size:(int)pageSize completion:(CallBack)completion{
     NSString *api = @"api/mobile/index.php?w=live_center&t=get_can_push_goods_list";
     
+    if (pageSize == 0) {
+        pageSize = 10;
+    }
+    
     NSMutableDictionary *payload = @{}.mutableCopy;
     [payload setValue:key forKey:@"key"];
     [payload setValue:@(page) forKey:@"page_num"];

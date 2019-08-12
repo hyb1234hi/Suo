@@ -9,6 +9,9 @@
 #import "GASelectedGoodsView.h"
 #import "GABaseCollectionViewCell.h"
 
+#import "GASelectedGoodsViewController.h"
+//#import "GACandidateGoodsViewController.h"
+
 @interface _SelectedGoodsCell : GABaseCollectionViewCell
 @property(nonatomic,strong)UIImageView *imageView;  //!<商品图片
 @property(nonatomic,strong)UIButton *deleteBtn;     //!<删除按钮
@@ -25,9 +28,7 @@
 
 @implementation GASelectedGoodsView
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -115,7 +116,17 @@
     }
     return nil;
 }
-
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        //GACandidateGoodsViewController *vc = GACandidateGoodsViewController.new;
+        
+        GASelectedGoodsViewController * vc = GASelectedGoodsViewController.new;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        
+        nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self rootVCPresentViewController:nav animated:YES completion:nil];
+    }
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat h = CGRectGetHeight(collectionView.bounds);

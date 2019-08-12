@@ -11,7 +11,8 @@
 #import "GAHomeViewController.h"
 #import "GALiveMainViewController.h"
 #import "GALiveCenterViewController.h"
-#import "GAAuthorViewController.h"
+#import "GAOpenLiveViewController.h"
+
 
 
 @interface GALiveTabBarViewController ()<UITabBarControllerDelegate>
@@ -32,13 +33,13 @@
     UIViewController *liveMain = GALiveMainViewController.new;
     [liveMain setTitle:@"直播推荐"];
     
-    UIViewController *openVC = GALiveCenterViewController.new;
+    UIViewController *openVC = GAOpenLiveViewController.new;
     [openVC setTitle:@"直播中心"];
     
     UIViewController *classVC = UIViewController.new;
     [classVC setTitle:@"直播分类"];
     
-    UIViewController *centre = UIViewController.new;
+    UIViewController *centre = GALiveCenterViewController.new;
     [centre setTitle:@"个人中心"];
     
     [self addChildViewController:home];

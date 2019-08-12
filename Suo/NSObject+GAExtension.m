@@ -22,14 +22,36 @@
 }
 
 - (void)rootVCPresentViewController:(UIViewController *)vc animated:(BOOL)animate completion:(void (^)(void))completion{
-    UIViewController *root = [[UIApplication sharedApplication].delegate.window rootViewController];
     
+    UIViewController *root = [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    
+    
+    NSLog(@" root ---- %@",root);
+    /*
+    [[UIApplication sharedApplication].keyWindow rootViewController];
     while (root.parentViewController) {
         root = root.parentViewController;
     }
+    */
     
     [root setDefinesPresentationContext:YES];
     [root presentViewController:vc animated:animate completion:completion];
+}
+
+- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController
+{
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
 }
 
 

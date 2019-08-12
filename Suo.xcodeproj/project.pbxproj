@@ -51,6 +51,10 @@
 		02E0E49322FFAD5C00E2BEA9 /* GALiveCenterProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49222FFAD5C00E2BEA9 /* GALiveCenterProfileView.m */; };
 		02E0E49622FFC9F800E2BEA9 /* GALiveCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */; };
 		02E0E49922FFFA2A00E2BEA9 /* GALivePushConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */; };
+		02E0E49F230104DB00E2BEA9 /* GASelectedGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E49E230104DB00E2BEA9 /* GASelectedGoodsViewController.m */; };
+		02E0E4A923011A3000E2BEA9 /* GASelectedGoodsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E4A823011A3000E2BEA9 /* GASelectedGoodsDataSource.m */; };
+		02E0E4AC23011DF400E2BEA9 /* GALiveGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E4AB23011DF400E2BEA9 /* GALiveGoodsModel.m */; };
+		02E0E4AF2301234900E2BEA9 /* GALiveGoodsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02E0E4AE2301234900E2BEA9 /* GALiveGoodsTableCell.m */; };
 		02EFD49922F96506008122FA /* GAAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49822F96506008122FA /* GAAPI.m */; };
 		02EFD49F22F96574008122FA /* GABaseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD49E22F96574008122FA /* GABaseAPI.m */; };
 		02EFD4A222F96669008122FA /* GALiveVideoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EFD4A122F96669008122FA /* GALiveVideoAPI.m */; };
@@ -200,6 +204,14 @@
 		02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveCenterHeaderView.m; sourceTree = "<group>"; };
 		02E0E49722FFFA2A00E2BEA9 /* GALivePushConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALivePushConfig.h; sourceTree = "<group>"; };
 		02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALivePushConfig.m; sourceTree = "<group>"; };
+		02E0E49D230104DB00E2BEA9 /* GASelectedGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GASelectedGoodsViewController.h; sourceTree = "<group>"; };
+		02E0E49E230104DB00E2BEA9 /* GASelectedGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GASelectedGoodsViewController.m; sourceTree = "<group>"; };
+		02E0E4A723011A3000E2BEA9 /* GASelectedGoodsDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GASelectedGoodsDataSource.h; sourceTree = "<group>"; };
+		02E0E4A823011A3000E2BEA9 /* GASelectedGoodsDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GASelectedGoodsDataSource.m; sourceTree = "<group>"; };
+		02E0E4AA23011DF400E2BEA9 /* GALiveGoodsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveGoodsModel.h; sourceTree = "<group>"; };
+		02E0E4AB23011DF400E2BEA9 /* GALiveGoodsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveGoodsModel.m; sourceTree = "<group>"; };
+		02E0E4AD2301234900E2BEA9 /* GALiveGoodsTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GALiveGoodsTableCell.h; sourceTree = "<group>"; };
+		02E0E4AE2301234900E2BEA9 /* GALiveGoodsTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GALiveGoodsTableCell.m; sourceTree = "<group>"; };
 		02EFD49722F96506008122FA /* GAAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAAPI.h; sourceTree = "<group>"; };
 		02EFD49822F96506008122FA /* GAAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GAAPI.m; sourceTree = "<group>"; };
 		02EFD49D22F96574008122FA /* GABaseAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABaseAPI.h; sourceTree = "<group>"; };
@@ -384,6 +396,8 @@
 				0208839F22FC022300B1E873 /* GALiveType.m */,
 				020883A822FC187800B1E873 /* GABannerItem.h */,
 				020883A922FC187800B1E873 /* GABannerItem.m */,
+				02E0E4AA23011DF400E2BEA9 /* GALiveGoodsModel.h */,
+				02E0E4AB23011DF400E2BEA9 /* GALiveGoodsModel.m */,
 			);
 			name = Live;
 			sourceTree = "<group>";
@@ -494,17 +508,18 @@
 		02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast */ = {
 			isa = PBXGroup;
 			children = (
+				02E0E4A023010EB600E2BEA9 /* DataSource */,
 				02E0E47C22FE78CC00E2BEA9 /* GABeautyFilterParams.h */,
 				02E0E47D22FE78CC00E2BEA9 /* GABeautyFilterParams.m */,
 				02E0E49022FFAD2A00E2BEA9 /* View */,
-				02E0E48D22FFAC5800E2BEA9 /* GALiveCenterViewController.h */,
-				02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */,
 				020883B122FD133C00B1E873 /* GAOpenLiveViewController.h */,
 				020883B222FD133C00B1E873 /* GAOpenLiveViewController.m */,
 				02E0E49722FFFA2A00E2BEA9 /* GALivePushConfig.h */,
 				02E0E49822FFFA2A00E2BEA9 /* GALivePushConfig.m */,
 				022FF22D22F8327C00C80375 /* GACandidateGoodsViewController.h */,
 				022FF22E22F8327C00C80375 /* GACandidateGoodsViewController.m */,
+				02E0E49D230104DB00E2BEA9 /* GASelectedGoodsViewController.h */,
+				02E0E49E230104DB00E2BEA9 /* GASelectedGoodsViewController.m */,
 			);
 			name = LiveBroadcast;
 			sourceTree = "<group>";
@@ -519,6 +534,8 @@
 		02E0E48C22FFA74600E2BEA9 /* Personal Center */ = {
 			isa = PBXGroup;
 			children = (
+				02E0E48D22FFAC5800E2BEA9 /* GALiveCenterViewController.h */,
+				02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */,
 			);
 			name = "Personal Center";
 			sourceTree = "<group>";
@@ -544,8 +561,19 @@
 				02E0E49222FFAD5C00E2BEA9 /* GALiveCenterProfileView.m */,
 				02E0E49422FFC9F800E2BEA9 /* GALiveCenterHeaderView.h */,
 				02E0E49522FFC9F800E2BEA9 /* GALiveCenterHeaderView.m */,
+				02E0E4AD2301234900E2BEA9 /* GALiveGoodsTableCell.h */,
+				02E0E4AE2301234900E2BEA9 /* GALiveGoodsTableCell.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		02E0E4A023010EB600E2BEA9 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				02E0E4A723011A3000E2BEA9 /* GASelectedGoodsDataSource.h */,
+				02E0E4A823011A3000E2BEA9 /* GASelectedGoodsDataSource.m */,
+			);
+			name = DataSource;
 			sourceTree = "<group>";
 		};
 		02EFD49622F964E3008122FA /* Net */ = {
@@ -869,10 +897,12 @@
 				AE9F037322F514A90073F5C1 /* GACommentFooterView.m in Sources */,
 				02E0E49622FFC9F800E2BEA9 /* GALiveCenterHeaderView.m in Sources */,
 				3B99C72122EC071000ED8999 /* GAVideo.m in Sources */,
+				02E0E49F230104DB00E2BEA9 /* GASelectedGoodsViewController.m in Sources */,
 				3B47C00822EA90F8000974C7 /* GAMainViewController.m in Sources */,
 				022FF22622F5698200C80375 /* NSObject+GAExtension.m in Sources */,
 				02FBD63722F409ED00ED76CC /* GA_KSYLive.m in Sources */,
 				3B99C73922ED665B00ED8999 /* GASharePopView.m in Sources */,
+				02E0E4AF2301234900E2BEA9 /* GALiveGoodsTableCell.m in Sources */,
 				3B47C02622EA97BC000974C7 /* GACityWideViewController.m in Sources */,
 				027DB67822F026A6001B0593 /* GAFansFollowCell.m in Sources */,
 				0208839222FBCDDC00B1E873 /* GATopListData.m in Sources */,
@@ -900,6 +930,7 @@
 				3B99C71E22EC067500ED8999 /* GABaseModel.m in Sources */,
 				027DB68022F02FBB001B0593 /* GAVideoDataSource.m in Sources */,
 				020883AD22FD021500B1E873 /* GABannerTargetViewController.m in Sources */,
+				02E0E4AC23011DF400E2BEA9 /* GALiveGoodsModel.m in Sources */,
 				3B99C73622EC468C00ED8999 /* GALiveWatchCell.m in Sources */,
 				020883A022FC022300B1E873 /* GALiveType.m in Sources */,
 				020883AA22FC187800B1E873 /* GABannerItem.m in Sources */,
@@ -919,6 +950,7 @@
 				027DB6A322F2EB43001B0593 /* GARecordControlView.m in Sources */,
 				027DB68422F044E2001B0593 /* GAShootingViewController.m in Sources */,
 				3B47C01322EA9102000974C7 /* main.m in Sources */,
+				02E0E4A923011A3000E2BEA9 /* GASelectedGoodsDataSource.m in Sources */,
 				3B99C72722EC0A8200ED8999 /* GAUser.m in Sources */,
 				3B47C05622EAF1E8000974C7 /* GACityWideSubViewController.m in Sources */,
 				3B47C04D22EAD539000974C7 /* GACommentPopView.m in Sources */,
@@ -1092,6 +1124,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
@@ -1121,6 +1157,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V9W837Y6AV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Suo/PrefixHeader.pch;
