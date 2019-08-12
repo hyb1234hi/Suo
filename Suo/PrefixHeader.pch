@@ -96,17 +96,19 @@ alpha:1.0]
 #define ScreenBounds    ([[UIScreen  mainScreen] bounds])
 #define ScreenWidth     (CGRectGetWidth([UIScreen mainScreen].bounds))
 #define ScreenHeight    (CGRectGetHeight([UIScreen mainScreen].bounds))
-#define SafeAreaBottomHeight ((ScreenHeight >= 812.0) && [[UIDevice currentDevice].model isEqualToString:@"iPhone"]  ? 30 : 0)
 #define StatusBarHeight [UIApplication sharedApplication].statusBarFrame.size.height
-#define SafeAreaTopHeight ((ScreenHeight >= 812.0) && [[UIDevice currentDevice].model isEqualToString:@"iPhone"] ? 88 : 64)
+
+#define SafeAreaTopHeight       ((ScreenHeight >= 812.0) && [[UIDevice currentDevice].model isEqualToString:@"iPhone"] ? 88 : 64)
+#define SafeAreaBottomHeight    ((ScreenHeight >= 812.0) && [[UIDevice currentDevice].model isEqualToString:@"iPhone"] ? 30 : 0)
 
 
 //URL
-#define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/jjkk?txSecret=de057c0af926edcd257341e954955c29&txTime=5D480C30"
+#define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/iOS?txSecret=1db0e2fcc1c3d61e9ebe4e63b6c7eaea&txTime=5D4D6E50"
 #define RTMPURL_PULL    @"rtmp://gajz.live.play.zsepoch.com/live/test_atangge?txSecret=604bd314c34586e6c366f3beaf922bd7&txTime=5D3ED1B0"
 
 //Pay and share
 #define AlipayAppID     @""
+
 #define WXAppID         @""
 #define TencentAppID    @""
 #define WXSecret        @""

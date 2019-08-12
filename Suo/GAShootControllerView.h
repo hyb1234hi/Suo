@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)startLiveDidClick;
 
-- (void)switchLens;
+- (void)switchLensDidClick;
 - (void)toggleRecord:(GARecordButton*)send;
 
 @end

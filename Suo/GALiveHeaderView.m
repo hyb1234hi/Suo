@@ -8,16 +8,25 @@
 
 #import "GALiveHeaderView.h"
 
+#import "GABaseTableViewCell.h"
+#import "GABaseCollectionViewCell.h"
+#import "GATopListData.h"
+
 #import <SDCycleScrollView.h>
-#import <WMMenuView.h>
+#import <UIImageView+YYWebImage.h>
 
-@interface GALiveHeaderView ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,WMMenuViewDataSource,WMMenuViewDelegate>
+/**
+ 轮播图cell
+ */
+@interface _BannerCell : GABaseCollectionViewCell
+@property(nonatomic,strong)UIImageView *imageView;
+@end
+
+
+
+@interface GALiveHeaderView ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong) SDCycleScrollView *cycleView; //!<轮播图
-@property(nonatomic,strong) UITableView *tableView;       //!<主播榜单
-@property(nonatomic,strong) WMMenuView *menuView;         //!<分页
-@property(nonatomic,strong) NSArray *titles;
-
-@property(nonatomic,strong) NSTimer *timer;                //定时滚动tableView cell
+@property(nonatomic,strong) NSArray *urls;
 @end
 
 @implementation GALiveHeaderView
@@ -30,110 +39,78 @@
 }
 
 - (void)setupUI{
-    _cycleView = SDCycleScrollView.new;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _menuView  = [[WMMenuView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
-    
-    
+    //UIImage *image = [UIImage imageNamed:@"banner"];
+    _cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil] ;
     [self addSubview:_cycleView];
-    [self addSubview:_tableView];
-    [self addSubview:_menuView];
-    
-    [_cycleView setDelegate:self];
-    [_cycleView setImageURLStringsGroup:@[@"",@"",@""]];
-    
-    [_tableView setDataSource:self];
-    [_tableView setDelegate:self];
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    [_menuView setDataSource:self];
-    [_menuView setDelegate:self];
-    [_menuView selectItemAtIndex:0];
-    
-    _titles = @[@"推荐",@"游戏",@"电台"];
-    [_menuView reload];
+    [_cycleView setBackgroundColor:ColorWhite];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
     [self.cycleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(self);
-        make.height.mas_equalTo(ScreenWidth*0.3);
+        make.edges.mas_equalTo(self);
     }];
-    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.cycleView.mas_bottom);
-        make.height.mas_equalTo(44);
-    }];
-    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.tableView.mas_bottom).inset(6);
-    }];
-    
-    [self.timer fire];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    }
-    NSString *text = [NSString stringWithFormat:@"👤 主播榜 %ld",indexPath.row];
-    [cell.textLabel setText:text];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    return cell;
-}
 
-- (NSInteger)numbersOfTitlesInMenuView:(WMMenuView *)menu{
-    return self.titles.count;
-}
-- (NSString *)menuView:(WMMenuView *)menu titleAtIndex:(NSInteger)index{
-    return self.titles[index];
-}
-- (UIColor *)menuView:(WMMenuView *)menu titleColorForState:(WMMenuItemState)state atIndex:(NSInteger)index{
-    switch (state) {
-        case WMMenuItemStateNormal:
-            return ColorBlack;
-            break;
-            
-        case WMMenuItemStateSelected:
-            return  UIColor.redColor;
-            break ;
+- (void)setBanners:(NSArray<GABannerItem *> *)banners{
+    if (_banners != banners) {
+        _banners = banners;
+        
+        NSMutableArray *urlList = @[].mutableCopy;
+        for (GABannerItem *item in banners) {
+            [urlList addObject:item.img];
+        }
+        self.urls = urlList;
+        [self.cycleView setImageURLStringsGroup:self.urls];
     }
 }
-- (WMMenuItem *)menuView:(WMMenuView *)menu initialMenuItem:(WMMenuItem *)initialMenuItem atIndex:(NSInteger)index{
-    [initialMenuItem setFont:[MainFont fontWithSize:18]];
-    return initialMenuItem;
+#pragma mark - SDCycleScrollViewDelegate
+-(Class)customCollectionViewCellClassForCycleScrollView:(SDCycleScrollView *)view{
+    return _BannerCell.class;
 }
 
-- (void)menuView:(WMMenuView *)menu didSelesctedIndex:(NSInteger)index currentIndex:(NSInteger)currentIndex{
-    if ([self.delegate respondsToSelector:@selector(menuView:selectedIndex:)]) {
-        [self.delegate menuView:menu selectedIndex:index];
-    }
-}
-
-- (NSTimer *)timer{
-    if (!_timer) {
-        __weak typeof(self) wself = self;
-        NSIndexPath *indexPath0 = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:1 inSection:0];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:2.35 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            
-            [UIView animateWithDuration:0.35 animations:^{
-                [wself.tableView scrollToRowAtIndexPath:indexPath1 atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            } completion:^(BOOL finished) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [wself.tableView scrollToRowAtIndexPath:indexPath0 atScrollPosition:UITableViewScrollPositionTop animated:NO];
-                });
-            }];
+- (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view{
+    //setup image
+    if ([cell isKindOfClass:_BannerCell.class]) {
+        
+        _BannerCell *bcell = (_BannerCell*)cell;
+        NSURL *url =  [NSURL URLWithString:self.banners[index].img];
+        [bcell.imageView setImageWithURL:url placeholder:nil options:YYWebImageOptionProgressive completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+            [bcell.imageView setupMaskWithCorner:6 rectCorner:UIRectCornerAllCorners];
+            NSLog(@"cell .image --- %@",bcell.imageView);
         }];
     }
-    return _timer;
 }
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    if ([self.delegate respondsToSelector:@selector(liveHeaderView:didSelectedBanner:)]) {
+        [self.delegate liveHeaderView:self didSelectedBanner:self.banners[index]];
+    }
+}
+
 @end
+
+
+@implementation _BannerCell
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        _imageView = UIImageView.new;
+        [_imageView setBackgroundColor:ColorWhite];
+        [self.contentView addSubview:_imageView];
+    }
+    return self;
+}
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    UIEdgeInsets padding = UIEdgeInsetsMake(11, 11, 0, 11);
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.contentView).insets(padding);
+    }];
+}
+
+@end
+

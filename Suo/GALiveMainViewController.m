@@ -11,22 +11,20 @@
 #import "GALiveViewController.h"
 #import "GAVideoViewController.h"
 #import "GACityWideViewController.h"
+<<<<<<< HEAD
 #import "GAShootingViewController.h"
 #import "GALiveChatViewController.h" // 私信
 
 #import <WMPageController.h>
 #import <DCPathButton.h>
+=======
+>>>>>>> pwxPro
 
 
 
 @interface GALiveMainViewController ()
-//@property(nonatomic,strong)WMMenuView *menuView
-
 @property(nonatomic,strong) NSArray<NSString*> *pages;
 
-@property(nonatomic,strong) DCPathButton *pathButton;
-
-@property(nonatomic,strong) UIButton *addButton;
 @end
 
 @implementation GALiveMainViewController
@@ -35,12 +33,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-  //  [self.view setBackgroupColor:UIColor.whiteColor];
-    
-    [self setTitle:@""]; 
     
     self.pages = @[@"直播",@"视频",@"同城"];
    
+<<<<<<< HEAD
     [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:UIImage.new];
     
@@ -49,8 +45,12 @@
     [chatBtn addTarget:self action:@selector(rightItemClick) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *chatItem = [[UIBarButtonItem alloc] initWithCustomView:chatBtn];
     self.navigationItem.rightBarButtonItem = chatItem;
+=======
+ //   [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
+ //   [self.navigationController.navigationBar setShadowImage:UIImage.new];
+>>>>>>> pwxPro
 
-    [self setShowOnNavigationBar:YES];
+    //[self setShowOnNavigationBar:YES];
     [self setMenuViewStyle:WMMenuViewStyleLine];
     [self setProgressColor:UIColor.redColor];
     [self setProgressViewCornerRadius:2.0];
@@ -60,8 +60,9 @@
     
     [self.menuView reload];
     [self reloadData];
-    [self.menuView selectItemAtIndex:1];
+    [self.menuView selectItemAtIndex:0];
     
+<<<<<<< HEAD
     // add button
     _addButton = UIButton.new;
     [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab"] forState:UIControlStateNormal];
@@ -78,30 +79,18 @@
 - (void)addButtonAction:(UIButton*)send{
     GAShootingViewController *vc = GAShootingViewController.new;
     [self presentViewController:vc animated:YES completion:nil];
+=======
+>>>>>>> pwxPro
 }
 
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-    
-}
+//- (void)addButtonAction:(UIButton*)send{
+//    UIViewController *vc = GAOpenLiveViewController.new; //GAShootingViewController.new;
+//    [self presentViewController:vc animated:YES completion:nil];
+//}
 
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    
-    [self.addButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.mas_equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, SafeAreaBottomHeight+10, 16));
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-    }];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -110,17 +99,13 @@
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index{
-//    WMMenuItem *item = [pageController.menuView itemAtIndex:index];
-//    [item setFont:[UIFont boldSystemFontOfSize:24]];
-    
     return  self.pages[index];
 }
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index{
+    
     UIColor *color = UIColor.whiteColor;
     UIViewController *vc = UIViewController.new;
     [vc.view setBackgroundColor:color];
-    
-    
     
     if (index == 0) {
         vc = GALiveViewController.new;
@@ -133,46 +118,24 @@
         vc = GACityWideViewController.new;
     }
     
-    
     return vc;
 }
 
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
-
-    return self.navigationController.navigationBar.frame;
+    [menuView setBackgroundColor:UIColor.whiteColor];
+    
+    return  CGRectMake(0, self.view.safeAreaInsets.top, ScreenWidth, 44);
 }
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView{
-    CGFloat y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-    CGFloat h = ScreenHeight - y - SafeAreaBottomHeight;
-    CGRect frame  = ScreenBounds;
-    frame.origin.y = y;
-    frame.size.height = h;
+
+    CGFloat menuViewMaxY = CGRectGetMaxY(pageController.menuView.frame);
+    CGFloat bottom = self.view.safeAreaInsets.bottom;
+    CGRect frame = self.view.bounds;
     
+    frame.origin.y = menuViewMaxY + 6; // 6.o 间距
+    frame.size.height -= (menuViewMaxY+bottom);
     return frame;
 }
-
-
-
-//- (DCPathButton *)pathButton{
-//    if (!_pathButton) {
-//
-//        DCPathItemButton*(^createItem)(NSString*image,NSString*highlightedImage,NSString*bac)
-//
-//        _pathButton = [[DCPathButton alloc] initWithCenterImage:[UIImage imageNamed:@"chooser-button-tab"]
-//                                               highlightedImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"]];
-//    }
-//    return _pathButton;
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

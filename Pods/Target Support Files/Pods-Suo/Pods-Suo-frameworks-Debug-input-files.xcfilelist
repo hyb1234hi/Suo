@@ -4,3 +4,4 @@ ${PODS_ROOT}/AlivcLivePusher/AlivcLibRtmp.framework
 ${PODS_ROOT}/AlivcLivePusher/AlivcLibBeauty.framework
 ${PODS_ROOT}/AlivcLivePusher/AlivcLibFace.framework
 ${PODS_ROOT}/LookinServer/LookinServer.framework
+${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework

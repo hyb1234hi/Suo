@@ -91,8 +91,11 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GAGoodsPushCell *cell = [tableView dequeueReusableCellWithIdentifier:GAGoodsPushCell.identifier forIndexPath:indexPath];
-    [cell.textLabel setText:@"商品"];
+    [cell.textLabel setNumberOfLines:0];
+    [cell.textLabel setText:@"商品UIViewAlertForUnsatisfiableConstraints to catch this "];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell.imageView setImage:[UIImage imageNamed:@"icon_home_like_after"]];
+    [cell.detailTextLabel setText:@"Y 1-00"];
     
     return cell;
 }

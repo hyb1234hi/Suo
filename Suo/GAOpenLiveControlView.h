@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AlivcLivePusher/AlivcLivePusher.h>
 
+#import "GABeautyFilterParams.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol GAOpenLiveControllerDelegate <NSObject>
@@ -26,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GAOpenLiveControlView : UIView
 @property(nonatomic,weak)id<GAOpenLiveControllerDelegate> delegate;
+
+@property(nonatomic,strong)GABeautyFilterParams *params;
+@property(nonatomic,strong)AlivcLivePusher *pusher;
+
 @end
 
 NS_ASSUME_NONNULL_END

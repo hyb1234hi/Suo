@@ -166,6 +166,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/AlivcLivePusher/AlivcLibBeauty.framework"
   install_framework "${PODS_ROOT}/AlivcLivePusher/AlivcLibFace.framework"
   install_framework "${PODS_ROOT}/LookinServer/LookinServer.framework"
+  install_framework "${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/AlivcLivePusher/AlivcLivePusher.framework"

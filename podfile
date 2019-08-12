@@ -16,7 +16,7 @@ pod 'XRWaterfallLayout'
 
 pod 'TZImagePickerController'
 pod 'HZPhotoBrowser'
-
+pod 'YYKit'
 
 pod 'DCPathButton'  #按钮
 pod 'VHBoomMenuButton/ObjC'
@@ -32,10 +32,14 @@ pod 'MLEmojiLabel'
 pod 'libksygpulive/KSYGPUResource'
 pod 'libksygpulive/libksygpulive'
 pod 'AlivcLivePusher'
+pod 'SocketRocket'
+
+pod 'Bugly'
 
 #debug
 pod 'LookinServer', :configurations => ['Debug']
-pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+#pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+pod 'Reveal-SDK', :configurations => ['Debug']
 
 end
 
