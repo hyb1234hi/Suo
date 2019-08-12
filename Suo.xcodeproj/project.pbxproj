@@ -458,10 +458,10 @@
 				02EFD49622F964E3008122FA /* Net */,
 				3B47C03622EAA64F000974C7 /* EX */,
 				3B47C01B22EA917D000974C7 /* Support */,
-				02E0E48C22FFA74600E2BEA9 /* Personal Center */,
-				02E0E48B22FFA6BF00E2BEA9 /* LiveClassify */,
-				02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast */,
-				02E0E48922FFA69000E2BEA9 /* LiveRecom */,
+				02E0E48C22FFA74600E2BEA9 /* Personal Center(个人中心) */,
+				02E0E48B22FFA6BF00E2BEA9 /* LiveClassify（分类） */,
+				02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast(开播) */,
+				02E0E48922FFA69000E2BEA9 /* LiveRecom(推荐) */,
 				02E0E48822FFA68600E2BEA9 /* Home */,
 				02E0E48622FFA66800E2BEA9 /* MainVC */,
 			);
@@ -488,7 +488,7 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		02E0E48922FFA69000E2BEA9 /* LiveRecom */ = {
+		02E0E48922FFA69000E2BEA9 /* LiveRecom(推荐) */ = {
 			isa = PBXGroup;
 			children = (
 				3B47C02322EA97BC000974C7 /* GACityWideViewController.h */,
@@ -502,10 +502,10 @@
 				3B47C02022EA97BC000974C7 /* GALiveMainViewController.h */,
 				3B47C01E22EA97BC000974C7 /* GALiveMainViewController.m */,
 			);
-			name = LiveRecom;
+			name = "LiveRecom(推荐)";
 			sourceTree = "<group>";
 		};
-		02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast */ = {
+		02E0E48A22FFA69F00E2BEA9 /* LiveBroadcast(开播) */ = {
 			isa = PBXGroup;
 			children = (
 				02E0E4A023010EB600E2BEA9 /* DataSource */,
@@ -521,23 +521,23 @@
 				02E0E49D230104DB00E2BEA9 /* GASelectedGoodsViewController.h */,
 				02E0E49E230104DB00E2BEA9 /* GASelectedGoodsViewController.m */,
 			);
-			name = LiveBroadcast;
+			name = "LiveBroadcast(开播)";
 			sourceTree = "<group>";
 		};
-		02E0E48B22FFA6BF00E2BEA9 /* LiveClassify */ = {
+		02E0E48B22FFA6BF00E2BEA9 /* LiveClassify（分类） */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = LiveClassify;
+			name = "LiveClassify（分类）";
 			sourceTree = "<group>";
 		};
-		02E0E48C22FFA74600E2BEA9 /* Personal Center */ = {
+		02E0E48C22FFA74600E2BEA9 /* Personal Center(个人中心) */ = {
 			isa = PBXGroup;
 			children = (
 				02E0E48D22FFAC5800E2BEA9 /* GALiveCenterViewController.h */,
 				02E0E48E22FFAC5800E2BEA9 /* GALiveCenterViewController.m */,
 			);
-			name = "Personal Center";
+			name = "Personal Center(个人中心)";
 			sourceTree = "<group>";
 		};
 		02E0E49022FFAD2A00E2BEA9 /* View */ = {

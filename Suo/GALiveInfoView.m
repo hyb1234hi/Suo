@@ -11,18 +11,17 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface GALiveInfoView ()<CLLocationManagerDelegate>
-@property(nonatomic,strong)UIImageView *coverView;              //!<封面
+
 @property(nonatomic,strong)UILabel *addCoverTitleLab;           //!<添加封面lab
-@property(nonatomic,strong)UITextField *titleTextField;         //!<标题栏
+
 @property(nonatomic,strong)UILabel *locationLab;                //!<位置信息
 @property(nonatomic,strong)UILabel *shareLab;                   //!<分享Lab
 @property(nonatomic,strong)UIToolbar *shareBar;                 //!<分享容器
 
-@property(nonatomic,strong)CLLocationManager *manager;
+
 @end
 
 @implementation GALiveInfoView
-
 
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -57,6 +56,7 @@
     [_addCoverTitleLab setTextAlignment:NSTextAlignmentCenter];
     [_addCoverTitleLab setTextColor:ColorWhite];
     
+    [_titleTextField setTextColor:UIColor.whiteColor];
     [_titleTextField setPlaceholder:@""];
     NSDictionary *dict = @{NSFontAttributeName:MainFontWithSize(19),
                            NSForegroundColorAttributeName:ColorWhite,

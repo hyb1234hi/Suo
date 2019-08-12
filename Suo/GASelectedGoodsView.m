@@ -10,6 +10,7 @@
 #import "GABaseCollectionViewCell.h"
 
 #import "GASelectedGoodsViewController.h"
+#import <UIImageView+WebCache.h>
 //#import "GACandidateGoodsViewController.h"
 
 @interface _SelectedGoodsCell : GABaseCollectionViewCell
@@ -21,7 +22,7 @@
 @property(nonatomic,strong)UILabel *titleLabel;     //!<标题
 @property(nonatomic,strong)UICollectionView *collectionView;
 
-@property(nonatomic,strong)NSArray *goodsArray;
+
 
 
 @end
@@ -32,15 +33,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        _goodsArray = @[@"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        @"icon_profile_share_qqZone",
-                        ];
+        _goodsArray = @[];
+        
         [self setupUI];
         
         [self setBackgroundColor:ColorBlackAlpha40];
@@ -64,6 +58,7 @@
     [_collectionView setDelegate:self];
     [_collectionView setDataSource:self];
     [_collectionView setBackgroundColor:UIColor.clearColor];
+    [_collectionView setShowsHorizontalScrollIndicator:NO];
     
     [self addSubview:_titleLabel];
     [self addSubview:_collectionView];
@@ -77,8 +72,8 @@
         make.left.top.mas_equalTo(self).insets(UIEdgeInsetsMake(17, 25, 0, 0));
     }];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 25, 25, 25));
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).inset(22);
+        make.left.right.bottom.mas_equalTo(self).insets(UIEdgeInsetsMake(0, 25, 20, 25));
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).inset(12);
     }];
 }
 
@@ -101,9 +96,13 @@
         //[cell.imageView setImage:[UIImage imageNamed:@"chooser-button-input-highlighted"]];
         [cell.imageView setBackgroundColor:UIColor.grayColor];
         [cell.deleteBtn setHidden:YES];
+        [cell.imageView setImage:nil];
     }else{
         //[cell.imageView setImage:[UIImage imageNamed:self.goodsArray[indexPath.row]]];
         [cell.deleteBtn setHidden:NO];
+        
+        NSURL *url = [NSURL URLWithString:self.goodsArray[indexPath.row].goods_image];
+        [cell.imageView sd_setImageWithURL:url];
     }
     
     return cell;
@@ -121,8 +120,16 @@
         //GACandidateGoodsViewController *vc = GACandidateGoodsViewController.new;
         
         GASelectedGoodsViewController * vc = GASelectedGoodsViewController.new;
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         
+        __weak typeof(self) wself = self;
+        [vc setSelectedGoods:^(NSArray<GALiveGoodsModel *> * _Nonnull array) {
+            wself.goodsArray = array;
+            [wself.collectionView reloadData];
+        }];
+        
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+
         nav.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self rootVCPresentViewController:nav animated:YES completion:nil];
     }

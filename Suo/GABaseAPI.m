@@ -17,8 +17,6 @@ static NSString *const rootPath = @"http://www.suo.com";
 // 默认 POST
 - (NSURLRequest *)createRequestWithPath:(NSString*)path parameter:(NSDictionary *)parameter method:(NSString *)method{
 
-    
-        // NSLog(@"dict --- %@",params);
     if ([method isEqualToString:@"GET"]) {
         __block NSString *api = [rootPath stringByAppendingPathComponent:path];
         [parameter enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -74,10 +72,18 @@ static NSString *const rootPath = @"http://www.suo.com";
         if ([parameterValue  isKindOfClass:NSArray.class]) {
             [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
-            for (NSString *imageName in parameterValue) {
-                [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", imageName] dataUsingEncoding:NSUTF8StringEncoding]];
+            for (NSString *value in parameterValue) {
+                [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
             }
-        }else{
+        } if ([parameterValue isKindOfClass:UIImage.class]) {
+            [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.png\"\r\n",parameterKey,parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+            NSData *data = UIImagePNGRepresentation(parameterValue);
+            [httpBody appendData:data];
+            //[httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+        } else{
             [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
             [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];

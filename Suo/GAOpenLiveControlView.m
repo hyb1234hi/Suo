@@ -266,8 +266,13 @@ static CGFloat space = 19.0;
 
 
 - (void)toggleStartButton:(UIButton*)send{
-    if ([self.delegate respondsToSelector:@selector(startLive)]) {
-        [self.delegate startLive];
+    if ([self.delegate respondsToSelector:@selector(startLiveWiteTitle:image:location:selectedGoods:)]) {
+        NSString *title = self.infoView.titleTextField.text;
+        UIImage *image =  self.infoView.coverView.image;
+        CLLocationCoordinate2D location = self.infoView.manager.location.coordinate;
+        
+        
+        [self.delegate startLiveWiteTitle:title image:image location:location selectedGoods:self.selectedGoodsView.goodsArray];
     }
 }
 
