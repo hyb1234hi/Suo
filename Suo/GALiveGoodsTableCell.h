@@ -7,10 +7,12 @@
 //
 
 #import "GABaseTableViewCell.h"
+#import "GALiveGoodsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GALiveGoodsTableCell : GABaseTableViewCell
+@property(nonatomic,strong)GALiveGoodsModel *goods;
 
 @end
 

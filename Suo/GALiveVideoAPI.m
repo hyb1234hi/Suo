@@ -114,5 +114,26 @@
     NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];
 }
+
+
+- (void)openLiveWithKey:(NSString *)key title:(NSString *)title type:(int)type coverImage:(UIImage *)image tag:(NSArray *)tagList goodsList:(NSArray *)goodsIDList lng:(double)lng lat:(double)lat completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live_center&t=open_live";
+    
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:title forKey:@"title"];
+    [payload setValue:@(type) forKey:@"type"];
+    [payload setValue:image forKey:@"cover_img"];
+    
+    [payload setValue:tagList forKey:@"tag"];
+    [payload setValue:goodsIDList forKey:@"goods_id_arr"];
+    [payload setValue:@(lng) forKey:@"lng"];
+    [payload setValue:@(lat) forKey:@"lat"];
+    
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
 @end
 

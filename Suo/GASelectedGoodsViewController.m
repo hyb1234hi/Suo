@@ -7,10 +7,11 @@
 //
 
 #import "GASelectedGoodsViewController.h"
-
+#import "GALiveGoodsTableCell.h"
 
 #import "GAAPI.h"
 #import "GALiveGoodsModel.h"
+#import <UIImageView+WebCache.h>
 
 @interface GASelectedGoodsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -18,8 +19,9 @@
 @property(nonatomic,strong)UISearchBar *searchBar;
 
 @property(nonatomic,strong)NSMutableArray<GALiveGoodsModel*> *goodsList;
+@property(nonatomic,strong)NSMutableArray<GALiveGoodsModel*> *selectedArray;
 
-//@property(nonatomic,strong)UISearchController *searchController;
+@property(nonatomic,strong)UISearchController *searchController;
 
 @end
 
@@ -34,11 +36,12 @@
     [self.view addGestureRecognizer:swipe];
     
     [self.view setBackgroundColor:ColorWhite];
+    self.selectedArray = @[].mutableCopy;
     
     
     [self.navigationItem setTitle:@"选择商品"];
-    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
-    [self.navigationItem setLargeTitleDisplayMode:UINavigationItemLargeTitleDisplayModeAlways];
+//    [self.navigationController.navigationBar setPrefersLargeTitles:YES];
+//    [self.navigationItem setLargeTitleDisplayMode:UINavigationItemLargeTitleDisplayModeAlways];
   
 
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
@@ -51,7 +54,7 @@
     
     [self.view addSubview:self.tableView];
     [self.tableView setTableHeaderView:self.searchBar];
-    
+ 
     self.goodsList = @[].mutableCopy;
     [self reloadGoodsComletion:^(NSArray *array) {
         if (array.count > 0 ) {
@@ -66,7 +69,7 @@
 
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
-
+    
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
     }];
@@ -77,9 +80,13 @@
     return self.goodsList.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    [cell.textLabel setText:self.goodsList[indexPath.row].goods_name];
+    GALiveGoodsTableCell *cell = [tableView dequeueReusableCellWithIdentifier:GALiveGoodsTableCell.identifier forIndexPath:indexPath];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+   
+    GALiveGoodsModel *goods = self.goodsList[indexPath.row];
+    [cell setGoods:goods];
     
     return cell;
 }
@@ -87,10 +94,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.okItem setEnabled:(tableView.indexPathsForSelectedRows>0)];
     [self.searchBar resignFirstResponder];
+    
+    [self.selectedArray addObject:self.goodsList[indexPath.row]];
+    
+    
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.okItem setEnabled:(tableView.indexPathsForSelectedRows>0)];
     [self.searchBar resignFirstResponder];
+    [self.selectedArray removeObject:self.goodsList[indexPath.row]];
 }
 
 
@@ -98,7 +110,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)okItemAction{
-    
+    if (self.selectedGoods) {
+        self.selectedGoods(self.selectedArray);
+    }
     [self dismiss];
 }
 
@@ -110,8 +124,8 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
-        [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
-        [_tableView setRowHeight:66];
+        [_tableView registerClass:GALiveGoodsTableCell.class forCellReuseIdentifier:GALiveGoodsTableCell.identifier];
+        [_tableView setRowHeight:112];
         [_tableView setAllowsMultipleSelection:YES];
         [_tableView setTableFooterView:UIView.new];
     }

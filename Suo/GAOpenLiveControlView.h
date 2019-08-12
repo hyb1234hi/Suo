@@ -8,16 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import <AlivcLivePusher/AlivcLivePusher.h>
+#import <CoreLocation/CoreLocation.h>
 
+#import "GALiveGoodsModel.h"
 #import "GABeautyFilterParams.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol GAOpenLiveControllerDelegate <NSObject>
 
+
 /**
- 开启直播点击
+ 开始直播
+
+ @param title       直播title
+ @param cover       直播封面
+ @param location    位置信息
+ @param goodsList   选择直播商品
  */
-- (void)startLive;
+- (void)startLiveWiteTitle:(NSString*)title image:(UIImage*)cover location:(CLLocationCoordinate2D)location selectedGoods:(NSArray<GALiveGoodsModel*>*)goodsList;
 
 /**
  切换镜头点击

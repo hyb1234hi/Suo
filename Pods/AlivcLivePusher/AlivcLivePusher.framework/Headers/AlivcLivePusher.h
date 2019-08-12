@@ -27,7 +27,6 @@ AlivcLivePusherCustomDetectorDelegate,
 AlivcLivePusherSnapshotDelegate;
 
 
-
 /**
  推流类
  */

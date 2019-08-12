@@ -100,7 +100,24 @@
 - (void)fetchLiveGoodsForKey:(NSString*)key withGoodsKey:(NSString*)goodsKey page:(int)page size:(int)pageSize completion:(CallBack)completion;
 
 
-- (void)openLiveWithKey:(NSString*)key title:(NSString*)title type:(int)type;
+
+
+
+/**
+ 开播
+
+ @param key 用户key
+ @param title 直播title
+ @param type 直播类型
+ @param image 封面
+ 
+ @param tagList 标签列表 option
+ @param goodsIDList 商品id列表 option
+ @param lng 经度
+ @param lat 纬度
+ @param completion 数据回调
+ */
+- (void)openLiveWithKey:(NSString*)key title:(NSString*)title type:(int)type coverImage:(UIImage*)image tag:(NSArray*)tagList goodsList:(NSArray*)goodsIDList lng:(double)lng lat:(double)lat completion:(CallBack)completion;
 @end
 
 

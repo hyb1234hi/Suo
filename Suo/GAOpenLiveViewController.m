@@ -12,6 +12,7 @@
 
 #import "GABeautyFilterParams.h"
 #import "GALivePushConfig.h"
+#import "GAAPI.h"
 
 #import <AlivcLivePusher/AlivcLivePusher.h>
 #import <AlivcLibFace/AlivcLibFaceManager.h>
@@ -34,6 +35,7 @@ AlivcLivePusherCustomDetectorDelegate
 
 @property(nonatomic,strong)GABeautyFilterParams *params;
 
+//@property(nonatomic,strong)<#class#> *<#name#>;
 
 @end
 
@@ -65,16 +67,12 @@ AlivcLivePusherCustomDetectorDelegate
     ({
         GALivePushConfig *cfg = [[GALivePushConfig alloc] init];
         [cfg setParams:_params];
-//        [cfg setBeautyMode:AlivcLivePushBeautyModeProfessional];
-//        [cfg setBeautyBuffing:_params.beautyBuffing];
-//        [cfg setBeautyWhite:_params.beautyWhite];
         
        // [AlivcLivePusher showDebugView];
         self.pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
         
         [self.pusher setCustomFilterDelegate:self];
         [self.pusher setCustomDetectorDelegate:self];
-        [self.pusher startPreview:self.view];
     });
     
     [self setupUI];
@@ -98,6 +96,9 @@ AlivcLivePusherCustomDetectorDelegate
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];
+    [self.pusher startPreview:self.view];
+    [self.view insertSubview:self.controlView atIndex:1]; //移到上层
+
 }
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
@@ -117,7 +118,26 @@ AlivcLivePusherCustomDetectorDelegate
 }
 
 #pragma mark - GAOpenLiveControllerDelegate
-- (void)startLive{
+- (void)startLiveWiteTitle:(NSString *)title image:(UIImage *)cover location:(CLLocationCoordinate2D)location selectedGoods:(NSArray<GALiveGoodsModel *> *)goodsList{
+    
+    if (title.length <= 0) {
+        [self showHUDToView:self.view message:@"请输入标题"];
+        return;
+    }
+    if (!cover) {
+        [self showHUDToView:self.view message:@"请添加张封面吧"];
+        return;
+    }
+    
+    // 请求开播 数据
+    NSMutableArray *idArray = @[].mutableCopy;
+    
+    [GAAPI.new.videoAPI openLiveWithKey:self.loginKey title:title type:0 coverImage:cover tag:nil goodsList:idArray lng:location.longitude lat:location.latitude completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+        NSLog(@"json ------ %@",json);
+    }];
+    
+    
+    
     [UIView animateWithDuration:0.35 animations:^{
         [self.controlView setAlpha:0];
     } completion:^(BOOL finished) {
