@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAOpenLiveModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GALiveBroadcastControlView : UIView
 @property(nonatomic,weak)id<GALiveBroadcastControlViewDelegate> delegate;
+@property(nonatomic,strong)GAOpenLiveModel *liveMode;       //!<数据直播模型
 @end
 
 NS_ASSUME_NONNULL_END

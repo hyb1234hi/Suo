@@ -42,39 +42,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        NSString *uid = @"14";
-        NSString *roomID = @"10004";
-        NSString *ltoken = @"122317461#$&*@hbdjbcaysg*())*&^%23131231";
-        NSString *ntime = @"";
-        
-        NSDate *date = [NSDate date];
-        NSTimeInterval interval = [date timeIntervalSince1970];
-        int t = (int)interval;
-        ntime = @(t).stringValue;
-        
-        
-        NSString *token = [NSString stringWithFormat:@"%@%@%@%@",uid,roomID,ltoken,ntime];
-        token  = [token md5String];
-        
-        NSDictionary *para = @{@"type":@"connect",
-                               @"uid":uid,
-                               @"uname":@"ios_test2",
-                               @"room_id":roomID,
-                               @"ntime":@(t).stringValue,
-                               @"ltoken":token,
-                               @"other_data":@""
-                               };
-        
-        NSData *data = [NSJSONSerialization dataWithJSONObject:para options:NSJSONWritingPrettyPrinted error:nil];
-        _data = data;
-        
-        NSString *api = @"ws://192.168.1.11:2000";
-        NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:api]];
-        
-        _socket = [[SRWebSocket alloc] initWithURLRequest:request];
-        [_socket setDelegate:self];
-        [_socket open];
-    
         [self setupUI];
     }
     return self;
@@ -152,7 +119,21 @@
 
 -(void)webSocketDidOpen:(SRWebSocket *)webSocket{
     NSLog(@"------------->>>>>>弹幕连接成功");
-    [self.socket send:self.data];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.liveMode.danmu_connect_data.json options:NSJSONWritingSortedKeys error:nil];
+    [self.socket send:data];
+}
+
+- (void)setLiveMode:(GAOpenLiveModel *)liveMode{
+    if (_liveMode != liveMode) {
+        _liveMode = liveMode;
+        
+        NSString *api = @"ws://192.168.1.11:2000";
+        NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:api]];
+        
+        _socket = [[SRWebSocket alloc] initWithURLRequest:request];
+        [_socket setDelegate:self];
+        [_socket open];
+    }
 }
 
 #pragma mark - 弹幕处理

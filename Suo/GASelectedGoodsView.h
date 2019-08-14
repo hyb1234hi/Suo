@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GASelectedGoodsView : UIView
 @property(nonatomic,strong)NSArray<GALiveGoodsModel*> *goodsArray; //!<选中的商品
+
 @end
 
 NS_ASSUME_NONNULL_END

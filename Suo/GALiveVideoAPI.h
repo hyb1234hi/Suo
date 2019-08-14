@@ -115,9 +115,20 @@
  @param goodsIDList 商品id列表 option
  @param lng 经度
  @param lat 纬度
+ @param address 定位地址
  @param completion 数据回调
  */
-- (void)openLiveWithKey:(NSString*)key title:(NSString*)title type:(int)type coverImage:(UIImage*)image tag:(NSArray*)tagList goodsList:(NSArray*)goodsIDList lng:(double)lng lat:(double)lat completion:(CallBack)completion;
+- (void)openLiveWithKey:(NSString*)key title:(NSString*)title type:(int)type coverImage:(UIImage*)image tag:(NSArray*)tagList goodsList:(NSArray*)goodsIDList  lng:(double)lng lat:(double)lat address:(NSString*)address completion:(CallBack)completion;
+
+
+
+/**
+ 获取开播的类型
+
+ @param key 用户key
+ @param completion 数据回调
+ */
+- (void)fetchLiveTypeForKey:(NSString*)key completion:(CallBack)completion;
 @end
 
 

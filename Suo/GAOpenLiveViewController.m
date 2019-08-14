@@ -13,6 +13,7 @@
 #import "GABeautyFilterParams.h"
 #import "GALivePushConfig.h"
 #import "GAAPI.h"
+#import "GAOpenLiveModel.h"
 
 #import <AlivcLivePusher/AlivcLivePusher.h>
 #import <AlivcLibFace/AlivcLibFaceManager.h>
@@ -35,7 +36,10 @@ AlivcLivePusherCustomDetectorDelegate
 
 @property(nonatomic,strong)GABeautyFilterParams *params;
 
-//@property(nonatomic,strong)<#class#> *<#name#>;
+@property(nonatomic,strong)GAOpenLiveModel *liveModel;
+
+@property(nonatomic,strong)MBProgressHUD *openLiveHUD;  //开播请求数据 状态反馈
+
 
 @end
 
@@ -117,8 +121,10 @@ AlivcLivePusherCustomDetectorDelegate
     return _liveBroadcast;
 }
 
+
+
 #pragma mark - GAOpenLiveControllerDelegate
-- (void)startLiveWiteTitle:(NSString *)title image:(UIImage *)cover location:(CLLocationCoordinate2D)location selectedGoods:(NSArray<GALiveGoodsModel *> *)goodsList{
+- (void)startLiveWiteTitle:(NSString *)title image:(UIImage *)cover location:(GALocationInfo)info selectedGoods:(nonnull NSArray<GALiveGoodsModel *> *)goodsList{
     
     if (title.length <= 0) {
         [self showHUDToView:self.view message:@"请输入标题"];
@@ -128,28 +134,62 @@ AlivcLivePusherCustomDetectorDelegate
         [self showHUDToView:self.view message:@"请添加张封面吧"];
         return;
     }
+    if (!self.controlView.selectedType) {
+        [self showHUDToView:self.view message:@"请选择直播类型"];
+        return;
+    }
     
     // 请求开播 数据
     NSMutableArray *idArray = @[].mutableCopy;
+    for (GALiveGoodsModel *goods in goodsList) {
+        [idArray addObject:goods.goods_id];
+    }
+    if (idArray.count <= 0) {
+        idArray = nil;
+    }
     
-    [GAAPI.new.videoAPI openLiveWithKey:self.loginKey title:title type:0 coverImage:cover tag:nil goodsList:idArray lng:location.longitude lat:location.latitude completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
-        NSLog(@"json ------ %@",json);
-    }];
-    
-    
-    
-    [UIView animateWithDuration:0.35 animations:^{
-        [self.controlView setAlpha:0];
-    } completion:^(BOOL finished) {
-       
-        [self.view addSubview:self.liveBroadcast];
-        [self.liveBroadcast mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
+    //直播
+    void(^beginLive)(NSString* rtmpURL) = ^(NSString* url){
+        
+        [UIView animateWithDuration:0.35 animations:^{
+            [self.controlView setAlpha:0];
+        } completion:^(BOOL finished) {
+            
+            [self.view addSubview:self.liveBroadcast];
+            [self.liveBroadcast setLiveMode:self.liveModel];
+            [self.liveBroadcast mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
+            }];
+            [self.view layoutIfNeeded];
         }];
-        [self.view layoutIfNeeded];
+        [self.pusher startPushWithURL:url];
+        [self.tabBarController.tabBar setHidden:YES];
+    };
+    
+    
+    [self.openLiveHUD removeFromSuperview];
+    self.openLiveHUD = [MBProgressHUD showHUDAddedTo:self.controlView animated:YES];
+    [self.openLiveHUD.label setText:@"正在连接网络..."];
+    [self.controlView.startLiveBtn setEnabled:NO];
+    
+        //请求地址数据
+    int type = [self.controlView.selectedType.identifier intValue];
+    
+    [GAAPI.new.videoAPI openLiveWithKey:self.loginKey title:title type:type coverImage:cover tag:nil goodsList:idArray lng:info.lng lat:info.lat address:info.address completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
+        if ([json valueForKey:@"datas"]) {
+        
+            self.liveModel = [GAOpenLiveModel instanceWithDict:[json valueForKey:@"datas"]];
+            //NSString *url = [json valueForKeyPath:@"datas.push_url"];
+            [self.openLiveHUD removeFromSuperview];
+            beginLive(self.liveModel.push_url);
+        }else{
+            [self.openLiveHUD.label setText:@"连接服务器出错！"];
+            [self.openLiveHUD hideAnimated:YES afterDelay:2.0];
+            [self.controlView.startLiveBtn setEnabled:YES];
+        }
     }];
-    [self.pusher startPushWithURL:RTMPURL_UP];
-    [self.tabBarController.tabBar setHidden:YES];
+
+    
 }
 - (void)switchCamera{
     [self.pusher switchCamera];
@@ -160,6 +200,7 @@ AlivcLivePusherCustomDetectorDelegate
     [self.liveBroadcast removeFromSuperview];
     [UIView animateWithDuration:0.35 animations:^{
         [self.controlView setAlpha:1];
+        [self.controlView.startLiveBtn setEnabled:YES];
     }];
     
     [self.tabBarController.tabBar setHidden:NO];

@@ -10,9 +10,14 @@
 #import <AlivcLivePusher/AlivcLivePusher.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "GALiveInfoView.h"
 #import "GALiveGoodsModel.h"
 #import "GABeautyFilterParams.h"
+#import "GALiveTypeModel.h"
 NS_ASSUME_NONNULL_BEGIN
+
+
+
 
 @protocol GAOpenLiveControllerDelegate <NSObject>
 
@@ -22,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param title       直播title
  @param cover       直播封面
- @param location    位置信息
+ @param info        位置信息
  @param goodsList   选择直播商品
  */
-- (void)startLiveWiteTitle:(NSString*)title image:(UIImage*)cover location:(CLLocationCoordinate2D)location selectedGoods:(NSArray<GALiveGoodsModel*>*)goodsList;
+- (void)startLiveWiteTitle:(NSString*)title image:(UIImage*)cover location:(GALocationInfo)info selectedGoods:(NSArray<GALiveGoodsModel*>*)goodsList;
 
 /**
  切换镜头点击
@@ -37,8 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GAOpenLiveControlView : UIView
 @property(nonatomic,weak)id<GAOpenLiveControllerDelegate> delegate;
 
+@property(nonatomic,strong)UIButton *startLiveBtn;      //!<开始直播
 @property(nonatomic,strong)GABeautyFilterParams *params;
 @property(nonatomic,strong)AlivcLivePusher *pusher;
+
+@property(nonatomic,strong)GALiveTypeModel *selectedType;   //!<直播类型
+
 
 @end
 

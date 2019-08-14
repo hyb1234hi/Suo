@@ -8,14 +8,19 @@
 
 #import "GABaseAPI.h"
 #import <CoreServices/CoreServices.h>
+#import <AFNetworking.h>
 
 
 static NSString *const rootPath = @"http://www.suo.com";
 @implementation GABaseAPI
 
 
+
+
 // 默认 POST
 - (NSURLRequest *)createRequestWithPath:(NSString*)path parameter:(NSDictionary *)parameter method:(NSString *)method{
+    
+    
 
     if ([method isEqualToString:@"GET"]) {
         __block NSString *api = [rootPath stringByAppendingPathComponent:path];
@@ -71,16 +76,25 @@ static NSString *const rootPath = @"http://www.suo.com";
             //NSLog(@"  value ===%@",parameterValue);
         if ([parameterValue  isKindOfClass:NSArray.class]) {
             [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
-            for (NSString *value in parameterValue) {
-                [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
-            }
-        } if ([parameterValue isKindOfClass:UIImage.class]) {
-            [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[]\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
             
+            NSMutableString *paraValue = [[NSMutableString alloc] init];
+            for (NSString *value in parameterValue) {
+                [paraValue appendString:[NSString stringWithFormat:@"%@,",value]];
+//                [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//                [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[]\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+//                [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+            }
+            [httpBody appendData:[paraValue dataUsingEncoding:NSUTF8StringEncoding]];
+            
+        } if ([parameterValue isKindOfClass:UIImage.class]) {
+            
+            [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.png\"\r\n",parameterKey,parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+            [httpBody appendData:[@"Content-Type=image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
             NSData *data = UIImagePNGRepresentation(parameterValue);
             [httpBody appendData:data];
+            [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
             //[httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
             
         } else{
@@ -91,6 +105,7 @@ static NSString *const rootPath = @"http://www.suo.com";
     }];
     
     [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
     return httpBody;
 }
 
