@@ -14,7 +14,12 @@
 #import "GALiveBroadcastControlView.h"
 
 #import <AVKit/AVKit.h>
+<<<<<<< HEAD
+
+#import <AlivcLivePusher/AlivcLivePusher.h>
+=======
 //#import <AlivcLivePusher/AlivcLivePusher.h>
+>>>>>>> pwxPro
 #import <KSYGPUStreamerKit.h>
 
 

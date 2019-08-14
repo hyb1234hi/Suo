@@ -11,6 +11,15 @@
 #import "GALiveViewController.h"
 #import "GAVideoViewController.h"
 #import "GACityWideViewController.h"
+<<<<<<< HEAD
+#import "GAShootingViewController.h"
+#import "GALiveChatViewController.h" // 私信
+
+#import <WMPageController.h>
+#import <DCPathButton.h>
+=======
+>>>>>>> pwxPro
+
 
 
 @interface GALiveMainViewController ()
@@ -27,8 +36,19 @@
     
     self.pages = @[@"直播",@"视频",@"同城"];
    
+<<<<<<< HEAD
+    [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:UIImage.new];
+    
+    UIButton *chatBtn = UIButton.new;
+    [chatBtn setImage:[UIImage imageNamed:@"微信"] forState:UIControlStateNormal];
+    [chatBtn addTarget:self action:@selector(rightItemClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *chatItem = [[UIBarButtonItem alloc] initWithCustomView:chatBtn];
+    self.navigationItem.rightBarButtonItem = chatItem;
+=======
  //   [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
  //   [self.navigationController.navigationBar setShadowImage:UIImage.new];
+>>>>>>> pwxPro
 
     //[self setShowOnNavigationBar:YES];
     [self setMenuViewStyle:WMMenuViewStyleLine];
@@ -42,6 +62,25 @@
     [self reloadData];
     [self.menuView selectItemAtIndex:0];
     
+<<<<<<< HEAD
+    // add button
+    _addButton = UIButton.new;
+    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab"] forState:UIControlStateNormal];
+    [_addButton setImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"] forState:UIControlStateHighlighted];
+    [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_addButton];
+}
+
+- (void)rightItemClick {
+    GALiveChatViewController *chatVC = GALiveChatViewController.new;
+    [self.navigationController pushViewController:chatVC animated:YES];
+}
+
+- (void)addButtonAction:(UIButton*)send{
+    GAShootingViewController *vc = GAShootingViewController.new;
+    [self presentViewController:vc animated:YES completion:nil];
+=======
+>>>>>>> pwxPro
 }
 
 //- (void)addButtonAction:(UIButton*)send{
