@@ -10,15 +10,19 @@
 
 @implementation GADanmuConnect
 + (instancetype)instanceWithDict:(NSDictionary *)dict{
-    NSLog(@">>>>>>>>>>>>>>>>>>>>>");
-    
     return [[self alloc] initWithDict:dict];
 }
 - (instancetype)initWithDict:(NSDictionary *)dict{
-    NSLog(@"init ----->>>>>>>>>>>>>>>>- ");
     if (self = [super initWithDict:dict]) {
-        NSLog(@" OOOOOOOOOOOOOOOOOO");
         _json = dict;
+        NSLog(@" >?????????????");
+    }
+    return self;
+}
+
+- (instancetype)init{
+    if (self = [super init]) {
+        NSLog(@">>>");
     }
     return self;
 }

@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSNumber *ntime; //
 @property(nonatomic,strong)NSArray *other_data;
 
-
 @property(nonatomic,strong)NSDictionary *json;  //!<原始字典
+
 @end
 
 NS_ASSUME_NONNULL_END

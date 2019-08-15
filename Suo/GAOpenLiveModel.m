@@ -9,14 +9,16 @@
 #import "GAOpenLiveModel.h"
 
 @implementation GAOpenLiveModel
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"danmu":@"danmu_connect_data"};
+}
+
 + (instancetype)instanceWithDict:(NSDictionary *)dict{
-    NSLog(@">>>>>><<<<<<<");
     return [[self alloc] initWithDict:dict];
 }
 - (instancetype)initWithDict:(NSDictionary *)dict{
     if (self = [super initWithDict:dict]) {
-        NSLog(@"OLOLOLLLLLLLL");
-    
+        _danmu.json = [dict valueForKey:@"danmu_connect_data"];
     }
     return self;
 }

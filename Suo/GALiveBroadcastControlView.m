@@ -9,6 +9,7 @@
 #import "GALiveBroadcastControlView.h"
 #import "GACommentTextView.h"
 #import "GAGoodsPushSelectView.h"
+#import "GABeautyFilterView.h"
 
 #import <BarrageRenderer.h>
 #import <SocketRocket.h>
@@ -18,10 +19,12 @@
 
 @interface GALiveBroadcastControlView ()<BarrageRendererDelegate,SRWebSocketDelegate>
 @property(nonatomic,strong)UIButton *stopLiveBtn;   //!<退出直播
-@property(nonatomic,strong)UIButton *sendMSGBtn;    //!<发送消息
-@property(nonatomic,strong)UIButton *sendPrivateMSGBtn; //!<发送私信
+//@property(nonatomic,strong)UIButton *sendMSGBtn;    //!<发送消息
+//@property(nonatomic,strong)UIButton *sendPrivateMSGBtn; //!<发送私信
 
 @property(nonatomic,strong)BarrageRenderer *renderer;   //!<弹幕渲染
+
+@property(nonatomic,strong)UIButton *beautyView;        //!<美颜按钮
 
 // bottom
 @property(nonatomic,strong)UIButton *sendMSG;
@@ -60,6 +63,8 @@
     _stopLiveBtn = UIButton.new;
     [_stopLiveBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_stopLiveBtn setTitle:@"退出直播" forState:UIControlStateNormal];
+    
+    
     
     [self addSubview:_stopLiveBtn];
     
@@ -119,7 +124,7 @@
 
 -(void)webSocketDidOpen:(SRWebSocket *)webSocket{
     NSLog(@"------------->>>>>>弹幕连接成功");
-    NSData *data = [NSJSONSerialization dataWithJSONObject:self.liveMode.danmu_connect_data.json options:NSJSONWritingSortedKeys error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.liveMode.danmu.json options:NSJSONWritingSortedKeys error:nil];
     [self.socket send:data];
 }
 
@@ -183,7 +188,17 @@
 
 - (void)onButtonAction:(UIButton*)send{
     if (send == self.stopLiveBtn) {
-        [self sendMSGToDelegateWithSel:@selector(stopLive)];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定结束直播？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self sendMSGToDelegateWithSel:@selector(stopLive)];
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:ok];
+        [alert addAction:cancel];
+        
+        [self rootVCPresentViewController:alert animated:YES completion:nil];
     }
 }
 
