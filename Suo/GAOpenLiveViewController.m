@@ -117,6 +117,7 @@ AlivcLivePusherCustomDetectorDelegate
     if (!_liveBroadcast) {
         _liveBroadcast = GALiveBroadcastControlView.new;
         [_liveBroadcast setDelegate:self];
+        
     }
     return _liveBroadcast;
 }
@@ -150,6 +151,10 @@ AlivcLivePusherCustomDetectorDelegate
     
     //直播
     void(^beginLive)(NSString* rtmpURL) = ^(NSString* url){
+        NSLog(@"url -- %@",url);
+        
+        [self.liveBroadcast setPusher:self.pusher];
+        [self.liveBroadcast setParams:self.params];
         
         [UIView animateWithDuration:0.35 animations:^{
             [self.controlView setAlpha:0];

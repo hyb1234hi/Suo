@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AlivcLivePusher/AlivcLivePusher.h>
+
 #import "GAOpenLiveModel.h"
+#import "GABeautyFilterParams.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GALiveBroadcastControlView : UIView
 @property(nonatomic,weak)id<GALiveBroadcastControlViewDelegate> delegate;
 @property(nonatomic,strong)GAOpenLiveModel *liveMode;       //!<数据直播模型
+@property(nonatomic,strong)GABeautyFilterParams *params;
+@property(nonatomic,strong)AlivcLivePusher *pusher;
 @end
 
 NS_ASSUME_NONNULL_END

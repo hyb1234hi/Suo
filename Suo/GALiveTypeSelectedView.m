@@ -38,7 +38,6 @@
 - (void)setupUI{
     _typeList = @[];
     
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     [layout setItemSize:CGSizeMake(100, 35)];
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -59,6 +58,9 @@
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self).insets(UIEdgeInsetsMake(11, 11, 11, 11));
     }];
+    if (self.typeList.count <= 0) {
+        [self reloadData];
+    }
 }
 
 - (void)reloadData{
