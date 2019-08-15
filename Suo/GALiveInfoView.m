@@ -15,9 +15,7 @@
 @property(nonatomic,strong)UILabel *addCoverTitleLab;           //!<添加封面lab
 
 @property(nonatomic,strong)UILabel *locationLab;                //!<位置信息
-@property(nonatomic,strong)UILabel *shareLab;                   //!<分享Lab
-@property(nonatomic,strong)UIToolbar *shareBar;                 //!<分享容器
-
+@property(nonatomic,strong)CLLocationManager *manager;
 
 @end
 
@@ -41,15 +39,12 @@
     _addCoverTitleLab = UILabel.new;
     _titleTextField = UITextField.new;
     _locationLab = UILabel.new;
-    _shareLab = UILabel.new;
-    _shareBar = UIToolbar.new;
+
     
     [self addSubview:_addCoverTitleLab];
     [self addSubview:_coverView];
     [self addSubview:_titleTextField];
     [self addSubview:_locationLab];
-    [self addSubview:_shareLab];
-    [self addSubview:_shareBar];
     
     [_addCoverTitleLab setText:@"添加封面"];
     [_addCoverTitleLab setFont:MainFontWithSize(13)];
@@ -78,9 +73,7 @@
     [_locationLab addGestureRecognizer:tapLocatin];
     [_locationLab setUserInteractionEnabled:YES];
     
-    [_shareLab setTextColor:ColorWhite];
-    [_shareLab setText:@"分享精彩直播"];
-    [_shareLab setFont:MainFontWithSize(15)];
+
     
         //share item
     UIBarButtonItem*(^shareItem)(NSString*,SEL) = ^(NSString*imageName,SEL sel){
@@ -98,10 +91,7 @@
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [_shareBar setItems:@[sina,space,qq,space,wechat,space,wechatTimline] animated:YES];
-    [_shareBar setBackgroundImage:UIImage.new forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [_shareBar setShadowImage:UIImage.new forToolbarPosition:UIBarPositionAny];
-    
+
     
     [_coverView setBackgroundColor:ColorBlackAlpha60];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addCoverImage:)];
@@ -130,16 +120,6 @@
         make.bottom.mas_equalTo(self.coverView).inset(8);
     }];
     
-    [self.shareLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.coverView);
-        make.centerY.mas_equalTo(self.shareBar);
-            //make.bottom.mas_equalTo(self.containerView).inset(18);
-    }];
-    [self.shareBar mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).inset(4);
-        make.bottom.mas_equalTo(self).inset(8);
-        make.height.mas_equalTo(30);
-    }];
 }
 
 - (void)fetchLocation:(UIGestureRecognizer*)tap{
@@ -154,7 +134,6 @@
         
         return;
     }
-    
     
         //跳转打开定位
     void(^openLocation)(void) = ^(){
@@ -239,13 +218,18 @@
     
         //
     CLGeocoder *geo = [[CLGeocoder alloc] init];
-    [geo reverseGeocodeLocation:locations.firstObject completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    CLLocation *location = locations.firstObject;
+    
+    [geo reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placemark = placemarks.firstObject;
             //市
-        NSString *locality = placemark.locality;
-        NSString *sublocality = placemark.subLocality;
+        NSString *locality      = placemark.locality;
+        NSString *sublocality   = placemark.subLocality;
+        NSString *thoroughfare  = placemark.thoroughfare;
         
-        NSString *loca = [NSString stringWithFormat:@"%@ - %@",locality,sublocality];
+        NSString *loca = [NSString stringWithFormat:@"%@ - %@ - %@",locality,sublocality,thoroughfare];
+        self.info = (GALocationInfo){location.coordinate.latitude,location.coordinate.longitude,loca};
+        
         [self.locationLab setText:loca];
     }];
 }

@@ -9,6 +9,7 @@
 #import "GALiveBroadcastControlView.h"
 #import "GACommentTextView.h"
 #import "GAGoodsPushSelectView.h"
+#import "GABeautyFilterView.h"
 
 #import <BarrageRenderer.h>
 #import <SocketRocket.h>
@@ -18,10 +19,12 @@
 
 @interface GALiveBroadcastControlView ()<BarrageRendererDelegate,SRWebSocketDelegate>
 @property(nonatomic,strong)UIButton *stopLiveBtn;   //!<退出直播
-@property(nonatomic,strong)UIButton *sendMSGBtn;    //!<发送消息
-@property(nonatomic,strong)UIButton *sendPrivateMSGBtn; //!<发送私信
+//@property(nonatomic,strong)UIButton *sendMSGBtn;    //!<发送消息
+//@property(nonatomic,strong)UIButton *sendPrivateMSGBtn; //!<发送私信
 
 @property(nonatomic,strong)BarrageRenderer *renderer;   //!<弹幕渲染
+
+@property(nonatomic,strong)UIButton *beautyView;        //!<美颜按钮
 
 // bottom
 @property(nonatomic,strong)UIButton *sendMSG;
@@ -42,39 +45,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        NSString *uid = @"14";
-        NSString *roomID = @"10004";
-        NSString *ltoken = @"122317461#$&*@hbdjbcaysg*())*&^%23131231";
-        NSString *ntime = @"";
-        
-        NSDate *date = [NSDate date];
-        NSTimeInterval interval = [date timeIntervalSince1970];
-        int t = (int)interval;
-        ntime = @(t).stringValue;
-        
-        
-        NSString *token = [NSString stringWithFormat:@"%@%@%@%@",uid,roomID,ltoken,ntime];
-        token  = [token md5String];
-        
-        NSDictionary *para = @{@"type":@"connect",
-                               @"uid":uid,
-                               @"uname":@"ios_test2",
-                               @"room_id":roomID,
-                               @"ntime":@(t).stringValue,
-                               @"ltoken":token,
-                               @"other_data":@""
-                               };
-        
-        NSData *data = [NSJSONSerialization dataWithJSONObject:para options:NSJSONWritingPrettyPrinted error:nil];
-        _data = data;
-        
-        NSString *api = @"ws://192.168.1.11:2000";
-        NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:api]];
-        
-        _socket = [[SRWebSocket alloc] initWithURLRequest:request];
-        [_socket setDelegate:self];
-        [_socket open];
-    
         [self setupUI];
     }
     return self;
@@ -93,6 +63,8 @@
     _stopLiveBtn = UIButton.new;
     [_stopLiveBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [_stopLiveBtn setTitle:@"退出直播" forState:UIControlStateNormal];
+    
+    
     
     [self addSubview:_stopLiveBtn];
     
@@ -152,7 +124,21 @@
 
 -(void)webSocketDidOpen:(SRWebSocket *)webSocket{
     NSLog(@"------------->>>>>>弹幕连接成功");
-    [self.socket send:self.data];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.liveMode.danmu.json options:NSJSONWritingSortedKeys error:nil];
+    [self.socket send:data];
+}
+
+- (void)setLiveMode:(GAOpenLiveModel *)liveMode{
+    if (_liveMode != liveMode) {
+        _liveMode = liveMode;
+        
+        NSString *api = @"ws://192.168.1.11:2000";
+        NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:api]];
+        
+        _socket = [[SRWebSocket alloc] initWithURLRequest:request];
+        [_socket setDelegate:self];
+        [_socket open];
+    }
 }
 
 #pragma mark - 弹幕处理
@@ -202,7 +188,17 @@
 
 - (void)onButtonAction:(UIButton*)send{
     if (send == self.stopLiveBtn) {
-        [self sendMSGToDelegateWithSel:@selector(stopLive)];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定结束直播？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self sendMSGToDelegateWithSel:@selector(stopLive)];
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:ok];
+        [alert addAction:cancel];
+        
+        [self rootVCPresentViewController:alert animated:YES completion:nil];
     }
 }
 

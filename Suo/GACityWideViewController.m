@@ -55,6 +55,8 @@ static CGFloat menuViewHeight = 38.0;
     frame.origin.y += menuViewHeight;
     frame.size.height -= menuViewHeight;
     
+    NSLog(@"self ----------------- %@",self.view);
+    
     return frame;
 }
 

@@ -1,21 +1,28 @@
 //
-//  GABaseModel.m
+//  GADanmuConnect.m
 //  Suo
 //
-//  Created by 怪兽 🐙 on 2019/7/27.
+//  Created by ysw on 2019/8/14.
 //  Copyright © 2019 怪兽 🐙. All rights reserved.
 //
 
-#import "GABaseModel.h"
+#import "GADanmuConnect.h"
 
-@implementation GABaseModel
-
+@implementation GADanmuConnect
 + (instancetype)instanceWithDict:(NSDictionary *)dict{
     return [[self alloc] initWithDict:dict];
 }
 - (instancetype)initWithDict:(NSDictionary *)dict{
+    if (self = [super initWithDict:dict]) {
+        _json = dict;
+        NSLog(@" >?????????????");
+    }
+    return self;
+}
+
+- (instancetype)init{
     if (self = [super init]) {
-        [self  mj_setKeyValues:dict];
+        NSLog(@">>>");
     }
     return self;
 }

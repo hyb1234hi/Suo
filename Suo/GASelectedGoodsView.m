@@ -22,9 +22,6 @@
 @property(nonatomic,strong)UILabel *titleLabel;     //!<标题
 @property(nonatomic,strong)UICollectionView *collectionView;
 
-
-
-
 @end
 
 @implementation GASelectedGoodsView

@@ -11,18 +11,25 @@
 #import "GALiveInfoView.h"
 #import "GABeautyFilterView.h"
 #import "GASelectedGoodsView.h"
+#import "GALiveTypeSelectedView.h"
+
+#import "GAAPI.h"
 
 @interface GAOpenLiveControlView ()
+
+@property(nonatomic,strong)UILabel *typeTitleLabel;
+@property(nonatomic,strong)UIButton *selectTypeBtn;     //!<选择直播类型按钮
 
 @property(nonatomic,strong)UIButton *switchCamera;      //!<切换相机
 @property(nonatomic,strong)UIButton *beautyBtn;         //!<美颜按钮
 @property(nonatomic,strong)UIButton *filterBtn;         //!<滤镜✨💫按钮
 @property(nonatomic,strong)UIButton *selectBtn;         //!<选择商品
-@property(nonatomic,strong)UIButton *startLiveBtn;      //!<开始直播
+
 
 @property(nonatomic,strong)GALiveInfoView *infoView;
-@property(nonatomic,strong)GASelectedGoodsView *selectedGoodsView; //!<直播商品
-@property(nonatomic,strong)GABeautyFilterView *beautyFilter;    //!<美颜&滤镜
+@property(nonatomic,strong)GASelectedGoodsView *selectedGoodsView;  //!<直播商品
+@property(nonatomic,strong)GABeautyFilterView *beautyFilter;        //!<美颜&滤镜
+@property(nonatomic,strong)GALiveTypeSelectedView *typeView;        //!<直播类型视图
 
 @end
 
@@ -40,8 +47,10 @@ static CGFloat space = 19.0;
             
             CGRect rect = [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
             CGFloat bottomOffset = CGRectGetHeight(rect);
-            [wself.infoView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(wself).inset(bottomOffset+20);
+            [wself.infoView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(wself).inset(space);
+                make.bottom.mas_equalTo(wself).inset(bottomOffset);
+                make.height.mas_equalTo(wself.infoView.mas_width).multipliedBy(151/375.0);
             }];
             [UIView animateWithDuration:0.35 animations:^{
                 [wself layoutIfNeeded];
@@ -55,7 +64,7 @@ static CGFloat space = 19.0;
 }
 
 - (void)setupUI{
-
+    _selectTypeBtn      = UIButton.new;
     _switchCamera       = UIButton.new;
     _beautyBtn          = UIButton.new;
     _filterBtn          = UIButton.new;
@@ -65,19 +74,26 @@ static CGFloat space = 19.0;
     _infoView           = GALiveInfoView.new;
     _selectedGoodsView  = GASelectedGoodsView.new;
     _beautyFilter       = GABeautyFilterView.new;
+    _typeView           = GALiveTypeSelectedView.new;
 
     [self addSubview:_switchCamera];
     [self addSubview:_beautyBtn];
     [self addSubview:_filterBtn];
     [self addSubview:_selectBtn];
     [self addSubview:_startLiveBtn];
-    
+    [self addSubview:_selectTypeBtn];
     [self addSubview:_infoView];
     [self addSubview:_selectedGoodsView];
     [self addSubview:_beautyFilter];
+    [self addSubview:_typeView];
+    
+    [_selectTypeBtn setBackgroundColor:UIColor.grayColor];
+    [_selectTypeBtn setTitle:@"直播类型 ▲" forState:UIControlStateNormal];
+    [_selectTypeBtn setTitle:@"直播类型 ▼" forState:UIControlStateSelected];
+    [_selectTypeBtn.titleLabel setFont:MainFontWithSize(15)];
     
     [_switchCamera setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [_switchCamera setTitle:@"switch" forState:UIControlStateNormal];
+    [_switchCamera setTitle:@"📷" forState:UIControlStateNormal];
     
     [_startLiveBtn setTitle:@"开启视频直播" forState:UIControlStateNormal];
     [_startLiveBtn.titleLabel setFont:MainFontWithSize(24)];
@@ -86,9 +102,8 @@ static CGFloat space = 19.0;
     [_startLiveBtn.layer setMasksToBounds:YES];
     
     
-    [_beautyBtn setTitle:@"美颜" forState:UIControlStateNormal];
-    [_filterBtn setTitle:@"滤镜" forState:UIControlStateNormal];
-    [_selectBtn setTitle:@"商品" forState:UIControlStateNormal];
+    [_beautyBtn setTitle:@"☠️" forState:UIControlStateNormal];
+    [_selectBtn setTitle:@"🛍" forState:UIControlStateNormal];
     
     //初始布局
     [self infoViewShowLayout];
@@ -96,6 +111,7 @@ static CGFloat space = 19.0;
     [self selectedGoodsViewHinddenLayout];
     
     UIControlEvents event = UIControlEventTouchUpInside ;
+    [_selectTypeBtn addTarget:self action:@selector(toggleSelectedTypeButton:) forControlEvents:event];
     [_filterBtn addTarget:self action:@selector(toggleFilterButton:) forControlEvents:event];
     [_beautyBtn addTarget:self action:@selector(toggleBeautyButton:) forControlEvents:event];
     [_selectBtn addTarget:self action:@selector(toggleSelectedGoodsButton:) forControlEvents:event];
@@ -108,32 +124,58 @@ static CGFloat space = 19.0;
     [_selectedGoodsView.layer setCornerRadius:corner];
     [_selectedGoodsView.layer setMasksToBounds:YES];
     
+    
+    [_startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        CGFloat space = 24.0;
+        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
+        make.height.mas_equalTo(70);
+    }];
+    
+    [self typeViewHinddenLayout];
+    
+    [self.filterBtn setUserInteractionEnabled:NO];
+    
+    __weak typeof(self) wself = self;
+    [_typeView setSelectedBlock:^(GALiveTypeModel * _Nonnull type) {
+        NSString *nor = [NSString stringWithFormat:@"%@ ▲",type.name];
+        NSString *sel = [NSString stringWithFormat:@"%@ ▼",type.name];
+        
+        [wself.selectTypeBtn setTitle:nor forState:UIControlStateNormal];
+        [wself.selectTypeBtn setTitle:sel forState:UIControlStateSelected];
+        wself.selectedType = type;
+        [wself typeViewHinddenLayout];
+        [wself.selectTypeBtn setSelected:NO];
+        
+    }];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    [self.selectTypeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self);
+        make.top.mas_equalTo(self).inset(self.safeAreaInsets.top);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    [self.selectTypeBtn.layer setCornerRadius:15];
+    [self.selectTypeBtn.layer setMasksToBounds:YES];
+    
+    
     [self.switchCamera mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.mas_equalTo(self).insets(UIEdgeInsetsMake(40, 0, 0, 20));
+        make.top.right.mas_equalTo(self).insets(UIEdgeInsetsMake(self.safeAreaInsets.top,0,0,20));
     }];
+    
     [self.beautyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.switchCamera);
-        make.top.mas_equalTo(self.switchCamera.mas_bottom).inset(16);
+        make.left.top.mas_equalTo(self).insets(UIEdgeInsetsMake(self.safeAreaInsets.top, 20, 0, 0));
     }];
-    [self.filterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.switchCamera);
-        make.top.mas_equalTo(self.beautyBtn.mas_bottom).inset(16);
-    }];
+    
+    
     [self.selectBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.switchCamera);
-        make.top.mas_equalTo(self.filterBtn.mas_bottom).inset(16);
+        make.left.mas_equalTo(self.beautyBtn.mas_right).inset(20);
+        make.top.mas_equalTo(self.beautyBtn);
     }];
 
-//    [self.startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        CGFloat space = 24.0;
-//        make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
-//        make.height.mas_equalTo(70);
-//    }];
+ 
 }
 
 - (void)setParams:(GABeautyFilterParams *)params{
@@ -158,12 +200,12 @@ static CGFloat space = 19.0;
         make.bottom.mas_equalTo(self.startLiveBtn.mas_top).inset(20);
         make.height.mas_equalTo(self.infoView.mas_width).multipliedBy(151/375.0);
     }];
-    [self.startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [_startLiveBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         CGFloat space = 24.0;
         make.left.bottom.right.mas_equalTo(self).insets(UIEdgeInsetsMake(0, space, SafeAreaBottomHeight + space, space));
         make.height.mas_equalTo(70);
     }];
-    
+
     [UIView animateWithDuration:0.35 animations:^{
         [self layoutIfNeeded];
     }];
@@ -175,7 +217,6 @@ static CGFloat space = 19.0;
         make.height.mas_equalTo(70);
     }];
 }
-
 
 - (void)selectedGoodsViewHinddenLayout{
     [_selectedGoodsView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -225,6 +266,28 @@ static CGFloat space = 19.0;
     } completion:^(BOOL finished) {}];
 }
 
+- (void)typeViewHinddenLayout{
+    [self.typeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.startLiveBtn);
+        make.top.mas_equalTo(self.selectTypeBtn.mas_bottom).inset(8);
+        make.height.mas_equalTo(0);
+    }];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
+}
+- (void)typeViewShowLayout{
+    [self.typeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.startLiveBtn);
+        make.top.mas_equalTo(self.selectTypeBtn.mas_bottom).inset(8);
+        make.height.mas_equalTo(self.typeView.mas_width).multipliedBy(167/383.0);
+    }];
+    [UIView animateWithDuration:0.25 animations:^{
+        [self layoutIfNeeded];
+    }];
+
+}
+
 //注销响应者， 恢复布局
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self endEditing:YES];
@@ -232,11 +295,23 @@ static CGFloat space = 19.0;
         //恢复原始布局
     [self selectedGoodsViewHinddenLayout];
     [self beautyFilterViewHinddenLayout];
+    [self typeViewHinddenLayout];
     
     [self infoViewShowLayout];
 }
 #pragma mark button Action
-
+- (void)toggleSelectedTypeButton:(UIButton*)send{
+    BOOL selected = send.selected;
+    [send setSelected:!selected];
+    
+    if (!selected) {
+        [self selectedGoodsViewHinddenLayout];
+        [self beautyFilterViewHinddenLayout];
+        [self typeViewShowLayout];
+    }else{
+        [self typeViewHinddenLayout];
+    }
+}
 - (void)toggleSwitchCamera:(UIButton*)send{
     if ([self.delegate respondsToSelector:@selector(switchCamera)]) {
         [self.delegate switchCamera];
@@ -246,6 +321,7 @@ static CGFloat space = 19.0;
 - (void)toggleBeautyButton:(UIButton*)send{
     [self infoViewHinddenLayout];
     [self selectedGoodsViewHinddenLayout];
+    [self typeViewHinddenLayout];
     
     [self beautyFilterViewShowLayout];
     [self.beautyFilter selectedState:BFViewStateBeauty];
@@ -253,6 +329,7 @@ static CGFloat space = 19.0;
 - (void)toggleFilterButton:(UIButton*)send{
     [self infoViewHinddenLayout];
     [self selectedGoodsViewHinddenLayout];
+    [self typeViewHinddenLayout];
     
     [self beautyFilterViewShowLayout];
     [self.beautyFilter selectedState:BFViewStateFilter];
@@ -260,6 +337,7 @@ static CGFloat space = 19.0;
 - (void)toggleSelectedGoodsButton:(UIButton*)send{
     [self infoViewHinddenLayout];
     [self beautyFilterViewHinddenLayout];
+    [self typeViewHinddenLayout];
     
      [self selectedGoodsViewShowLayout];
 }
@@ -269,10 +347,8 @@ static CGFloat space = 19.0;
     if ([self.delegate respondsToSelector:@selector(startLiveWiteTitle:image:location:selectedGoods:)]) {
         NSString *title = self.infoView.titleTextField.text;
         UIImage *image =  self.infoView.coverView.image;
-        CLLocationCoordinate2D location = self.infoView.manager.location.coordinate;
         
-        
-        [self.delegate startLiveWiteTitle:title image:image location:location selectedGoods:self.selectedGoodsView.goodsArray];
+        [self.delegate startLiveWiteTitle:title image:image location:self.infoView.info selectedGoods:self.selectedGoodsView.goodsArray];
     }
 }
 
