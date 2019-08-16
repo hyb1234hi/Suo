@@ -45,27 +45,23 @@
     UIBarButtonItem *chatItem = [[UIBarButtonItem alloc] initWithCustomView:chatBtn];
     self.navigationItem.rightBarButtonItem = chatItem;
 
-
-    //[self setShowOnNavigationBar:YES];
     [self setMenuViewStyle:WMMenuViewStyleLine];
     [self setProgressColor:UIColor.redColor];
     [self setProgressViewCornerRadius:2.0];
     [self setProgressHeight:4];
     [self setProgressWidth:40];
     [self setTitleFontName:@"Helvetica-BoldOblique"];
+   
     
     [self.menuView reload];
     [self reloadData];
     [self.menuView selectItemAtIndex:0];
-    
-
 }
 
 - (void)rightItemClick {
     GALiveChatViewController *chatVC = GALiveChatViewController.new;
     [self.navigationController pushViewController:chatVC animated:YES];
 }
-
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -99,7 +95,6 @@
     
     return vc;
 }
-
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
     [menuView setBackgroundColor:UIColor.whiteColor];

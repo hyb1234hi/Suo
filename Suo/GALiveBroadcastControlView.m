@@ -12,6 +12,7 @@
 #import "GABeautyFilterView.h"
 
 #import "GABeautyFilterView.h"
+#import "GALiveMessageView.h"
 
 #import <BarrageRenderer.h>
 #import <SocketRocket.h>
@@ -27,7 +28,9 @@
 @property(nonatomic,strong)UIButton *beautyBtn;     //!<美颜按钮
 
 @property(nonatomic,strong)GABeautyFilterView *beautyView;  //!<美颜视图
-@property(nonatomic,strong)BarrageRenderer *renderer;   //!<弹幕渲染
+@property(nonatomic,strong)BarrageRenderer *renderer;       //!<弹幕渲染
+@property(nonatomic,strong)GALiveMessageView *messageView;
+
 
 @property(nonatomic,strong)SRWebSocket *socket;
 @property(nonatomic,strong)NSData *data;
@@ -43,6 +46,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self setupUI];
     }
     return self;
@@ -51,7 +55,8 @@
 - (void)setupUI{
     _renderer       = [[BarrageRenderer alloc] init];
     _beautyView     = [[GABeautyFilterView alloc] init];
-    
+    _messageView    = [[GALiveMessageView alloc] init];
+
     _stopLiveBtn    = UIButton.new;
     _beautyBtn      = UIButton.new;
     _sendMSG        = UIButton.new;
@@ -65,6 +70,7 @@
     [self addSubview:_beautyView];
     [self addSubview:_sendMSG];
     [self addSubview:_pushGoods];
+    [self addSubview:_messageView];
     
     [_renderer setDelegate:self];
     [_renderer setSmoothness:0.8];
@@ -116,6 +122,12 @@
     [self.beautyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(self).insets(UIEdgeInsetsMake(11, 16, 0, 0));
         make.size.mas_equalTo(CGSizeMake(70, 30));
+    }];
+    
+    [self.messageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(6, 0, 0, 6));
+        make.bottom.mas_equalTo(self.sendMSG.mas_top).inset(4);
+        make.height.mas_equalTo(180);
     }];
 
 }
@@ -236,6 +248,9 @@
         
         [self.socket send:text];
         [self.renderer receive:desc];
+        
+        [self.messageView sendMessage:@{@"send sss > ":text}];
+        
     }];
     [text show];
 }

@@ -41,6 +41,7 @@ static CGFloat space = 19.0;
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
         
+        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         __weak typeof(self) wself = self;
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {

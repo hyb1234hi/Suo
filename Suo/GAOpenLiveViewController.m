@@ -151,7 +151,7 @@ AlivcLivePusherCustomDetectorDelegate
     
     //直播
     void(^beginLive)(NSString* rtmpURL) = ^(NSString* url){
-        NSLog(@"url -- %@",url);
+        //NSLog(@"url -- %@",url);
         
         [self.liveBroadcast setPusher:self.pusher];
         [self.liveBroadcast setParams:self.params];
@@ -182,7 +182,7 @@ AlivcLivePusherCustomDetectorDelegate
     
     [GAAPI.new.videoAPI openLiveWithKey:self.loginKey title:title type:type coverImage:cover tag:nil goodsList:idArray lng:info.lng lat:info.lat address:info.address completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
         if ([json valueForKey:@"datas"]) {
-        
+            NSLog(@"json --- %@",json);
             self.liveModel = [GAOpenLiveModel instanceWithDict:[json valueForKey:@"datas"]];
             //NSString *url = [json valueForKeyPath:@"datas.push_url"];
             [self.openLiveHUD removeFromSuperview];
