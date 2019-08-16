@@ -12,7 +12,7 @@
 @interface GACommentTextView ()<UITextViewDelegate>
 @property(nonatomic,strong) UIView *container;
 
-@property(nonatomic,assign) int  maxChart;
+@property(nonatomic,strong)UILabel *textLengLabel;
 
 @property(nonatomic,strong) UIToolbar *toolBar;
 @property(nonatomic,strong) UIBarButtonItem *imageItem;
@@ -24,6 +24,7 @@
     if (self = [super initWithFrame:ScreenBounds]) {
         [self setBackgroundColor:ColorBlackAlpha40];
         
+        _textLength = 0;
         _container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 160)];
         [_container setBackgroundColor:UIColor.whiteColor];
         
@@ -32,10 +33,16 @@
         [_textView.layer setCornerRadius:6];
         [_textView.layer setMasksToBounds:YES];
         [_textView setDelegate:self];
-        [_textView setScrollEnabled:NO];
+        [_textView setScrollEnabled:YES];
         [_textView setReturnKeyType:UIReturnKeySend];
         [_textView sizeToFit];
         [_textView setFont:BigFont];
+        [_textView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
+        
+        _textLengLabel = UILabel.new;
+        [_textLengLabel setTextColor:UIColor.redColor];
+        [_textLengLabel setHidden:YES];
+        [_textLengLabel setFont:MainFontWithSize(14)];
 
         UIImage *image = [UIImage imageNamed:@"icon_home_like_after"];
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -53,6 +60,8 @@
         [_emojiItem setEnabled:NO];  //暂时无用；
         [_toolBar setItems:@[_imageItem,fixbale,_emojiItem]];
         
+    
+        [_container addSubview:_textLengLabel];
         [_container addSubview:_textView];
         [_container addSubview:_toolBar];
         
@@ -68,37 +77,47 @@
     [super layoutSubviews];
     
     [_textView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(self.container).insets(UIEdgeInsetsMake(6, 16, 6, 16));
+        make.left.top.right.mas_equalTo(self.container).insets(UIEdgeInsetsMake(6, 16, 6, 50));
         make.bottom.mas_equalTo(self.toolBar.mas_top).inset(6);
     }];
+    [_textLengLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.textView);
+        make.left.mas_equalTo(self.textView.mas_right).inset(2);
+        make.right.mas_equalTo(self.container).inset(2);
+    }];
+    
     [_toolBar mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.mas_equalTo(self.container);
         make.height.mas_equalTo(44);
     }];
+    
+    
+}
+
+- (void)setTextLength:(NSUInteger)textLength{
+    
+    [self.textLengLabel setHidden:textLength<=0];
+    if (_textLength != textLength) {
+        _textLength = textLength;
+        [_textLengLabel setText:@(textLength).stringValue];
+    }
 }
 
 #pragma mark - ========== textViewDelegate
 - (void)textViewDidChange:(UITextView *)textView{
     
-//    CGFloat newHeight = 170 ;// 计算新高度
-//    NSLayoutConstraint *constraint = [[_container constraints] objectAtIndex:0];
-//    constraint.constant = newHeight;
-    
-//    [textView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_equalTo(textView.contentSize.height);
-//    }];
-    
-//    CGFloat h = 12+44+ textView.contentSize.height;
-//    CGRect frame = self.container.frame;
-//    frame.size.height  = h ;
-//    [self.container setFrame:frame];
-//    NSLog(@"h --- %f",h);
-//    //[self.textView.inputAccessoryView setFrame:frame];
-//    [self.textView setInputAccessoryView:self.container];
+    int length = (int)(_textLength - textView.text.length);
+    [_textLengLabel setText:@(length).stringValue];
 }
 
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if (range.length > 0) {  //length == 删除  && text = @""
+        return YES;
+    }
+    
+
     if ([text isEqualToString:@"\n"]) {
         if (self.delegate) {
             [self.delegate sendComment:textView.text];
@@ -112,6 +131,11 @@
         [self dismiss];
         return NO;
     }
+    
+    if (textView.text.length+text.length > _textLength && _textLength != 0 ) {
+        return NO;
+    }
+    
     return YES;
 }
 

@@ -129,6 +129,80 @@
  @param completion 数据回调
  */
 - (void)fetchLiveTypeForKey:(NSString*)key completion:(CallBack)completion;
+
+
+/**
+ 退出直播
+
+ @param key         用户key
+ @param completion  数据返回
+ */
+- (void)closeLiveForKey:(NSString*)key completion:(CallBack)completion;
+
+
+/**
+ 发送弹幕
+
+ @param key         用户key
+ @param roomID      房间号
+ @param msg         弹幕文字
+ @param completion  数据回调
+ */
+- (void)sendBarrageForKey:(NSString*)key roomID:(NSString*)roomID msg:(NSString*)msg completion:(CallBack)completion;
+
+
+
+/**
+ 打赏礼物
+
+ @param key 用户key
+ @param roomID 房间id
+ @param num 打赏数量
+ @param giftID 礼物id
+ @param pwd 密码MD5
+ @param completion 数据返回
+ */
+- (void)rewardForKey:(NSString*)key roomID:(NSString*)roomID num:(NSString*)num giftID:(NSString*)giftID pwd:(NSString*)pwd completion:(CallBack)completion;
+
+
+
+/**
+ 获取可打赏礼物列表
+
+ @param completion 数据回调
+ */
+- (void)fetchRewardListWithCompletion:(CallBack)completion;
+
+
+/**
+ 直播点赞
+
+ @param key         用户key
+ @param roomID      房间id
+ @param completion  数据回调
+ */
+- (void)liveLikeForKey:(NSString*)key roomID:(NSString*)roomID completion:(CallBack)completion;
+
+
+/**
+ 直播推送商品
+
+ @param key         用户key
+ @param goodsID     商品id
+ @param completion  数据回调
+ */
+- (void)livePushGoodsForKey:(NSString*)key goodsID:(NSString*)goodsID completion:(CallBack)completion;
+
+
+/**
+ 商品推送消息
+
+ @param roomID      房间id
+ @param type        视频类型
+ @param key         用户key
+ @param completion  数据回调
+ */
+- (void)fetchGoodsPushMessageForRoomID:(NSString*)roomID videoType:(NSString*__nullable)type key:(NSString*__nullable)key completion:(CallBack __nullable)completion;
 @end
 
 

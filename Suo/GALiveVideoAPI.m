@@ -141,7 +141,7 @@
     str = [NSString stringWithFormat:@"%@",str].mutableCopy;
     [payload setValue:str forKey:@"goods_id_arr"];
    
-    api = @"http://www.suo.com/api/mobile/index.php?w=live_center&t=open_live";
+    api = [rootPath stringByAppendingPathComponent:api];
     AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
     manage.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
     [manage POST:api parameters:payload constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -170,6 +170,79 @@
     
     NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"GET"];
     [self dataTaskWithRequest:request dataCallback:completion];
+}
+
+-(void)closeLiveForKey:(NSString *)key completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live_center&t=end_live";
+    NSMutableDictionary *payload = @[].mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
+
+- (void)sendBarrageForKey:(NSString *)key roomID:(NSString *)roomID msg:(NSString *)msg completion:(CallBack)completion{
+    NSString *api  = @"api/mobile/index.php?w=live_danmu&t=sendMsg";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:roomID forKey:@"room_id"];
+    [payload setValue:msg forKey:@"msg"];
+    
+    NSURLRequest *request = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:request dataCallback:completion];
+}
+
+- (void)rewardForKey:(NSString *)key roomID:(NSString *)roomID num:(NSString *)num giftID:(NSString *)giftID pwd:(NSString *)pwd completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?t=post_gift&w=member_payment";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:roomID forKey:@"room_id"];
+    [payload setValue:num forKey:@"num"];
+    [payload setValue:giftID forKey:@"gift_id"];
+    [payload setValue:pwd forKey:@"pwd"];
+    
+    NSURLRequest *re = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:re dataCallback:completion];
+    
+}
+
+- (void)fetchRewardListWithCompletion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live&t=get_gift_list";
+    
+    NSURLRequest *re = [self createRequestWithPath:api parameter:nil method:@"GET"];
+    [self dataTaskWithRequest:re dataCallback:completion];
+    
+}
+
+- (void)liveLikeForKey:(NSString *)key roomID:(NSString *)roomID completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live_member_center&t=like_live";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:roomID forKey:@"room_id"];
+    
+    NSURLRequest *re = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:re dataCallback:completion];
+}
+
+- (void)livePushGoodsForKey:(NSString *)key goodsID:(NSString *)goodsID completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live_center&t=push_goods";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    [payload setValue:key forKey:@"key"];
+    [payload setValue:goodsID forKey:@"goods_id"];
+    
+    
+    NSURLRequest *re = [self createRequestWithPath:api parameter:payload method:@"POST"];
+    [self dataTaskWithRequest:re dataCallback:completion];
+}
+
+- (void)fetchGoodsPushMessageForRoomID:(NSString *)roomID videoType:(NSString *)type key:(NSString *)key completion:(CallBack)completion{
+    NSString *api = @"api/mobile/index.php?w=live&t=room";
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    
+    [self GETWithAPI:api parameter:payload completion:completion];
+    
+//    NSURLRequest *re = [self createRequestWithPath:api parameter:payload method:@"GET"];
+//    [self dataTaskWithRequest:re dataCallback:completion];
 }
 @end
 

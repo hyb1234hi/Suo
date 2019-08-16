@@ -8,18 +8,44 @@
 
 #import "GABaseAPI.h"
 #import <CoreServices/CoreServices.h>
+
 #import <AFNetworking.h>
 
+@interface GABaseAPI ()
+@property(nonatomic,strong)NSSet<NSString*> *contenTypes;
 
-static NSString *const rootPath = @"http://www.suo.com";
+@end
+
 @implementation GABaseAPI
+- (instancetype)init{
+    if (self  = [super init]) {
+        _contenTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
+    }
+    return self;
+}
 
-
-
+- (void)POSTWithAPI:(NSString*)api parameter:(NSDictionary*)parameter completion:(CallBack)completion{
+    api = [rootPath stringByAppendingPathComponent:api];
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    manage.responseSerializer.acceptableContentTypes = self.contenTypes;
+    
+    [manage POST:api parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//        NSData *data = UIImagePNGRepresentation(image);
+//        [formData appendPartWithFileData:data name:@"cover_img" fileName:@"cover_img.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {}
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (completion) {
+            completion(responseObject,task.response);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (completion) {
+            completion(@{@"error":error},task.response);
+        }
+    }];
+}
 
 // 默认 POST
 - (NSURLRequest *)createRequestWithPath:(NSString*)path parameter:(NSDictionary *)parameter method:(NSString *)method{
-    
     
 
     if ([method isEqualToString:@"GET"]) {
@@ -86,16 +112,6 @@ static NSString *const rootPath = @"http://www.suo.com";
 //                [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
             }
             [httpBody appendData:[paraValue dataUsingEncoding:NSUTF8StringEncoding]];
-            
-        } if ([parameterValue isKindOfClass:UIImage.class]) {
-            
-            [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-            [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.png\"\r\n",parameterKey,parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
-            [httpBody appendData:[@"Content-Type=image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-            NSData *data = UIImagePNGRepresentation(parameterValue);
-            [httpBody appendData:data];
-            [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-            //[httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
             
         } else{
             [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

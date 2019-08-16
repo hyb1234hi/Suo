@@ -23,7 +23,8 @@
 @interface GAOpenLiveViewController (CameraSetter)
 <
 AlivcLivePusherCustomFilterDelegate,
-AlivcLivePusherCustomDetectorDelegate
+AlivcLivePusherCustomDetectorDelegate,
+AlivcLivePusherInfoDelegate
 >
 
 @end
@@ -39,6 +40,10 @@ AlivcLivePusherCustomDetectorDelegate
 @property(nonatomic,strong)GAOpenLiveModel *liveModel;
 
 @property(nonatomic,strong)MBProgressHUD *openLiveHUD;  //开播请求数据 状态反馈
+
+@property(nonatomic,assign)int totalTime;       //!<秒
+@property(nonatomic,strong)UILabel *timeLabel;  //!<计时显示
+@property(nonatomic,strong)NSTimer *timer;      //!<直播计时器
 
 
 @end
@@ -64,20 +69,21 @@ AlivcLivePusherCustomDetectorDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:RGBA(80, 185, 249, 1)];
-
+    
+    
+    _totalTime = 0;
     _params = [GABeautyFilterParams defaultBeautyParamsWithLevel:GABeautyParamsLevel4];
     
-    //初始化推流、相机
-    ({
-        GALivePushConfig *cfg = [[GALivePushConfig alloc] init];
-        [cfg setParams:_params];
-        
-       // [AlivcLivePusher showDebugView];
-        self.pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
-        
-        [self.pusher setCustomFilterDelegate:self];
-        [self.pusher setCustomDetectorDelegate:self];
-    });
+  
+    GALivePushConfig *cfg = [[GALivePushConfig alloc] init];
+    [cfg setParams:_params];
+   // [AlivcLivePusher showDebugView];
+    self.pusher = [[AlivcLivePusher alloc] initWithConfig:cfg];
+    
+    [self.pusher setCustomFilterDelegate:self];
+    [self.pusher setCustomDetectorDelegate:self];
+    [self.pusher setInfoDelegate:self];
+ 
     
     [self setupUI];
     [self.controlView setParams:self.params];
@@ -86,6 +92,7 @@ AlivcLivePusherCustomDetectorDelegate
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [swipe setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipe];
+    
 }
 
 - (void)setupUI{
@@ -93,6 +100,11 @@ AlivcLivePusherCustomDetectorDelegate
     [self.controlView setFrame:self.view.bounds];
     [self.controlView setDelegate:self];
     
+    self.timeLabel = UILabel.new;
+    [self.timeLabel  setFont:MainFontWithSize(22)];
+    [self.timeLabel setTextColor:UIColor.whiteColor];
+    
+    [self.view addSubview:self.timeLabel];
     [self.view addSubview:self.controlView];
 }
 
@@ -101,7 +113,10 @@ AlivcLivePusherCustomDetectorDelegate
     
     [self.navigationController setNavigationBarHidden:YES];
     [self.pusher startPreview:self.view];
-    [self.view insertSubview:self.controlView atIndex:1]; //移到上层
+    
+    //移到上层
+    [self.view addSubview:self.timeLabel];
+    [self.view addSubview:self.controlView];
 
 }
 - (void)viewDidLayoutSubviews{
@@ -110,6 +125,11 @@ AlivcLivePusherCustomDetectorDelegate
     [self.controlView  mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view).insets(self.view.safeAreaInsets);
     }];
+    
+    [self.timeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.mas_equalTo(self.view).insets(UIEdgeInsetsMake(self.view.safeAreaInsets.top+8, 0, 0, 16));
+    }];
+    
 }
 
 #pragma mari - getter
@@ -122,6 +142,20 @@ AlivcLivePusherCustomDetectorDelegate
     return _liveBroadcast;
 }
 
+- (NSTimer *)timer{
+    if (!_timer) {
+        __weak typeof(self) wself = self;
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            wself.totalTime += 1;
+            
+            NSString *min = [NSString stringWithFormat:@"%.02d",wself.totalTime/60];
+            NSString *sec = [NSString stringWithFormat:@"%.02d",wself.totalTime%60];
+            NSString *text = [NSString stringWithFormat:@"%@:%@",min,sec];
+            [wself.timeLabel setText:text];
+        }];
+    }
+    return _timer;
+}
 
 
 #pragma mark - GAOpenLiveControllerDelegate
@@ -182,9 +216,9 @@ AlivcLivePusherCustomDetectorDelegate
     
     [GAAPI.new.videoAPI openLiveWithKey:self.loginKey title:title type:type coverImage:cover tag:nil goodsList:idArray lng:info.lng lat:info.lat address:info.address completion:^(NSDictionary * _Nonnull json, NSURLResponse * _Nonnull response) {
         if ([json valueForKey:@"datas"]) {
-            NSLog(@"json --- %@",json);
+            //NSLog(@"json --- %@",json);
+            
             self.liveModel = [GAOpenLiveModel instanceWithDict:[json valueForKey:@"datas"]];
-            //NSString *url = [json valueForKeyPath:@"datas.push_url"];
             [self.openLiveHUD removeFromSuperview];
             beginLive(self.liveModel.push_url);
         }else{
@@ -274,6 +308,75 @@ AlivcLivePusherCustomDetectorDelegate
 - (void)onDestoryDetector:(AlivcLivePusher *)pusher
 {
     [[AlivcLibFaceManager shareManager] destroy];
+}
+
+
+
+#pragma mark - AlivcLivePusherInfoDelegate
+/**
+ 推流开始回调
+ 
+ @param pusher 推流AlivcLivePusher
+ */
+- (void)onPushStarted:(AlivcLivePusher *)pusher{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timer fire];
+    });
+}
+
+
+/**
+ 推流暂停回调
+ 
+ @param pusher 推流AlivcLivePusher
+ */
+- (void)onPushPaused:(AlivcLivePusher *)pusher{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timer invalidate];
+        self.timer = nil;
+    });
+}
+
+
+/**
+ 推流恢复回调
+ 
+ @param pusher 推流AlivcLivePusher
+ */
+- (void)onPushResumed:(AlivcLivePusher *)pusher{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timer invalidate];
+        self.timer = nil;
+        [self.timer fire];
+    });
+}
+
+
+/**
+ 重新推流回调
+ 
+ @param pusher 推流AlivcLivePusher
+ */
+- (void)onPushRestart:(AlivcLivePusher *)pusher{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timer invalidate];
+        self.timer = nil;
+        [self.timer fire];
+    });
+
+}
+
+
+/**
+ 推流停止回调
+ 
+ @param pusher 推流AlivcLivePusher
+ */
+- (void)onPushStoped:(AlivcLivePusher *)pusher{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.timer invalidate];
+        self.timer = nil;
+    });
 }
 
 @end

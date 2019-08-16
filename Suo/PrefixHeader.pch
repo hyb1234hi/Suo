@@ -92,6 +92,17 @@ alpha:1.0]
 
 //iPhoneX
 #define isIPhoneX       ((CGRectGetHeight([UIScreen mainScreen].bounds) >= 812)&&([[UIDevice currentDevice].model isEqualToString:@"iPhone"]))
+// 判断iPhoneX
+#define IS_iPhoneX (\
+{\
+BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);}\
+)
+
+#define GAVIEWBOTTOMMARGIN (IS_iPhoneX ? 34.f : 0.f)
 
 #define ScreenBounds    ([[UIScreen  mainScreen] bounds])
 #define ScreenWidth     (CGRectGetWidth([UIScreen mainScreen].bounds))
@@ -105,6 +116,9 @@ alpha:1.0]
 //URL
 #define RTMPURL_UP      @"rtmp://gajz.live.push.zsepoch.com/live/iOS?txSecret=1db0e2fcc1c3d61e9ebe4e63b6c7eaea&txTime=5D4D6E50"
 #define RTMPURL_PULL    @"rtmp://gajz.live.play.zsepoch.com/live/test_atangge?txSecret=604bd314c34586e6c366f3beaf922bd7&txTime=5D3ED1B0"
+// 弹幕地址
+#define Barrage_URL     @"ws://192.168.1.11:2000"
+#define Domain_URL      @"http://www.suo.com"
 
 //Pay and share
 #define AlipayAppID     @""
@@ -113,10 +127,26 @@ alpha:1.0]
 #define TencentAppID    @""
 #define WXSecret        @""
 
+// chat
+#define HXAppID         @"easemob-demo#chatdemoui"
+//消息动图
+#define MSG_EXT_GIF_ID @"em_expression_id"
+#define MSG_EXT_GIF @"em_is_big_expression"
+
+#define CALL_SELECTCONFERENCECELL @"EMSelectConferenceCell"
+
 #import <Masonry.h>
 #import <UIButton+LXMImagePosition.h>
 
 #import "NSObject+GAExtension.h"
 #import "UIView+GAExtension.h"
+#import "SVProgressHUD.h"
+#import "UIView+WebCache.h"
+#ifdef __OBJC__
+// 包含实时音视频功能 SDK 的头文件
+#import <Hyphenate/Hyphenate.h>
+// UI 头文件
+#endif
 
 #endif /* PrefixHeader_pch */
+

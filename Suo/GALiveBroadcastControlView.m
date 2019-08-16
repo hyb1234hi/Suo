@@ -33,7 +33,7 @@
 
 
 @property(nonatomic,strong)SRWebSocket *socket;
-@property(nonatomic,strong)NSData *data;
+
 
 @end
 
@@ -42,6 +42,8 @@
 - (void)dealloc{
     [_socket close];
     _socket = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserverBlocks];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -99,6 +101,36 @@
     [_pushGoods addTarget:self action:@selector(onPushGoods:) forControlEvents:events];
     [_beautyBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:events];
     [_stopLiveBtn addTarget:self action:@selector(onButtonAction:) forControlEvents:events];
+    
+    
+    
+    __weak typeof(self) wself = self;
+    void(^normalLayout)(void) = ^{
+        [wself.messageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(wself).insets(UIEdgeInsetsMake(6, 0, 0, 6));
+            make.bottom.mas_equalTo(wself.sendMSG.mas_top).inset(4);
+            make.height.mas_equalTo(180);
+        }];
+    };
+    normalLayout();
+    
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        CGRect frame = [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        CGFloat bottomOffset = CGRectGetHeight(frame);
+        [wself.messageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(wself).insets(UIEdgeInsetsMake(6, 0, 0, 6));
+            make.bottom.mas_equalTo(wself).inset(bottomOffset-(wself.safeAreaInsets.bottom));
+            make.height.mas_equalTo(180);
+        }];
+        [UIView animateWithDuration:0.25 animations:^{
+            [wself layoutIfNeeded];
+        }];
+    }];
+    [nc addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        normalLayout();
+    }];
 }
 
 - (void)layoutSubviews{
@@ -124,11 +156,7 @@
         make.size.mas_equalTo(CGSizeMake(70, 30));
     }];
     
-    [self.messageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self).insets(UIEdgeInsetsMake(6, 0, 0, 6));
-        make.bottom.mas_equalTo(self.sendMSG.mas_top).inset(4);
-        make.height.mas_equalTo(180);
-    }];
+
 
 }
 
@@ -169,24 +197,37 @@
     if (_pusher != pusher) {
         _pusher = pusher;
         [_beautyView setPusher:pusher];
+        if ([pusher isPushing]) {
+            
+        }
     }
 }
+
+
 
 #pragma mark - SRWebSocketDelegate
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message{
     NSLog(@"接收 >>>>>>>>>>>>>>>>>> %@",message);
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-    NSString *b = [dict valueForKeyPath:@"data.msg"];
+    if ([[dict valueForKey:@"type"] isEqualToString:@"connect"]) {
+        
+        NSString *msg = [dict valueForKeyPath:@"data.msg"];
+        NSString *name = [dict valueForKey:@"uname"];
+        [self.messageView sendMessage:@{name:msg}];
+    }
     
-    [self.renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideDefault msg:b]];
+
+    //[self.renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideDefault msg:msg]];
+    
+    
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
     NSLog(@"弹幕连接错误 ---->%@",error);
 }
 
 -(void)webSocketDidOpen:(SRWebSocket *)webSocket{
-    NSLog(@"------------->>>>>>弹幕连接成功");
+    //NSLog(@"------------->>>>>>弹幕连接成功");
     NSData *data = [NSJSONSerialization dataWithJSONObject:self.liveMode.danmu.json options:NSJSONWritingSortedKeys error:nil];
     [self.socket send:data];
 }
@@ -195,7 +236,7 @@
     if (_liveMode != liveMode) {
         _liveMode = liveMode;
         
-        NSString *api = @"ws://192.168.1.11:2000";
+        NSString *api = Barrage_URL;
         NSMutableURLRequest *request =  [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:api]];
         
         _socket = [[SRWebSocket alloc] initWithURLRequest:request];
@@ -243,14 +284,24 @@
 }
 - (void)onSendMSG:(UIButton*)send{
     GACommentTextView *text = GACommentTextView.new;
+    [text setBackgroundColor:UIColor.clearColor];
+    [text setTextLength:120];
+    
+    CGRect frame = text.frame;
+    frame.size.height -= 40;
+    [text setFrame:frame];
+    
     [text setSendComment:^(NSString * _Nonnull text) {
         BarrageDescriptor *desc = [self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideDefault  msg:text];
         
         [self.socket send:text];
         [self.renderer receive:desc];
         
-        [self.messageView sendMessage:@{@"send sss > ":text}];
-        
+        [UIView animateWithDuration:0.25 animations:^{
+            
+        } completion:^(BOOL finished) {
+             [self.messageView sendMessage:@{@"send sss > ":text}];
+        }];
     }];
     [text show];
 }

@@ -34,7 +34,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
-       // [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [_tableView registerClass:_MessageCell.class forCellReuseIdentifier:_MessageCell.identifier];
         [_tableView setBackgroundColor:UIColor.clearColor];
         [_tableView setEstimatedRowHeight:120];
@@ -67,7 +67,6 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     cell.message = [self.messae objectAtIndex:indexPath.row];
-    [cell setBackgroundColor:UIColor.redColor];
     
     return cell;
 }
@@ -83,8 +82,6 @@
     
     [self.tableView endUpdates];
     
-   // [self.tableView reloadData];
-   // [self.tableView reloadRowsAtIndexPaths:@[indexPath,] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 @end
@@ -99,8 +96,10 @@
         
         _contentLabel = GALabel.new;
         [_contentLabel setNumberOfLines:0];
-        [_contentLabel setBackgroundColor:ColorBlackAlpha20];
+        [_contentLabel setBackgroundColor:ColorBlackAlpha40];
         [_contentLabel setTextInsets:UIEdgeInsetsMake(2, 4, 2, 4)];
+        [_contentLabel.layer setCornerRadius:6];
+        [_contentLabel.layer setMasksToBounds:YES];
         
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addSubview:_contentLabel];
@@ -112,7 +111,7 @@
     [super layoutSubviews];
 
     [self.contentLabel setPreferredMaxLayoutWidth:CGRectGetWidth(self.bounds)-8];
-    [self.contentLabel setupMaskWithCorner:6.0 rectCorner:UIRectCornerAllCorners];
+    //[self.contentLabel setupMaskWithCorner:6.0 rectCorner:UIRectCornerAllCorners];  //不正确
 }
 
 - (void)setMessage:(NSDictionary *)message{
@@ -132,6 +131,8 @@
     [att appendAttributedString:[[NSAttributedString alloc] initWithString:content attributes:contentAtt]];
     
     [self.contentLabel setAttributedText:att];
+    
+    
     [self.contentLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.mas_equalTo(self.contentView).insets(UIEdgeInsetsMake(4, 4, 4, 4));
         make.right.mas_lessThanOrEqualTo(self.contentView);

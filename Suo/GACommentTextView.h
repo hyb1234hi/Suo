@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GACommentTextView : UIView
 @property(nonatomic,strong) UITextView *textView;
+@property(nonatomic,assign) NSUInteger textLength;   //!<输入的文本长度 0 = 不限制
 @property(nonatomic,strong) void(^sendComment)(NSString*text);
 
 @property(nonatomic,weak) id<SendCommentProtocol> delegate;

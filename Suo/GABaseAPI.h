@@ -12,9 +12,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^CallBack)(NSDictionary *json,NSURLResponse *response);
 
+
+static NSString *const rootPath = Domain_URL;
 @interface GABaseAPI : NSObject
 
 
+
+/**
+ POST 请求
+
+ @param api 接口路径
+ @param parameter 参数字典
+ @param competion 回调
+ */
+- (void)POSTWithAPI:(NSString*)api parameter:(NSDictionary*)parameter completion:(CallBack)completion;
+
+
+/**
+ GET 请求
+
+ @param api 接口路径
+ @param parameter 参数
+ @param completion 回调
+ */
+- (void)GETWithAPI:(NSString*)api parameter:(NSDictionary*)parameter completion:(CallBack)completion;
 
 /**
 通过子路径创建请求体
